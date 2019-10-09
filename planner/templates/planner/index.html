@@ -5,6 +5,28 @@
     <title>Title</title>
 </head>
 <body>
-Hello World
+
+<ul>
+    {%for task in task_list%}
+    <li>
+        {{task.text}} - <small>{{task.author}}</small>
+    </li>
+    {%endfor%}
+</ul>
+
+
+<form action="/add">
+    {%csrf_token%}
+    <input type="text" value="Enter task" name="mytextbox" size="20"/>
+    <button type="submit">Add a task</button>
+</form>
+
+
+
+
+
+
+
+
 </body>
 </html>
