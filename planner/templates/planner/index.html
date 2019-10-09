@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
 
+{% extends "planner/base.html" %}
+
+{% block body%}
 <ul>
     {%for task in task_list%}
     <li>
@@ -21,12 +24,8 @@
     <button type="submit">Add a task</button>
 </form>
 
+{% endblock %}
 
 
-
-
-
-
-
-</body>
-</html>
+{#</body>#}
+{#</html>#}
