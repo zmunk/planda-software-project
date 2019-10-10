@@ -18,9 +18,10 @@
 </ul>
 
 
-<form action="/add">
+<form method="post" >
     {%csrf_token%}
-    <input type="text" value="Enter task" name="mytextbox" size="20"/>
+    <input id="task-input" type="text" value="Enter task" size="20"/>
+    <input id="task-authro" type="text" value="Enter author name" size="20" />
     <button type="submit">Add a task</button>
 </form>
 
