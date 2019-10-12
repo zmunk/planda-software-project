@@ -16,15 +16,27 @@
     </li>
     {%endfor%}
 </ul>
-    Haytham test
 
 
-<form method="post" >
+<form method="POST" action="/">
     {%csrf_token%}
-    <input id="task-input" type="text" value="Enter task" size="20"/>
-    <input id="task-authro" type="text" value="Enter author name" size="20" />
+    <input id="task-input" type="text" placeholder="Enter Task" size="20"/>
+    <input id="task-author" type="text" placeholder="Author Name" size="20" />
     <button type="submit">Add a task</button>
 </form>
+
+
+{#    The following is a template based add task button, so it will not Permenantly save the added task#}
+{#    <script>#}
+{#        function appendList() {#}
+{#        var ul = document.getElementById('listtasks');#}
+{#        var li = document.createElement('li');#}
+{#        var task = document.getElementById('task-input');#}
+{#        var author = document.getElementById('task-author');#}
+{#        li.appendChild(document.createTextNode(item.value));#}
+{#        ul.appendChild(li);#}
+{#        }#}
+{#    </script>#}
 
 {% endblock %}
 
