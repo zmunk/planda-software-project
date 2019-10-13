@@ -7,3 +7,7 @@ class Task(models.Model):
 
     def __str__(self):
         return "Task by {}".format(self.author)
+
+    # def get_absolute_url(self):
+    #     # refresh page
+    #     return render(request, 'site/name.html', {})

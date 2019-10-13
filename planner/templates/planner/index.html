@@ -16,14 +16,16 @@
     </li>
     {%endfor%}
 </ul>
-
-
-<form method="POST" action="/">
-    {%csrf_token%}
-    <input id="task-input" type="text" placeholder="Enter Task" size="20"/>
-    <input id="task-author" type="text" placeholder="Author Name" size="20" />
-    <button type="submit">Add a task</button>
+<form action="{% url "planner:add_task" %}" method='GET'>
+    <button type='submit'>Add Task</button>
 </form>
+
+
+{#<form action="add" method="post" enctype="multipart/form-data">#}
+{#    {% csrf_token %}#}
+{#    {% include "planner/form-template.html" %}#}
+{#    <button type="submit">Add a task</button>#}
+{#</form>#}
 
 
 {#    The following is a template based add task button, so it will not Permenantly save the added task#}
