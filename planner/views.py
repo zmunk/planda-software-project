@@ -4,9 +4,6 @@ from django.views import generic
 from .models import Task
 from .forms import TaskForm
 from django.views.generic.edit import CreateView
-<<<<<<< HEAD
-from django.http import HttpResponse
-=======
 
 
 def add_task(request):
@@ -20,7 +17,6 @@ def add_task(request):
     return render(request, "planner/task-form.html", {"form": form})
 
 
->>>>>>> e17ee00a9f92f4adf93e18d502f66f14a958a5d8
 class IndexView(generic.ListView):
     template_name = "planner/index.html"
     context_object_name = "task_list"
@@ -28,7 +24,6 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Task.objects.all()
 
-<<<<<<< HEAD
 class TaskCreate(CreateView):
     model = Task
     fields = ["text", "author"]
@@ -86,7 +81,6 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
-=======
     def taskpost(self, request):
         form = TaskForm(request.POST or None)
         if form.is_valid():
@@ -99,4 +93,3 @@ def logout_view(request):
 #     fields = ["text", "author"]
 
 
->>>>>>> e17ee00a9f92f4adf93e18d502f66f14a958a5d8
