@@ -1,32 +1,27 @@
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>Title</title>#}
-{#</head>#}
-{#<body>#}
-
 {% extends "planner/base.html" %}
 
-{% block body%}
-<ul>
-    {%for task in task_list%}
-    <li>
-        {{task.text}} - <small>{{task.author}}</small>
-    </li>
-    {%endfor%}
-</ul>
-<form action="{% url "planner:add_task" %}" method='GET'>
-    <button type='submit'>Add Task</button>
-</form>
-
-
-{#<form action="add" method="post" enctype="multipart/form-data">#}
-{#    {% csrf_token %}#}
-{#    {% include "planner/form-template.html" %}#}
-{#    <button type="submit">Add a task</button>#}
-{#</form>#}
-
+{% block body %}
+    <div class="devsite-main-content" has-book-nav has-toc>
+        <devsite-content>
+            {%for task in task_list%}
+            <article class="devsite-article ibrahim-card">
+                <section class="devsite-landing-row devsite-landing-row-1-up dac-sublandings-hero">
+                    <div class="devsite-landing-row-group">
+                        <div class="devsite-landing-row-item-body">
+                            <div class="devsite-landing-row-item-description-content">
+                                <p>{{task.text}} - <small>{{task.author}}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </article>
+            <br>
+            {%endfor%}
+            <form action="{% url "planner:add_task" %}" method='GET'>
+                <button type='submit'>Add Task</button>
+            </form>
+        </devsite-content>
+    </div>
 
 {#    The following is a template based add task button, so it will not Permenantly save the added task#}
 {#    <script>#}
@@ -41,7 +36,3 @@
 {#    </script>#}
 
 {% endblock %}
-
-
-{#</body>#}
-{#</html>#}
