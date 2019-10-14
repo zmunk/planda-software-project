@@ -1,4 +1,5 @@
 from django import forms
+<<<<<<< HEAD
 from django.contrib.auth import (
     authenticate,
     get_user_model,
@@ -51,3 +52,12 @@ class UserRegisterForm(forms.ModelForm):
 
 
          
+=======
+from .models import Task
+
+
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ["text", "author"]
+>>>>>>> e17ee00a9f92f4adf93e18d502f66f14a958a5d8

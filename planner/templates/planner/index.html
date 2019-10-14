@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,3 +29,43 @@
 
 </body>
 </html>
+=======
+{% extends "planner/base.html" %}
+
+{% block body %}
+    <div class="devsite-main-content" has-book-nav has-toc>
+        <devsite-content>
+            {%for task in task_list%}
+            <article class="devsite-article ibrahim-card">
+                <section class="devsite-landing-row devsite-landing-row-1-up dac-sublandings-hero">
+                    <div class="devsite-landing-row-group">
+                        <div class="devsite-landing-row-item-body">
+                            <div class="devsite-landing-row-item-description-content">
+                                <p>{{task.text}} - <small>{{task.author}}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </article>
+            <br>
+            {%endfor%}
+            <form action="{% url "planner:add_task" %}" method='GET'>
+                <button type='submit'>Add Task</button>
+            </form>
+        </devsite-content>
+    </div>
+
+{#    The following is a template based add task button, so it will not Permenantly save the added task#}
+{#    <script>#}
+{#        function appendList() {#}
+{#        var ul = document.getElementById('listtasks');#}
+{#        var li = document.createElement('li');#}
+{#        var task = document.getElementById('task-input');#}
+{#        var author = document.getElementById('task-author');#}
+{#        li.appendChild(document.createTextNode(item.value));#}
+{#        ul.appendChild(li);#}
+{#        }#}
+{#    </script>#}
+
+{% endblock %}
+>>>>>>> e17ee00a9f92f4adf93e18d502f66f14a958a5d8

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Planda{% endblock %}</title>
+
+    <!-- Static Files -->
+    <link rel="stylesheet" href="https://www.gstatic.com/devrel-devsite/v2355ed73ae6b243a36832e70498f2cd0b3f352ff30481ebdfdc56826b566bf8a/android/css/app.css">
+    <link rel="stylesheet" href="{% static 'planner/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'planner/images/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'planner/images/apple-touch-icon.png' %}">
+</head>
+
+<body type="landing" theme="android-theme" class="dac-home-page ibrahim-card" layout="docs" pending>
+    <div class="devsite-wrapper">
+
+        <devsite-header>
+            <div class="devsite-header--inner">
+                <div class="devsite-top-logo-row-wrapper-wrapper">
+                    <div class="devsite-top-logo-row-wrapper">
+                        <div class="devsite-top-logo-row">
+                            <button type="button" id="devsite-hamburger-menu" class="devsite-header-icon-button button-flat material-icons " data-category="Site-Wide Custom Events" visually-hidden aria-label="Close menu"></button>
+                            <div class="devsite-product-name-wrapper">
+                                <a href="#" class="devsite-site-logo-link " data-category="Site-Wide Custom Events" data-label="Site logo">
+                                    <img src="{% static 'planner/images/planda.png' %}" class="devsite-site-logo" alt="Android Developers">
+                                </a>
+                                <span class="devsite-product-name">
+                                    <ul class="devsite-breadcrumb-list">
+                                        <li class="devsite-breadcrumb-item">
+                                        </li>
+                                    </ul>
+                                </span>
+                            </div>
+                            <div class="devsite-top-logo-row-middle">
+                                <div class="devsite-header-upper-tabs">
+                                    <devsite-tabs class="upper-tabs">
+                                        <div class="devsite-tabs-wrapper">
+                                            <tab>
+                                                <a href="#" class="" title="My Projects">My Projects</a>
+                                            </tab>
+                                            <tab>
+                                                <a href="#" class="" title="My Account">My Account</a>
+                                            </tab>
+                                            <tab>
+                                                <a href="#" class="" title="About">About</a>
+                                            </tab>
+                                            <tab>
+                                                <a href="#" class="" title="Contact">Contact</a>
+                                            </tab>
+                                        </div>
+                                    </devsite-tabs>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </devsite-header>
+
+    {% block body %}
+    {% endblock %}
+
+    </div>
+</body>
+</html>

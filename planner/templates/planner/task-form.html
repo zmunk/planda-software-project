@@ -1,0 +1,14 @@
+{% extends "planner/base.html" %}
+{% block title %}Add Task{% endblock %}
+
+{% block body %}
+<form method="POST" action="">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Save</button>
+
+</form>
+<form action="{% url "planner:index" %}">
+    <button>Back</button>
+</form>
+{% endblock %}
