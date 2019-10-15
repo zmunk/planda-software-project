@@ -52,10 +52,7 @@ def login_view(request):
             return redirect(next)
         return redirect('/')
 
-    context = {
-        'form':form,
-    }
-    return render(request, 'planner/login.html', context)
+    return render(request, 'planner/login.html', {'form': form})
 
 
 def register_view(request):
