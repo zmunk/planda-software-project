@@ -23,7 +23,7 @@ urlpatterns = [
 
     # /home
     path('home', include('homepage.urls')),
-    # path('/login', include('login.urls'))
+    path('', include('authentic.urls'))
 
 
 ]
