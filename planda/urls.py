@@ -20,6 +20,9 @@ urlpatterns = [
     
     path('admin', admin.site.urls),
     path('', include('planner.urls')),
+
+    # /home
+    path('home', include('homepage.urls')),
     # path('/login', include('login.urls'))
 
 
