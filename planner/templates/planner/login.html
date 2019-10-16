@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #4CAF50;
+  background-color: black;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -68,7 +69,7 @@ span.psw {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 40%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button (x) */
@@ -103,6 +104,21 @@ span.psw {
   to {transform: scale(1)}
 }
 
+/* resize images */
+.container img {
+    width: 20%;
+    height: auto;
+
+}
+
+/* center planda image*/
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
   span.psw {
@@ -112,14 +128,17 @@ span.psw {
   .cancelbtn {
      width: 100%;
   }
+
 }
 </style>
 </head>
 <body>
 
-<h2>Log In</h2>
-  
-    
+<h1 style="text-align:center;">Log in to Planda</h1>
+<div class="container">
+  <img src="{% static 'planner/images/planda.png' %}" class="center">
+</div>
+
   <form class="modal-content animate" method="POST">
     {%csrf_token%}
     <div class="container">
