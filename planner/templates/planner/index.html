@@ -5,29 +5,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-
-
-<button ><a href="/login">Log In</a></button>
-<button ><a href="/register">Sign Up</a></button>
-<button ><a href="/logout">Log out</a></button>
-<ul>
-    {%for task in task_list%}
-    <li>
-        {{task.text}} - <small>{{task.author}}</small>
-    </li>
-    {%endfor%}
-</ul>
-
-
-<form action="/add">
-    {%csrf_token%}
-    <input type="text" value="Enter task" name="mytextbox" size="20"/>
-    <button type="submit">Add a task</button>
-</form>
-
-
-</body>
 
 
 
@@ -41,6 +18,9 @@
                         <div class="devsite-landing-row-item-body">
                             <div class="devsite-landing-row-item-description-content">
                                 <p>{{task.text}} - <small>{{task.author}}</small></p>
+                                 <form action="{% url "planner:remove-task" id=task.id%}" method="GET">
+                                    <button type="submit" style="background-color: #f44336; color: #cccccc">Remove Task</button>
+                                </form>
                             </div>
                         </div>
                     </div>
