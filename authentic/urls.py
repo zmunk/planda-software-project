@@ -5,8 +5,12 @@ from . import views
 app_name = "authentic"
 
 urlpatterns = [
+
+    # /auth/login
     path("login", views.login_view, name ="login_view"),
+    # /auth/signup
     path('signup', views.signup_view, name="signup_view"),
+    # /auth/logout
     path('logout', views.logout_view),
    
 ]

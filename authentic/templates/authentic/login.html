@@ -15,7 +15,7 @@
 
   <form class="modal-content animate" method="POST">
     {%csrf_token%}
-    <span class="newacc"><a href = '/signup' >Create an account</a></span>
+    <span class="newacc"><a href = 'auth/signup' >Create an account</a></span>
     <div class="container">
       <label for="uname"><b>Username</b></label>
       <span class="username_field">{{ form.username }}</span>
