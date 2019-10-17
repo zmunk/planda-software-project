@@ -7,16 +7,6 @@ from .forms import TaskForm
 from django.views.generic.edit import CreateView
 
 
-def add_task(request):
-    if request.method == "POST":
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            task_item = form.save(commit=False)
-            task_item.save()
-    else:
-        form = TaskForm()
-    return render(request, "planner/task-form.html", {"form": form})
-
 def remove_task(request, id=None):
     task = get_object_or_404(Task,id=id)
     if request.method=="POST":
@@ -25,6 +15,7 @@ def remove_task(request, id=None):
         return redirect("/")
     return render(request, "planner/remove-task.html")
 
+
 class IndexView(generic.ListView):
     template_name = "planner/index.html"
     context_object_name = "task_list"
@@ -32,9 +23,10 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Task.objects.all()
 
+
 class TaskCreate(CreateView):
     model = Task
-    fields = ["text", "author"]
+    fields = "__all__"
 
 
 
