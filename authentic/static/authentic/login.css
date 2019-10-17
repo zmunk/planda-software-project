@@ -34,14 +34,26 @@ button:hover {
 
 
 
+.newacc a:link, a:visited {
+  background-color: skyblue;
+  margin-left: 10px;
+  color: white;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.newacc a:hover, a:active {
+  background-color: black;
+}
+
+
+
 .container {
   padding: 16px;
 }
 
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
 
 /* The Modal (background) */
 .modal {
@@ -81,6 +93,7 @@ span.psw {
   color: red;
   cursor: pointer;
 }
+
 
 /* Add Zoom Animation */
 .animate {
