@@ -9,7 +9,7 @@
 
 
 {% block body %}
-    <div class="devsite-main-content" has-book-nav has-toc>
+    <div class="devsite-main-content">
         <devsite-content>
             {%for task in task_list%}
             <article class="devsite-article ibrahim-card">
@@ -17,7 +17,12 @@
                     <div class="devsite-landing-row-group">
                         <div class="devsite-landing-row-item-body">
                             <div class="devsite-landing-row-item-description-content">
-                                <p>{{task.text}} - <small>{{task.author}}</small></p>
+                                <p>
+                                    {{task.text}}
+                                    - <small>{{task.author}}</small>
+                                    <span style="font-size: xx-small; ">
+                                    id: {{ task.id }} (for debugging)</span>
+                                </p>
                                  <form action="{% url "planner:remove-task" id=task.id%}" method="GET">
                                     <button type="submit" style="background-color: #f44336; color: #cccccc">Remove Task</button>
                                 </form>

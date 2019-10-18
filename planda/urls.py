@@ -22,7 +22,7 @@ urlpatterns = [
     # /auth/
     path('auth/', include('authentic.urls')),
     # /admin/
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name="admin-page"),
     # /planner/
-    path('planner/', include('planner.urls', namespace="planner-polls")),
+    path('planner/', include('planner.urls', namespace="planner-namespace")),
 ]
