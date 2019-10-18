@@ -17,14 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    
-    path('admin/', admin.site.urls),
-    path('planner/', include('planner.urls')),
-
-    # /home/
-    path('home/', include('homepage.urls')),
+    # /
+    path('', include('homepage.urls')),
     # /auth/
-    path('auth/', include('authentic.urls'))
-
-
+    path('auth/', include('authentic.urls')),
+    # /admin/
+    path('admin/', admin.site.urls),
+    # /planner/
+    path('planner/', include('planner.urls', namespace="planner-polls")),
 ]
