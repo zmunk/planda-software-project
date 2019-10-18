@@ -12,7 +12,7 @@ urlpatterns = [
     # /planner/add/task/
     path("add/task/", views.TaskCreate.as_view(), name="add_task"),
     # /planner/remove/<id>/
-    path("remove/<int:id>", views.remove_task, name="remove-task"),
+    path("remove/<int:pk>", views.TaskDelete.as_view(), name="remove-task"),
     # /planner/<id>/
     path("<int:pk>/", views.DetailView.as_view(), name="detail"),
     ###

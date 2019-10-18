@@ -14,10 +14,18 @@
                                     - <small>{{task.author}}</small>
                                     <span style="font-size: xx-small; ">
                                     id: {{ task.id }} (for debugging)</span>
+
                                 </p>
-                                 <form action="{% url "planner:remove-task" id=task.id %}" method="GET">
-                                    <button type="submit" style="background-color: #f44336; color: #fff">Remove Task</button>
+                                 <form action="{% url "planner:remove-task" task.id %}" method="POST">
+                                     {% csrf_token %}
+                                     <input type="hidden" name="album_id" value="{{ task.id }}" />
+                                    <button type="submit" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
                                 </form>
+
+
+                            </form>
                             </div>
                         </div>
                     </div>
