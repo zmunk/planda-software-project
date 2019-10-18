@@ -1,12 +1,4 @@
 {% extends "planner/base.html" %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-
-
 
 {% block body %}
     <div class="devsite-main-content">
@@ -23,8 +15,8 @@
                                     <span style="font-size: xx-small; ">
                                     id: {{ task.id }} (for debugging)</span>
                                 </p>
-                                 <form action="{% url "planner:remove-task" id=task.id%}" method="GET">
-                                    <button type="submit" style="background-color: #f44336; color: #cccccc">Remove Task</button>
+                                 <form action="{% url "planner:remove-task" id=task.id %}" method="GET">
+                                    <button type="submit" style="background-color: #f44336; color: #fff">Remove Task</button>
                                 </form>
                             </div>
                         </div>
