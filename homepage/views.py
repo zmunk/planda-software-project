@@ -7,4 +7,4 @@ class IndexView(generic.ListView):
     template_name = "homepage/index.html"
 
     def get_queryset(self):
-        return HttpResponse("asdf")
+        return HttpResponse("")

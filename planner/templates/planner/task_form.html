@@ -8,7 +8,9 @@
     <button type="submit">Save</button>
 
 </form>
-<form action="{% url "planner:index" %}">
-    <button>Back</button>
-</form>
+{#<form action="{% url "planner:index" %}">#}
+<a href="{% url "planner:index" %}">
+    <button >Back</button>
+</a>
+{#</form>#}
 {% endblock %}

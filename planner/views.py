@@ -1,19 +1,21 @@
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
 from django.views import generic
 from .models import Task
 from .forms import TaskForm
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
-def remove_task(request, id=None):
-    task = get_object_or_404(Task,id=id)
-    if request.method=="POST":
-        task.delete()
-        messages.success(request, "Task Successfully Deleted !")
-        return redirect("/")
-    return render(request, "planner/remove-task.html")
+class TaskDelete(DeleteView):
+    model = Task
+    success_url = reverse_lazy("planner-namespace:index")
+
+
+class DetailView(generic.DetailView):
+    model = Task
+    template_name = "planner/detail.html"
 
 
 class IndexView(generic.ListView):
@@ -28,11 +30,11 @@ class TaskCreate(CreateView):
     model = Task
     fields = "__all__"
 
+###
 
-
-
-# class TaskCreate(CreateView):
-#     model = Task
-#     fields = ["text", "author"]
+class TaskUpdate(UpdateView):
+    model = Task
+    fields = "__all__"
+###
 
 

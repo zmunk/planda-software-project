@@ -1,0 +1,14 @@
+{% extends "planner/base.html" %}
+{% block title %}Details{% endblock %}
+
+{% block body %}
+<h1>
+        {{ task.text }}
+        <small>{{ task.author }}</small>
+    </h1>
+
+    <a href="{% url "planner:index" %}">
+        <button>Back</button>
+    </a>
+
+{% endblock %}
