@@ -1,51 +1,46 @@
 {% extends "planner/base.html" %}
 
 {% block body %}
-    <div class="devsite-main-content">
-        <devsite-content>
-            {%for task in task_list%}
-            <article class="devsite-article ibrahim-card">
-                <section class="devsite-landing-row devsite-landing-row-1-up dac-sublandings-hero">
-                    <div class="devsite-landing-row-group">
-                        <div class="devsite-landing-row-item-body">
-                            <div class="devsite-landing-row-item-description-content">
-                                <p style="display: inline;">
-                                    {{task.text}}
-                                    - <small>{{task.author}}</small>
-                                    <span style="font-size: xx-small; ">
-                                    id: {{ task.id }} (for debugging)</span>
-</p>
 
-                                <form action="{% url "planner:remove-task" task.id %}" method="POST" style="display: inline;">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="album_id" value="{{ task.id }}" />
-                                    <button type="submit" class="btn btn-default btn-sm">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </button>
-                                </form>
+    <div class="container">
+        <div class="row" id="drag-a">
+            {% for task in task_list %}
+                <div class="col-md-3">
+                    <div class="card cstm">
+                        <div class="card-block">
+                            <h4 class="card-title">{{ task.text }}</h4>
+                            <p class="card-text">
+                                {{ task.author }}
+                                <span style="font-size:xx-small">
+                                    id: {{ task.id }}
+                                </span>
+                            </p>
 
-                                <form action="{% url "planner:update-task" task.id %}" method="POST" style="display: inline;">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="album_id" value="{{ task.id }}" />
-                                    <button type="submit" class="btn btn-default btn-sm">
-                                        <span class="glyphicon glyphicon-edit"></span>
-                                    </button>
-                                </form>
+                            <form action="{% url "planner:remove-task" task.id %}" method="POST" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="album_id" value="{{ task.id }}"/>
+                                <button type="submit" class="btn btn-danger glow" href="#"><i class="fa fa-trash"></i></button>
+                            </form>
 
-
+                            <form action="{% url "planner:update-task" task.id %}" method="POST"
+                                  style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="album_id" value="{{ task.id }}"/>
+                                <button type="submit" class="btn btn-info glow" href="#"><i class="fa fa-edit"></i></button>
 
                             </form>
-                            </div>
                         </div>
                     </div>
-                </section>
-            </article>
-            <br>
-            {%endfor%}
+
+                </div>
+
+            {% endfor %}
+        </div>
+        <div class="col-xs-12 col-lg-6 text-xs-right">
             <form action="{% url "planner:add_task" %}" method='GET'>
-                <button type='submit'>Add Task</button>
+                <button type='submit' class="btn btn-lg text-normal btn-primary">Add Task</button>
             </form>
-        </devsite-content>
+        </div>
     </div>
 
 

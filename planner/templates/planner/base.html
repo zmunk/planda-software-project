@@ -1,79 +1,47 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Planda{% endblock %}</title>
 
     <!-- Static Files -->
-    <link rel="stylesheet" href="https://www.gstatic.com/devrel-devsite/v2355ed73ae6b243a36832e70498f2cd0b3f352ff30481ebdfdc56826b566bf8a/android/css/app.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'planner/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="shortcut icon" href="{% static 'planner/images/favicon-32x32.png' %}">
     <link rel="apple-touch-icon" href="{% static 'planner/images/apple-touch-icon.png' %}">
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+<body>
+<nav class="navbar navbar-expand-md navbar-default">
+    <a class="navbar-brand" href="#">
+        <img src="{% static 'planner/images/planda.png' %}" alt="Planda">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar4">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-<body type="landing" theme="android-theme" class="dac-home-page ibrahim-card" layout="docs" pending>
-    <div class="devsite-wrapper">
-
-        <devsite-header>
-            <div class="devsite-header--inner">
-                <div class="devsite-top-logo-row-wrapper-wrapper">
-                    <div class="devsite-top-logo-row-wrapper">
-                        <div class="devsite-top-logo-row">
-                            <button type="button" id="devsite-hamburger-menu" class="devsite-header-icon-button button-flat material-icons " data-category="Site-Wide Custom Events" visually-hidden aria-label="Close menu"></button>
-                            <div class="devsite-product-name-wrapper">
-                                <a href="#" class="devsite-site-logo-link " data-category="Site-Wide Custom Events" data-label="Site logo">
-                                    <img src="{% static 'planner/images/planda.png' %}" class="devsite-site-logo" alt="Android Developers">
-                                </a>
-                                <span class="devsite-product-name">
-                                    <ul class="devsite-breadcrumb-list">
-                                        <li class="devsite-breadcrumb-item">
-                                        </li>
-                                    </ul>
-                                </span>
-                            </div>
-                            <div class="devsite-top-logo-row-middle">
-                                <div class="devsite-header-upper-tabs">
-                                    <devsite-tabs class="upper-tabs">
-                                        <div class="devsite-tabs-wrapper">
-                                            <tab>
-                                                <a href="#" class="" title="My Projects">My Projects</a>
-                                            </tab>
-                                            <tab>
-                                                <a href="#" class="" title="My Account">My Account</a>
-                                            </tab>
-                                            <tab>
-                                                <a href="#" class="" title="About">About</a>
-                                            </tab>
-                                            <tab>
-                                                <a href="#" class="" title="Contact">Contact</a>
-                                            </tab>
-                                            <tab> 
-                                                <a href="{% url 'authentic:login_view' %}" title="Login">Login</a>
-                                            </tab>
-
-                                            <tab>
-                                                <a href="{% url 'authentic:signup_view' %}" title="Sign Up">Sign Up</a>
-                                            </tab>
-
-                                            <tab>
-                                                <a href="{% url 'authentic:logout_view' %}" title="LogOut">LogOut</a>
-                                            </tab>
-
-                                        </div>
-                                    </devsite-tabs>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </devsite-header>
-
-    {% block body %}
-    {% endblock %}
-
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Link <span class="sr-only">Home</span></a>
+            </li>
+            <li class="nav-item active"><a class="nav-link" href="#">My Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">My Account</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'authentic:login_view' %}">Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'authentic:signup_view' %}">Sign up</a></li>
+            <!-- <li><a href="#">Log out</a></li> -->
+        </ul>
     </div>
+</nav>
+
+{% block body %}
+{% endblock %}
+
 </body>
 </html>
