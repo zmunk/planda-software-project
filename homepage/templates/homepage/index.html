@@ -9,6 +9,10 @@
 <body>
 <h1>home page</h1>
 <br>
-<a href="{% url "planner-namespace:index" %}">Go to planner</a>
+<ul>
+<li><a class="nav-link" href="{% url "planner-namespace:index" %}">Go to planner</a></li>
+<li><a class="nav-link" href="{% url 'authentic:login_view' %}">Login</a></li>
+<li><a class="nav-link" href="{% url 'authentic:signup_view' %}">Sign up</a></li>
+</ul>
 </body>
 </html>
