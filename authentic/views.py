@@ -19,7 +19,7 @@ def login_view(request):
         login(request, user)
         if next:
             return redirect(next)
-        return redirect('/')
+        return redirect('/planner')
 
     return render(request, 'authentic/login.html', {'form': form})
 
@@ -36,7 +36,7 @@ def signup_view(request):
         login(request, new_user)
         if next:
             return redirect(next)
-        return redirect('/')
+        return redirect('authentic:login_view')
 
     return render(request, "authentic/signup.html", {'form': form})
 
@@ -44,9 +44,3 @@ def signup_view(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
-    def taskpost(self, request):
-        form = TaskForm(request.POST or None)
-        if form.is_valid():
-            form.save()
-
-        return render(request, '', {"form": form})
