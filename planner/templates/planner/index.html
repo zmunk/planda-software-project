@@ -9,20 +9,29 @@
                     <div class="devsite-landing-row-group">
                         <div class="devsite-landing-row-item-body">
                             <div class="devsite-landing-row-item-description-content">
-                                <p>
+                                <p style="display: inline;">
                                     {{task.text}}
                                     - <small>{{task.author}}</small>
                                     <span style="font-size: xx-small; ">
                                     id: {{ task.id }} (for debugging)</span>
+</p>
 
-                                </p>
-                                 <form action="{% url "planner:remove-task" task.id %}" method="POST">
-                                     {% csrf_token %}
-                                     <input type="hidden" name="album_id" value="{{ task.id }}" />
+                                <form action="{% url "planner:remove-task" task.id %}" method="POST" style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="album_id" value="{{ task.id }}" />
                                     <button type="submit" class="btn btn-default btn-sm">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </button>
                                 </form>
+
+                                <form action="{% url "planner:update-task" task.id %}" method="POST" style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="album_id" value="{{ task.id }}" />
+                                    <button type="submit" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </button>
+                                </form>
+
 
 
                             </form>

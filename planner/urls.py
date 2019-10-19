@@ -16,7 +16,7 @@ urlpatterns = [
     # /planner/<id>/
     path("<int:pk>/", views.DetailView.as_view(), name="detail"),
     ###
-    # path("task/<int:id>/update/", views.TaskUpdate.as_view(), name="update_task")
+    path("task/<int:pk>/update/", views.TaskUpdate.as_view(), name="update-task")
     ###
 
     
