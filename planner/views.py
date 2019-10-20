@@ -29,12 +29,15 @@ class IndexView(generic.ListView):
 class TaskCreate(CreateView):
     model = Task
     fields = "__all__"
+    success_url = reverse_lazy("planner-namespace:index")
+
 
 ###
 
 class TaskUpdate(UpdateView):
     model = Task
     fields = "__all__"
+    success_url = reverse_lazy("planner-namespace:index")
 ###
 
 
