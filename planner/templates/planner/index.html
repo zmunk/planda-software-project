@@ -15,6 +15,8 @@
                                     id: {{ task.id }}
                                 </span>
                             </p>
+                                <p><span style="font-weight: bold">{{ task.category }}</span>
+                            </p>
 
                             <form action="{% url "planner:remove-task" task.id %}" method="POST" style="display: inline;">
                                 {% csrf_token %}
