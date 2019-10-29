@@ -5,6 +5,9 @@ from django.urls import reverse
 class Category(models.Model):
     category_name = models.CharField(max_length=250)
 
+    class Meta:
+        verbose_name_plural = "Categories"
+
     def __str__(self):
         return self.category_name
 

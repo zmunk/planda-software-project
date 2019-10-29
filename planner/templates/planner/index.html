@@ -4,8 +4,13 @@
 
     <div class="container">
         <div class="row" id="drag-a">
-            {% for task in task_list %}
+{#            {% for task in task_list %}#}
+            {% for category in category_list %}
+{#        <div><p>{{ category.category_name }}</p></div>#}
+
+                    {% for task in category.task_set.all %}
                 <div class="col-md-3">
+
                     <div class="card cstm">
                         <div class="card-block">
                             <h4 class="card-title">{{ task.text }}</h4>
@@ -35,7 +40,7 @@
                     </div>
 
                 </div>
-
+            {% endfor %}
             {% endfor %}
         </div>
         <div class="col-xs-12 col-lg-6 text-xs-right">
