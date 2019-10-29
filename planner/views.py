@@ -27,6 +27,7 @@ class IndexView(generic.ListView):
         # return Task.objects.all()
         return Category.objects.all()
 
+
 class TaskCreate(CreateView):
     model = Task
     fields = "__all__"
@@ -35,6 +36,12 @@ class TaskCreate(CreateView):
 
 class TaskUpdate(UpdateView):
     model = Task
+    fields = "__all__"
+    success_url = reverse_lazy("planner-namespace:index")
+
+
+class CategoryCreate(CreateView):
+    model = Category
     fields = "__all__"
     success_url = reverse_lazy("planner-namespace:index")
 

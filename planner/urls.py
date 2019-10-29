@@ -17,11 +17,11 @@ urlpatterns = [
     path("remove/<int:pk>", views.TaskDelete.as_view(), name="remove-task"),
     # /planner/<id>/
     path("<int:pk>/", views.DetailView.as_view(), name="detail"),
-    ###
-    path("task/<int:pk>/update/", views.TaskUpdate.as_view(), name="update-task")
-    ###
+    # /planner/task/<id>/update/
+    path("task/<int:pk>/update/", views.TaskUpdate.as_view(), name="update-task"),
+    # /planner/add/category/
+    path("add/category/", views.CategoryCreate.as_view(), name="add_category"),
 
-    
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
