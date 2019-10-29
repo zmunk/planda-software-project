@@ -1,59 +1,27 @@
 {% extends "planner/base.html" %}
 
 {% block body %}
+    <section class="lists-container">
 
-    <div class="container">
-        <div class="row" id="drag-a">
-            {% for category in category_list %}
-
+        {% for category in category_list %}
+            <div class="list">
+                <h3 class="list-title">{{ category.category_name }}</h3>
+                <ul class="list-items">
                     {% for task in category.task_set.all %}
-                <div class="col-md-3">
+                        <li>{{ task.text }} <span style="font-size: xx-small">{{ task.author }}</span></li>
+                    {% endfor %}
+                </ul>
+                <form action="{% url "planner:add_task" %}" method='GET'>
+                    <button type='submit' class="add-card-btn btn">Add Task</button>
+                </form>
+            </div>
+        {% endfor %}
 
-                    <div class="card cstm">
-                        <div class="card-block">
-                            <h4 class="card-title">{{ task.text }}</h4>
-                            <p class="card-text">
-                                {{ task.author }}
-                                <span style="font-size:xx-small">
-                                    id: {{ task.id }}
-                                </span>
-                            </p>
-                                <p><span style="font-weight: bold">{{ task.category }}</span>
-                            </p>
+        <form action="{% url "planner:add_category" %}" method='GET'>
+            <button type="submit" class="add-list-btn btn">Add a list</button>
+        </form>
 
-                            <form action="{% url "planner:remove-task" task.id %}" method="POST" style="display: inline;">
-                                {% csrf_token %}
-                                <input type="hidden" name="album_id" value="{{ task.id }}"/>
-                                <button type="submit" class="btn btn-danger glow" href="#"><i class="fa fa-trash"></i></button>
-                            </form>
-
-                            <form action="{% url "planner:update-task" task.id %}" method="POST"
-                                  style="display: inline;">
-                                {% csrf_token %}
-                                <input type="hidden" name="album_id" value="{{ task.id }}"/>
-                                <button type="submit" class="btn btn-info glow" href="#"><i class="fa fa-edit"></i></button>
-
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
-            {% endfor %}
-            {% endfor %}
-        </div>
-        <div class="col-xs-12 col-lg-6 text-xs-right">
-            <form action="{% url "planner:add_task" %}" method='GET'>
-                <button type='submit' class="btn btn-lg text-normal btn-primary">Add Task</button>
-            </form>
-        </div>
-        <div class="col-xs-12 col-lg-6 text-xs-right">
-            <form action="{% url "planner:add_category" %}" method='GET'>
-                <button type='submit' class="btn btn-lg text-normal btn-primary">Add Category</button>
-            </form>
-        </div>
-    </div>
-
-
+    </section>
 {% endblock %}
 
 
