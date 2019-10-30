@@ -20,7 +20,6 @@ class Task(models.Model):
     text = models.CharField(max_length=1000)
     author = models.CharField(max_length=100)
     category = models.ForeignKey(Category, default="", on_delete=models.CASCADE)
-
     def __str__(self):
         return "Task by {}".format(self.author)
 
