@@ -42,11 +42,22 @@
 			</div>
 		</div>
 		<div class="right-container">
+			<div class="login-parent-container">
+				<div class="login-container">
+					<div class="input">
+						<input class="e-mail" type="email" placeholder="E-Mail or Username">
+					</div>
+					<div class="input">
+						<input class="password" type="password" placeholder="Password">
+					</div>
+					<a href="{% url 'authentic:login_view' %}" class="login-btn">Login</a>
+				</div>
+			</div>
 			<div class="start-container">
 				<div class="start-title">Create your own project with us</div>
 				<div class="project-container">
+					<div class="tell-us-more">Tell us more about your project</div>
 				</div>
-                <a href="{% url 'authentic:login_view' %}" class="login-btn">Login</a>
 				<a href="{% url 'authentic:signup_view' %}" class="start-btn">Sign up</a>
 			</div>
 		</div>
