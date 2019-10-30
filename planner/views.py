@@ -3,9 +3,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
-from .models import Task, Category
+from .models import Task, Category, Project
 from .forms import TaskForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 class TaskDelete(DeleteView):
@@ -21,12 +24,24 @@ class DetailView(generic.DetailView):
     template_name = "planner/detail.html"
 
 
+
 class ProjectView(generic.ListView):
     template_name = "planner/project.html"
     context_object_name = "category_list"
 
     def get_queryset(self):
-        return Category.objects.all()
+        return Category.objects.filter(user=self.request.user)
+
+ 
+
+@method_decorator(login_required, name='dispatch')
+class ProjectsListed(generic.ListView):
+    template_name = "planner/projects_listed.html"
+    context_object_name = "project_list"
+
+    def get_queryset(self):
+        return Project.objects.filter(user=self.request.user)
+
 
 
 class DashboardView(generic.ListView):

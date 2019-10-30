@@ -19,7 +19,7 @@ def login_view(request):
         login(request, user)
         if next:
             return redirect(next)
-        return redirect('/planner')
+        return redirect('/planner/projects')
 
     return render(request, 'authentic/login.html', {'form': form})
 

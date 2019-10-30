@@ -23,6 +23,8 @@ urlpatterns = [
     path("task/<int:pk>/update/", views.TaskUpdate.as_view(), name="update-task"),
     # /planner/add/category/
     path("add/category/", views.CategoryCreate.as_view(), name="add_category"),
+    # List Projects 
+     path("projects/", views.ProjectsListed.as_view(), name="projects_listed"),
 
 ]
 

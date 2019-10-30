@@ -1,0 +1,20 @@
+
+<h2>Your Projects</h2>
+{% for project in project_list %}
+    <h3><a href="/planner/">{{project.title}}</a></h3>
+
+<!-- 
+    {% for category in project.category_set.all %}
+    <li>{{ category.category_name }} </li>
+    
+    {% for task in category.task_set.all %}
+        <li>{{ task.text }} <span style="font-size: xx-small">{{ task.author }}</span></li>
+    {% endfor %}
+
+
+
+    {% endfor %} -->
+    
+
+{% endfor %}
+
