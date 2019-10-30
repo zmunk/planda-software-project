@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="{% static 'authentic/login.css' %}">
+<link rel="stylesheet" href="{% static 'login.css' %}">
 {#<style></style>#}
 </head>
 <body>
@@ -15,7 +15,7 @@
 
   <form class="modal-content animate" method="POST">
     {%csrf_token%}
-    <span class="newacc"><a href = 'auth/signup' >Create an account</a></span>
+    <span class="newacc"><a href="{% url 'authentic:signup_view' %}" >Create an account</a></span>
     <div class="container">
       <label for="uname"><b>Username</b></label>
       <span class="username_field">{{ form.username }}</span>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="container"  style="background-color:#f1f1f1">
-      <a class="psw">Forgot password?</a>
+      <span><a class="forgStyle" href="#">forgot password?</a></span>
     </div>
     <!-- <span style=" list-style-type: none;">{{form.non_field_errors}}</span> -->
     {% for field, error in form.errors.items %}
