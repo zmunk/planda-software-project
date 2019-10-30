@@ -18,14 +18,22 @@ class DetailView(generic.DetailView):
     template_name = "planner/detail.html"
 
 
-class IndexView(generic.ListView):
-    template_name = "planner/index.html"
-    # context_object_name = "task_list"
+class ProjectView(generic.ListView):
+    template_name = "planner/project.html"
     context_object_name = "category_list"
 
     def get_queryset(self):
-        # return Task.objects.all()
         return Category.objects.all()
+
+
+# class IndexView(generic.ListView):
+#     template_name = "planner/index.html"
+#     # context_object_name = "task_list"
+#     context_object_name = "category_list"
+#
+#     def get_queryset(self):
+#         # return Task.objects.all()
+#         return Category.objects.all()
 
 
 class TaskCreate(CreateView):
