@@ -9,9 +9,12 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 class TaskDelete(DeleteView):
+    template_name = "planner/remove-task.html"
     model = Task
-    success_url = reverse_lazy("planner-namespace:index")
-
+    success_url = reverse_lazy("planner-namespace:project_page")
+    def get_object(self):
+        pk = self.kwargs.get("pk")
+        return get_object_or_404(Task, id=pk)
 
 class DetailView(generic.DetailView):
     model = Task

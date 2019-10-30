@@ -8,7 +8,8 @@
                 <h3 class="list-title">{{ category.category_name }}</h3>
                 <ul class="list-items">
                     {% for task in category.task_set.all %}
-                        <li>{{ task.text }} <span style="font-size: xx-small">{{ task.author }}</span></li>
+                        <li>{{ task.text }} <span style="font-size: xx-small">{{ task.author }}</span>
+                            <a href="{% url "planner-namespace:remove-task" task.pk %}">--X--</a></li>
                     {% endfor %}
                 </ul>
                 <form action="{% url "planner:add_task" %}" method='GET'>
