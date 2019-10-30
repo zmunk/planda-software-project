@@ -10,7 +10,9 @@ app_name = "planner"
 urlpatterns = [
 
     # /planner/
-    path("", views.IndexView.as_view(), name="index"),
+    path("", views.ProjectView.as_view(), name="project_page"),
+    # /planner/dashboard/
+    path("dashboard/", views.DashboardView.as_view(), name="dashboard"),
     # /planner/add/task/
     path("add/task/", views.TaskCreate.as_view(), name="add_task"),
     # /planner/remove/<id>/
