@@ -118,6 +118,25 @@ button:hover {
 
 }
 
+a.forgStyle, a.forgStyle:link, a.forgStyle:visited {
+  /* background-color: #f44336; */
+  /* background-color: #000; */
+  color: black;
+  padding:1px 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a.forgStyle:hover, a.forgStyle:active {
+  background-color: #fefefe;
+  text-decoration:underline;
+}
+
+a.forgStyle {
+  font-size: 15px;
+}
+
 /* center planda image*/
 .center {
   display: block;
