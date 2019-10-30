@@ -7,6 +7,9 @@ from .models import Task, Category
 from .forms import TaskForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 
 class TaskDelete(DeleteView):
     model = Task
@@ -18,6 +21,7 @@ class DetailView(generic.DetailView):
     template_name = "planner/detail.html"
 
 
+@method_decorator(login_required, name='dispatch')
 class ProjectView(generic.ListView):
     template_name = "planner/project.html"
     context_object_name = "category_list"
