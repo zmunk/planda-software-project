@@ -6,8 +6,8 @@ from django.conf import settings
 class Project(models.Model):
     title = models.CharField(max_length=1000)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default = "", on_delete=models.CASCADE)
-    # def __str__(self):
-    #     return "Task by {}".format()
+    def __str__(self):
+        return self.title
 
     # def get_absolute_url(self):
         # refresh page
@@ -16,6 +16,7 @@ class Project(models.Model):
 class Category(models.Model):
     category_name = models.CharField(max_length=250)
     project = models.ForeignKey(Project, default="", on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default = "", on_delete=models.CASCADE)
     class Meta:
         verbose_name_plural = "Categories"
 
@@ -31,6 +32,7 @@ class Task(models.Model):
     text = models.CharField(max_length=1000)
     author = models.CharField(max_length=100)
     category = models.ForeignKey(Category, default="", on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default = "", on_delete=models.CASCADE)
     def __str__(self):
         return "Task by {}".format(self.author)
 
