@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
@@ -25,6 +25,12 @@ class ProjectView(generic.ListView):
     def get_queryset(self):
         return Category.objects.all()
 
+
+class DashboardView(generic.ListView):
+    template_name = "dashboard/index.html"
+
+    def get_queryset(self):
+        return HttpResponse("")
 
 # class IndexView(generic.ListView):
 #     template_name = "planner/index.html"

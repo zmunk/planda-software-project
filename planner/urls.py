@@ -11,7 +11,8 @@ urlpatterns = [
 
     # /planner/
     path("", views.ProjectView.as_view(), name="project_page"),
-    # path("", views.IndexView.as_view(), name="index"),
+    # /planner/dashboard/
+    path("dashboard/", views.DashboardView.as_view(), name="dashboard"),
     # /planner/add/task/
     path("add/task/", views.TaskCreate.as_view(), name="add_task"),
     # /planner/remove/<id>/
