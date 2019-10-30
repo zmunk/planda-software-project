@@ -43,15 +43,48 @@
 		</div>
 		<div class="right-container">
 			<div class="login-parent-container">
-				<div class="login-container">
-					<div class="input">
-						<input class="e-mail" type="email" placeholder="E-Mail or Username">
+				<form class="login-container" method="POST">
+                    <!---------------------- LOGIN -------------------------->
+{#					<form class="" method="POST">#}
+{#                    {%csrf_token%}#}
+{#                      <label for="uname"><b>Username</b></label>#}
+{#                      <span class="username_field">{{ form.username }}</span>#}
+{#                        <div class="input e-mail" type="email">#}
+{#                            <span class="username_field">{{ form.username }}</span>#}
+{#					    </div>#}
+{#                    <div class="input">#}
+{#                      <span class="password_field" >{{form.password}}</span>#}
+{#					</div>#}
+{#                      <label for="psw"><b>Password</b></label>#}
+{#                      <button type="submit" class="login-btn">Log In</button>#}
+{##}
+{##}
+{#                      <label>#}
+{#                        <input type="checkbox" checked="checked" name="remember"> Remember me#}
+{#                      </label>#}
+
+{#                    <div class="container"  style="background-color:#f1f1f1">#}
+{#                      <span><a class="forgStyle" href="#">forgot password?</a></span>#}
+{#                    </div>#}
+{#                    {% for field, error in form.errors.items %}#}
+{#                        {% if field != '__all__' %}{{ field }}{% endif %}#}
+{#                        <span style="color:red">{{ error | striptags }}</span>#}
+{#                    {% endfor %}#}
+{#                  </form>#}
+
+
+
+                    <!------------------------------------------------------>
+                    <div class="input">
+						<input class="e-mail" type="email" placeholder="E-Mail or Username" value="{{ form.username }}">
 					</div>
 					<div class="input">
-						<input class="password" type="password" placeholder="Password">
+						<input class="password" type="password" placeholder="Password" value="{{ form.password }}">
 					</div>
-					<a href="{% url 'authentic:login_view' %}" class="login-btn">Login</a>
-				</div>
+<a class="login-btn">Log In</a>
+{#                                          <button type="submit"></button>#}
+                    <!--------------------------------------------------->
+				</form>
 			</div>
 			<div class="start-container">
 				<div class="start-title">Create your own project with us</div>

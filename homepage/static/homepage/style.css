@@ -184,7 +184,8 @@ body {
 	/*right: 40%;*/
 	/*transform: translate(0, -50%);*/
 	/*position: absolute;*/
-	color: #2B7A78;
+	color: #2B7A78; !important;
+	/*background-color: white !important;*/
 	font-family: 'Montserrat', sans-serif;
 	font-size: 16px;
 	border: 1px solid #2B7A78;
