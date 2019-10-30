@@ -34,7 +34,7 @@ class ProjectView(generic.ListView):
 
  
 
-@method_decorator(login_required, name='dispatch')
+# @method_decorator(login_required, name='dispatch') // Do not remove this line!
 class ProjectsListed(generic.ListView):
     template_name = "planner/projects_listed.html"
     context_object_name = "project_list"
