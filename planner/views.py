@@ -45,19 +45,19 @@ class DashboardView(generic.ListView):
 class TaskCreate(CreateView):
     model = Task
     fields = "__all__"
-    success_url = reverse_lazy("planner-namespace:index")
+    success_url = reverse_lazy("planner-namespace:project_page")
 
 
 class TaskUpdate(UpdateView):
     model = Task
     fields = "__all__"
-    success_url = reverse_lazy("planner-namespace:index")
+    success_url = reverse_lazy("planner-namespace:project_page")
 
 
 class CategoryCreate(CreateView):
     model = Category
     fields = "__all__"
-    success_url = reverse_lazy("planner-namespace:index")
+    success_url = reverse_lazy("planner-namespace:project_page")
 
 
 
