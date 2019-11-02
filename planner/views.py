@@ -64,7 +64,8 @@ class DashboardView(generic.ListView):
 
 class TaskCreate(CreateView):
     model = Task
-    fields = ["text", ]
+    # fields = ["text"]
+    fields = "__all__"
     success_url = reverse_lazy("planner-namespace:project_page")
 
     

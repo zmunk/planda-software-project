@@ -11,9 +11,6 @@ class Project(models.Model):
     def __str__(self):
         return self.title + " - " + self.user.username
 
-    # def get_absolute_url(self):
-        # refresh page
-        # return reverse("planner-namespace:detail", kwargs={"pk": self.pk})
 
 class Category(models.Model):
     category_name = models.CharField(max_length=250) 
