@@ -18,12 +18,14 @@ urlpatterns = [
     path("dashboard/", views.DashboardView.as_view(), name="dashboard"),
     #/planner/add/project/
     path("add/project/", views.ProjectCreate.as_view(), name="add_project"),
-    # /planner/add/task/
-    path("add/task/", views.TaskCreate.as_view(), name="add_task"),
+    ################
+    # /planner/add/task/<id>/
+    path("add/task/<int:pk>", views.TaskCreate.as_view(), name="add_task"),
+    ################3
     # /planner/remove/<id>/
     path("task/<int:pk>/delete/", views.TaskDelete.as_view(), name="remove-task"),
-    # /planner/<id>/
-    path("<int:pk>/", views.DetailView.as_view(), name="detail"),
+    # # /planner/<id>/
+    # path("<int:pk>/", views.DetailView.as_view(), name="detail"),
     # /planner/task/<id>/update/
     path("task/<int:pk>/update/", views.TaskUpdate.as_view(), name="update-task"),
     # /planner/add/category/
