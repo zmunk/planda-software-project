@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, render_to_response
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 from .models import Task, Category, Project
 from .forms import TaskForm
@@ -93,7 +93,9 @@ class TaskUpdate(UpdateView):
 class CategoryCreate(CreateView):
     model = Category
     fields = ["category_name"]
-    success_url = reverse_lazy("planner-namespace:project_page")
+
+    def get_success_url(self):
+        return reverse('planner-namespace:temp_project_page', args=(self.kwargs["pk"],))
 
     def get_project(self):
         pk = self.kwargs.get("pk")
