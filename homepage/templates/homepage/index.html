@@ -3,14 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Startseite</title>
+	<title>Planda Home</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 {#	<link rel="stylesheet" type="text/css" href="main.css">#}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
-        <link rel="stylesheet" href="{% static 'homepage/style.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'planner/images/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'planner/images/apple-touch-icon.png' %}">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Erica+One&display=swap" rel="stylesheet">
 </head>
@@ -42,11 +42,55 @@
 			</div>
 		</div>
 		<div class="right-container">
+			<div class="login-parent-container">
+				<form class="login-container" method="POST">
+                    <!---------------------- LOGIN -------------------------->
+{#					<form class="" method="POST">#}
+{#                    {%csrf_token%}#}
+{#                      <label for="uname"><b>Username</b></label>#}
+{#                      <span class="username_field">{{ form.username }}</span>#}
+{#                        <div class="input e-mail" type="email">#}
+{#                            <span class="username_field">{{ form.username }}</span>#}
+{#					    </div>#}
+{#                    <div class="input">#}
+{#                      <span class="password_field" >{{form.password}}</span>#}
+{#					</div>#}
+{#                      <label for="psw"><b>Password</b></label>#}
+{#                      <button type="submit" class="login-btn">Log In</button>#}
+{##}
+{##}
+{#                      <label>#}
+{#                        <input type="checkbox" checked="checked" name="remember"> Remember me#}
+{#                      </label>#}
+
+{#                    <div class="container"  style="background-color:#f1f1f1">#}
+{#                      <span><a class="forgStyle" href="#">forgot password?</a></span>#}
+{#                    </div>#}
+{#                    {% for field, error in form.errors.items %}#}
+{#                        {% if field != '__all__' %}{{ field }}{% endif %}#}
+{#                        <span style="color:red">{{ error | striptags }}</span>#}
+{#                    {% endfor %}#}
+{#                  </form>#}
+
+
+
+                    <!------------------------------------------------------>
+                    <div class="input">
+						<input class="e-mail" type="email" placeholder="E-Mail or Username" value="{{ form.username }}">
+					</div>
+					<div class="input">
+						<input class="password" type="password" placeholder="Password" value="{{ form.password }}">
+					</div>
+<a class="login-btn">Log In</a>
+{#                                          <button type="submit"></button>#}
+                    <!--------------------------------------------------->
+				</form>
+			</div>
 			<div class="start-container">
 				<div class="start-title">Create your own project with us</div>
 				<div class="project-container">
+					<div class="tell-us-more">Tell us more about your project</div>
 				</div>
-                <a href="{% url 'authentic:login_view' %}" class="login-btn">Login</a>
 				<a href="{% url 'authentic:signup_view' %}" class="start-btn">Sign up</a>
 			</div>
 		</div>

@@ -40,7 +40,7 @@
 }
 
 .lists-container::-webkit-scrollbar-thumb {
-    background-color: #cccccc;
+    background-color: #cccccc; /* bottom scrollbar
     /*border: 0.8rem solid #0079bf;*/
     border-top-width: 0;
 }
@@ -88,8 +88,8 @@
 }
 
 .list-items::-webkit-scrollbar-thumb {
-    background-color: #c4c9cc;
-    border-right: 0.6rem solid #e2e4e6;
+    background-color: #5d1585;
+    border-right: 0.6rem solid #a224e6;
 }
 
 .list-items li {
