@@ -10,6 +10,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+import logging as log
+log.basicConfig(level=log.DEBUG)
+log.debug("DEBUGGING")
 
 class TaskDelete(DeleteView):
     template_name = "planner/remove-task.html"
@@ -64,9 +67,26 @@ class DashboardView(generic.ListView):
 
 class TaskCreate(CreateView):
     model = Task
+<<<<<<< HEAD
     # fields = ["text"]
     fields = "__all__"
+=======
+    fields = ["text", "author", "user"]
+>>>>>>> 9f50b684930c676ef8ecaa28659a7737d69e02fe
     success_url = reverse_lazy("planner-namespace:project_page")
+
+    def get_object(self, **kwargs):
+        log.debug("entering taskcreate's method")
+        # log.debug(f"{kwargs}")
+        id = self.kwargs.get("pk")
+        log.debug(id)
+        return get_object_or_404(Category, id=id)
+
+    def form_valid(self, form):
+        log.debug("form_valid called")
+        current_category = self.get_object()
+        form.instance.category = current_category
+        return super(TaskCreate, self).form_valid(form)
 
     
 

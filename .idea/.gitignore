@@ -2,5 +2,9 @@
 /workspace.xml
 # Default ignored files
 /workspace.xml
+<<<<<<< HEAD
+# sql
+=======
 #sql 
+>>>>>>> ac16f47fcf90638ad871a37846789f16557a427a
 *.sqlite3
