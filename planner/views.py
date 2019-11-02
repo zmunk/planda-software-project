@@ -68,7 +68,7 @@ class DashboardView(generic.ListView):
 
 class TaskCreate(CreateView):
     model = Task
-    fields = ["text", "author", "user"]
+    fields = ["text"]
     def get_success_url(self):
         # project_id  = something
         return reverse('planner-namespace:temp_project_page', args=(self.kwargs["project_id"],))
@@ -88,7 +88,8 @@ class TaskCreate(CreateView):
     def form_valid(self, form):
         log.debug("form_valid called")
         current_category = self.category_id()
-        form.instance.category = current_category
+        form.instance.category = current_category #fill category
+        form.instance.author = self.request.user #fill user
         return super(TaskCreate, self).form_valid(form)
 
 
