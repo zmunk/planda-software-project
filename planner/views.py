@@ -16,19 +16,16 @@ log.basicConfig(level=log.DEBUG)
 log.debug("DEBUGGING")
 
 
-class TaskDelete(DeleteView):
-    template_name = "planner/remove-task.html"
-    model = Task
-    success_url = reverse_lazy("planner-namespace:project_page")
+# ----------- Project
+class ProjectCreate(CreateView):
+    model = Project
+    fields = ["title"]
+    success_url = reverse_lazy("planner-namespace:projects_listed")
 
-    def get_object(self):
-        pk = self.kwargs.get("pk")
-        return get_object_or_404(Task, id=pk)
-
-
-class DetailView(generic.DetailView):
-    model = Task
-    template_name = "planner/detail.html"
+    # overriding form_valid method in createView to auto populate fields
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(ProjectCreate, self).form_valid(form)
 
 
 class ProjectView(generic.ListView):
@@ -59,37 +56,7 @@ class ProjectsListed(generic.ListView):
         return Project.objects.filter(user=self.request.user)
 
 
-class DashboardView(generic.ListView):
-    template_name = "dashboard/index.html"
-
-    def get_queryset(self):
-        return HttpResponse("")
-
-
-class TaskCreate(CreateView):
-    model = Task
-    fields = ["text", "author", "user"]
-    success_url = reverse_lazy("planner-namespace:project_page")
-
-    def get_object(self, **kwargs):
-        log.debug("entering taskcreate's method")
-        id = self.kwargs.get("pk")
-        log.debug(id)
-        return get_object_or_404(Category, id=id)
-
-    def form_valid(self, form):
-        log.debug("form_valid called")
-        current_category = self.get_object()
-        form.instance.category = current_category
-        return super(TaskCreate, self).form_valid(form)
-
-
-class TaskUpdate(UpdateView):
-    model = Task
-    fields = "__all__"
-    success_url = reverse_lazy("planner-namespace:project_page")
-
-
+# ----------- Category
 class CategoryCreate(CreateView):
     model = Category
     fields = ["category_name"]
@@ -107,12 +74,51 @@ class CategoryCreate(CreateView):
         return super(CategoryCreate, self).form_valid(form)
 
 
-class ProjectCreate(CreateView):
-    model = Project
-    fields = ["title"]
-    success_url = reverse_lazy("planner-namespace:projects_listed")
+# ----------- Task
+class TaskCreate(CreateView):
+    model = Task
+    fields = ["text"] ############
+    success_url = reverse_lazy("planner-namespace:project_page")
 
-    # overriding form_valid method in createView to auto populate fields
+    def get_object(self, **kwargs):
+        log.debug("entering taskcreate's method")
+        id = self.kwargs.get("pk")
+        log.debug(id)
+        return get_object_or_404(Category, id=id)
+
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(ProjectCreate, self).form_valid(form)
+        log.debug("form_valid called")
+        current_category = self.get_object()
+        form.instance.category = current_category
+        return super(TaskCreate, self).form_valid(form)
+
+
+class TaskDelete(DeleteView):
+    template_name = "planner/remove-task.html"
+    model = Task
+    success_url = reverse_lazy("planner-namespace:project_page")
+
+    def get_object(self):
+        pk = self.kwargs.get("pk")
+        return get_object_or_404(Task, id=pk)
+
+
+class DetailView(generic.DetailView):
+    model = Task
+    template_name = "planner/detail.html"
+
+
+class TaskUpdate(UpdateView):
+    model = Task
+    fields = "__all__"
+    success_url = reverse_lazy("planner-namespace:project_page")
+
+
+# ----------- Project
+class DashboardView(generic.ListView):
+    template_name = "dashboard/index.html"
+
+    def get_queryset(self):
+        return HttpResponse("")
+
+
