@@ -29,6 +29,7 @@ class ProjectView(generic.ListView):
     template_name = "planner/project.html"
     context_object_name = "category_list"
 
+    
     def get_queryset(self):
         project_name = self.kwargs.get("project_name")
         return Category.objects.filter(project__title=project_name)
@@ -77,14 +78,15 @@ class TaskUpdate(UpdateView):
 
 class CategoryCreate(CreateView):
     model = Category
-    fields = ["category_name", "project"]
+    fields = ["category_name"]
     # fields = "__all__"
     success_url = reverse_lazy("planner-namespace:project_page")
 
+
     #overriding form_valid method in createView to auto populate fields
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(CategoryCreate, self).form_valid(form)
+    # def form_valid(self, form):
+    #     form.instance.project = current_project_object
+    #     return super(CategoryCreate, self).form_valid(form)
 
 
 
