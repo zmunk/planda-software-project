@@ -72,7 +72,6 @@ class TaskCreate(CreateView):
 
     def get_object(self, **kwargs):
         log.debug("entering taskcreate's method")
-        # log.debug(f"{kwargs}")
         id = self.kwargs.get("pk")
         log.debug(id)
         return get_object_or_404(Category, id=id)
