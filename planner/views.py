@@ -25,46 +25,23 @@ class TaskDelete(DeleteView):
         pk = self.kwargs.get("pk")
         return get_object_or_404(Task, id=pk)
 
+
 class DetailView(generic.DetailView):
     model = Task
     template_name = "planner/detail.html"
-
 
 
 class ProjectView(generic.ListView):
     template_name = "planner/project.html"
     context_object_name = "category_list"
 
-    # def get_queryset(self):
-    #     # project_name = self.kwargs.get("project_name")
-    #     pk = self.kwargs.get("pk")
-    #     log.debug(f"in project view, pk: {pk}")
-    #     context = {
-    #         "categories": Category.objects.filter(project__id=pk),
-    #         "project_id": pk,  # TODO
-    #     }################################
-    #
-    #     return render_to_response(self.template_name, context)
-    #     # return render(request, 'Articles/greeting.html', context)
     def get_queryset(self):
-        # project_name = self.kwargs.get("project_name")
+        # gives category_list to project html page
         pk = self.kwargs.get("pk")
-
-        log.debug(f"project id: {pk}")
         return Category.objects.filter(project__pk=pk)
-        # return Category.objects.filter(project__title=project_name)
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super(ProjectView, self).get_context_data(**kwargs)
-    #     # context['tags'] = Tag.objects.all()
-    #     pk = self.kwargs.get("pk")
-    #     # q = Category.objects.filter(project__pk=pk) ############
-    #     context["categories"] = Category.objects.all().filter(project__pk=pk)
-    #     # log.debug("categories: " + str(q.query))
-    #     context["project_id"] = pk  #######################################3
-    #     return context
 
     def project_id(self):
+        # allows html to access project_id through: {{ view.project_id }}
         pk = self.kwargs.get("pk")
         return pk
 
@@ -72,15 +49,6 @@ class ProjectView(generic.ListView):
         project_name = self.kwargs.get("project_name")
         return Category.objects.filter(project__title=project_name)
 
-    # def get(self):
-    #     context = {
-    #         "categories": Category.objects.filter(project__title=project_name),
-    #         "project_id": self.kwargs.get("pk")
-    #     }
-        # return Category.objects.filter(project__title=project_name)
-        ########################################
-        # return project.id
- 
 
 # @method_decorator(login_required, name='dispatch') // Do not remove this line!
 class ProjectsListed(generic.ListView):
@@ -96,15 +64,6 @@ class DashboardView(generic.ListView):
 
     def get_queryset(self):
         return HttpResponse("")
-
-# class IndexView(generic.ListView):
-#     template_name = "planner/index.html"
-#     # context_object_name = "task_list"
-#     context_object_name = "category_list"
-#
-#     def get_queryset(self):
-#         # return Task.objects.all()
-#         return Category.objects.all()
 
 
 class TaskCreate(CreateView):
@@ -134,7 +93,6 @@ class TaskUpdate(UpdateView):
 class CategoryCreate(CreateView):
     model = Category
     fields = ["category_name"]
-    # fields = "__all__"
     success_url = reverse_lazy("planner-namespace:project_page")
 
     def get_project(self):
@@ -150,7 +108,6 @@ class CategoryCreate(CreateView):
 class ProjectCreate(CreateView):
     model = Project
     fields = ["title"]
-    # fields = "__all__"
     success_url = reverse_lazy("planner-namespace:projects_listed")
 
     # overriding form_valid method in createView to auto populate fields

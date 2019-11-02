@@ -1,7 +1,7 @@
 {% extends "planner/base.html" %}
 
 {% block body %}
-
+{#    <p>project id {{ view.project_id }}</p>#}
 
     <section class="lists-container">
         {% for category in category_list %}
@@ -18,11 +18,11 @@
                 </form>
             </div>
         {% endfor %}
-        <form action="{% url "planner-namespace:add_category" 7 %}" method='GET'>
+        <form action="{% url "planner-namespace:add_category" view.project_id %}" method='GET'>
             <!-- TODO: pass id of project to add_category -->
             <button type="submit" class="add-list-btn btn">Add a list</button>
         </form>
-{##}
+
     </section>
 {% endblock %}
 
