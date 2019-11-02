@@ -19,7 +19,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def __str__(self):
-        return self.category_name + " - " +  self.user.username
+        return self.category_name + "(Category of " + self.project.title + ")"
 
     def get_absolute_url(self):
         # go to album that was just created
