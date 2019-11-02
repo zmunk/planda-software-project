@@ -133,7 +133,7 @@ class TaskUpdate(UpdateView):
 
 class CategoryCreate(CreateView):
     model = Category
-    fields = ["category_name", "user"]
+    fields = ["category_name"]
     # fields = "__all__"
     success_url = reverse_lazy("planner-namespace:project_page")
 
