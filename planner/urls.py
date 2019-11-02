@@ -20,7 +20,10 @@ urlpatterns = [
     path("add/project/", views.ProjectCreate.as_view(), name="add_project"),
 
     # /planner/add/task/<category_id>/
-    path("add/task/<int:pk>", views.TaskCreate.as_view(), name="add_task"),
+    # path("add/task/<int:pk>", views.TaskCreate.as_view(), name="add_task"),
+    path("projects/<int:project_id>/add/task/<int:category_id>", views.TaskCreate.as_view(), name="add_task"), ##TODO
+    #pass both vairables to url
+    #take both variables at the end
     # /planner/remove/<task_id>/
     path("task/<int:pk>/delete/", views.TaskDelete.as_view(), name="remove-task"),
     # /planner/<id>/

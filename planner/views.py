@@ -41,7 +41,7 @@ class ProjectView(generic.ListView):
         # allows html to access project_id through: {{ view.project_id }}
         pk = self.kwargs.get("pk")
         return pk
-
+    
     def categories(self):
         project_name = self.kwargs.get("project_name")
         return Category.objects.filter(project__title=project_name)
@@ -77,19 +77,33 @@ class CategoryCreate(CreateView):
 # ----------- Task
 class TaskCreate(CreateView):
     model = Task
+<<<<<<< HEAD
     fields = ["text"] ############
     success_url = reverse_lazy("planner-namespace:project_page")
+=======
+    fields = ["text"]
+    def get_success_url(self):
+        # project_id  = something
+        return reverse('planner-namespace:temp_project_page', args=(self.kwargs["project_id"],))
+    # success_url = reverse_lazy("planner-namespace:project_page")
+>>>>>>> fc904993ed6e125b5a51589cf8f8aad743d9acf0
 
-    def get_object(self, **kwargs):
-        log.debug("entering taskcreate's method")
-        id = self.kwargs.get("pk")
-        log.debug(id)
-        return get_object_or_404(Category, id=id)
+    # def get_object(self, **kwargs):
+    #     log.debug("entering taskcreate's method")
+    #     id = self.kwargs.get("pk")
+    #     log.debug(id)
+    #     return get_object_or_404(Category, id=id)
+
+    def category_id(self):
+        # allows html to access project_id through: {{ view.project_id }}
+        pk = self.kwargs.get("category_id") ##TODO
+        return get_object_or_404(Category, id=pk)
 
     def form_valid(self, form):
         log.debug("form_valid called")
-        current_category = self.get_object()
-        form.instance.category = current_category
+        current_category = self.category_id()
+        form.instance.category = current_category #fill category
+        form.instance.author = self.request.user #fill user
         return super(TaskCreate, self).form_valid(form)
 
 

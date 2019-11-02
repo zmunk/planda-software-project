@@ -13,7 +13,7 @@
                             <a href="{% url "planner-namespace:remove-task" task.pk %}">--X--</a></li>
                     {% endfor %}
                 </ul>
-                <form action="{% url "planner:add_task" view.project_id %}" method='GET'>
+                <form action="{% url "planner:add_task" view.project_id category.id %}" method='GET'>
                     <button type='submit' class="add-card-btn btn">Add Task</button>
                 </form>
             </div>
