@@ -30,7 +30,8 @@ class ProjectView(generic.ListView):
     context_object_name = "category_list"
 
     def get_queryset(self):
-        return Category.objects.filter(user=self.request.user)
+        project_name = self.kwargs.get("project_name")
+        return Category.objects.filter(project__title=project_name)
 
  
 
@@ -62,8 +63,10 @@ class DashboardView(generic.ListView):
 
 class TaskCreate(CreateView):
     model = Task
-    fields = "__all__"
+    fields = ["text", ]
     success_url = reverse_lazy("planner-namespace:project_page")
+
+    
 
 
 class TaskUpdate(UpdateView):
@@ -74,8 +77,24 @@ class TaskUpdate(UpdateView):
 
 class CategoryCreate(CreateView):
     model = Category
-    fields = "__all__"
+    fields = ["category_name", "project"]
+    # fields = "__all__"
     success_url = reverse_lazy("planner-namespace:project_page")
 
+    #overriding form_valid method in createView to auto populate fields
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(CategoryCreate, self).form_valid(form)
 
 
+
+class ProjectCreate(CreateView):
+    model = Project
+    fields = ["title"]
+    # fields = "__all__"
+    success_url = reverse_lazy("planner-namespace:projects_listed")
+
+    #overriding form_valid method in createView to auto populate fields
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(ProjectCreate, self).form_valid(form)
