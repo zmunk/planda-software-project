@@ -1,8 +1,9 @@
 {% extends "planner/base.html" %}
 
 {% block body %}
-    <section class="lists-container">
 
+
+    <section class="lists-container">
         {% for category in category_list %}
             <div class="list">
                 <h3 class="list-title">{{ category.category_name }}</h3>
@@ -12,16 +13,16 @@
                             <a href="{% url "planner-namespace:remove-task" task.pk %}">--X--</a></li>
                     {% endfor %}
                 </ul>
-                <form action="{% url "planner:add_task" category.pk %}" method='GET'>
+                <form action="{% url "planner:add_task" view.project_id %}" method='GET'>
                     <button type='submit' class="add-card-btn btn">Add Task</button>
                 </form>
             </div>
         {% endfor %}
-
-        <form action="{% url "planner:add_category" %}" method='GET'>
+        <form action="{% url "planner-namespace:add_category" 7 %}" method='GET'>
+            <!-- TODO: pass id of project to add_category -->
             <button type="submit" class="add-list-btn btn">Add a list</button>
         </form>
-
+{##}
     </section>
 {% endblock %}
 
