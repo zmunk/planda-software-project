@@ -11,14 +11,10 @@ class Project(models.Model):
     def __str__(self):
         return self.title + " - " + self.user.username
 
-    # def get_absolute_url(self):
-        # refresh page
-        # return reverse("planner-namespace:detail", kwargs={"pk": self.pk})
 
 class Category(models.Model):
     category_name = models.CharField(max_length=250) 
     project = models.ForeignKey(Project, default="", on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default="", on_delete=models.CASCADE)
     class Meta:
         verbose_name_plural = "Categories"
 
