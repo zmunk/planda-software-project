@@ -1,7 +1,7 @@
 {% extends "planner/base.html" %}
 
 {% block body %}
-{#    <p>project id: {{ view.project_id }}</p>#}
+    {#        <p>project id: {{ view.project_id }}</p>#}
     <section class="lists-container">
         {% for category in category_list %}
             <div class="list">
@@ -9,16 +9,26 @@
                 <ul class="list-items">
                     {% for task in category.task_set.all %}
                         <li onclick="location.href='{% url "planner-namespace:update_task" view.project_id task.pk %}'">
-                            {{ task.text }}
-                            <span style="font-size: xx-small">{{ task.author }}</span>
-{#                            Task id: {{ task.pk }}#}
-                            <a href="{% url "planner-namespace:delete_task" view.project_id task.pk %}">--X--</a></li>
 
+                            <div class="row no-gutters">
+
+                                <div class="col-xs-10 col-md-11">
+                                    {{ task.text }}
+                                    <span style="font-size: xx-small">{{ task.author }}</span>
+                                </div>
+                                <div class="col-xs-2 col-md-1">
+                                    <a style="font-size: small; color: grey"
+                                       href="{% url "planner-namespace:delete_task" view.project_id task.pk %}">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
                     {% endfor %}
                 </ul>
-{#                <p>project id: {{ view.project_id }}</p>#}
-{#                <p>category id: {{ category.id }}</p>#}
-{#                <br><br><br><br><br>#}
+                {#                <p>project id: {{ view.project_id }}</p>#}
+                {#                <p>category id: {{ category.id }}</p>#}
+                {#                <br><br><br><br><br>#}
                 <form action="{% url "planner:add_task" view.project_id category.id %}" method='GET'>
                     <button type='submit' class="add-card-btn btn">Add Task</button>
                 </form>
@@ -27,9 +37,6 @@
         <form action="{% url "planner-namespace:add_category" view.project_id %}" method='GET'>
             <button type="submit" class="add-list-btn btn">Add a list</button>
         </form>
-
     </section>
 {% endblock %}
-
-
 </html>
