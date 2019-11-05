@@ -8,9 +8,7 @@
     <button type="submit">Save</button>
 
 </form>
-    <!-- TODO: figure out how to pass the project id to this template -->
-{#<a href="{% url "planner-namespace:project_page" view.project_id %}">#}
-<a href="{% url "planner:projects_listed" %}">
+<a href="{% url "planner-namespace:project_page" view.project_id %}">
     <button>Back</button>
 </a>
 {% endblock %}

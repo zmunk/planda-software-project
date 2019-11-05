@@ -81,13 +81,10 @@ class TaskCreate(CreateView):
 
     def get_success_url(self):
         return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
-    # success_url = reverse_lazy("planner-namespace:project_page")
 
-    # def get_object(self, **kwargs):
-    #     log.debug("entering taskcreate's method")
-    #     id = self.kwargs.get("pk")
-    #     log.debug(id)
-    #     return get_object_or_404(Category, id=id)
+    def project_id(self):
+        pk = self.kwargs.get("project_id")
+        return pk
 
     def get_category(self):
         # get current category
@@ -120,7 +117,7 @@ class TaskDelete(DeleteView):
 
     def category_id(self):
         # allows html to access project_id through: {{ view.project_id }}
-        pk = self.kwargs.get("category_id") ## TODO
+        pk = self.kwargs.get("category_id")
         return get_object_or_404(Category, id=pk)
 
 
