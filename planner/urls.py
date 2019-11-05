@@ -34,7 +34,7 @@ urlpatterns = [
     # /planner/<id>/
     path("project/<int:project_id>/task/<int:pk>/", views.DetailView.as_view(), name="detail"),
     # /planner/task/<id>/update/
-    path("project/<int:project_id>/update/task/<int:task_id>/", views.TaskUpdate.as_view(), name="update-task"),
+    path("project/<int:project_id>/update/task/<int:task_id>/", views.TaskUpdate.as_view(), name="update_task"),
 
 
 
