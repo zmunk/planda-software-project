@@ -34,12 +34,12 @@ class ProjectView(generic.ListView):
 
     def get_queryset(self):
         # gives category_list to project html page
-        pk = self.kwargs.get("pk")
+        pk = self.kwargs.get("project_id")
         return Category.objects.filter(project__pk=pk)
 
     def project_id(self):
         # allows html to access project_id through: {{ view.project_id }}
-        pk = self.kwargs.get("pk")
+        pk = self.kwargs.get("project_id")
         return pk
     
     def categories(self):
@@ -130,7 +130,7 @@ class DetailView(generic.DetailView):
     template_name = "planner/detail.html"
 
     def project_id(self):
-        pk = self.kwargs.get("project_id")  # TODO
+        pk = self.kwargs.get("project_id")
         return pk
 
 
@@ -139,12 +139,16 @@ class TaskUpdate(UpdateView):
     fields = ["text"]
 
     def get_success_url(self):
-        # project_id  = something
         return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
 
+    def project_id(self):
+        pk = self.kwargs.get("project_id")
+        return pk
+
     def get_object(self, queryset=None):
-        pk = self.kwargs.get("pk")
+        pk = self.kwargs.get("task_id")
         return get_object_or_404(Task, id=pk)
+
 
 # ----------- Project
 class DashboardView(generic.ListView):
