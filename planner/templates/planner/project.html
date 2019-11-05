@@ -9,8 +9,13 @@
                 <h3 class="list-title">{{ category.category_name }}</h3>
                 <ul class="list-items">
                     {% for task in category.task_set.all %}
+<<<<<<< HEAD
                         <li>{{ task.text }} <span style="font-size: xx-small">{{ task.author }}</span>
                             <a href="{% url "planner-namespace:delete_task" view.project_id task.pk %}">--X--</a></li>
+=======
+                        <li onclick="location.href='{% url "planner-namespace:update-task" task.pk %}'">{{ task.text }} <span style="font-size: xx-small">{{ task.author }}</span>
+                            <a href="{% url "planner-namespace:remove-task" task.pk %}">--X--</a></li>
+>>>>>>> 70f741a4d960f876784be1a0df116c9c8cd99865
                     {% endfor %}
                 </ul>
                 <p>project id: {{ view.project_id }}</p>

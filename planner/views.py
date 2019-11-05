@@ -77,6 +77,10 @@ class CategoryCreate(CreateView):
 # ----------- Task
 class TaskCreate(CreateView):
     model = Task
+<<<<<<< HEAD
+=======
+    success_url = reverse_lazy("planner-namespace:project_page")
+>>>>>>> 70f741a4d960f876784be1a0df116c9c8cd99865
     fields = ["text"]
 
     def get_success_url(self):
@@ -105,6 +109,7 @@ class TaskCreate(CreateView):
 class TaskDelete(DeleteView):
     template_name = "planner/remove-task.html"
     model = Task
+<<<<<<< HEAD
     # success_url = reverse_lazy("planner-namespace:project_page")
 
     def get_success_url(self):
@@ -113,7 +118,22 @@ class TaskDelete(DeleteView):
 
     def get_object(self, **kwargs):
         pk = self.kwargs.get("project_id")
+=======
+    success_url = reverse_lazy("planner-namespace:projects_listed")
+
+    def category_id(self):
+        # allows html to access project_id through: {{ view.project_id }}
+        pk = self.kwargs.get("category_id") ##TODO
+        return get_object_or_404(Category, id=pk)
+
+
+    def get_object(self, **kwargs):
+        pk = self.kwargs.get("pk")
+>>>>>>> 70f741a4d960f876784be1a0df116c9c8cd99865
         return get_object_or_404(Task, id=pk)
+
+
+
 
 
 class DetailView(generic.DetailView):
@@ -127,13 +147,21 @@ class DetailView(generic.DetailView):
 
 class TaskUpdate(UpdateView):
     model = Task
+<<<<<<< HEAD
     fields = "__all__"
     # success_url = reverse_lazy("planner-namespace:project_page")
 
     def get_success_url(self):
         # project_id  = something
         return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
+=======
+    fields = ["text"]
+    success_url = reverse_lazy("planner-namespace:projects_listed")
+>>>>>>> 70f741a4d960f876784be1a0df116c9c8cd99865
 
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get("pk")
+        return get_object_or_404(Task, id=pk)
 
 # ----------- Project
 class DashboardView(generic.ListView):
