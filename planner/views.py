@@ -62,10 +62,14 @@ class CategoryCreate(CreateView):
     fields = ["category_name"]
 
     def get_success_url(self):
-        return reverse('planner-namespace:project_page', args=(self.kwargs["pk"],))
+        return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
+
+    def project_id(self):
+        pk = self.kwargs.get("project_id")
+        return pk
 
     def get_project(self):
-        pk = self.kwargs.get("pk")
+        pk = self.project_id()
         return get_object_or_404(Project, id=pk)
 
     # overriding form_valid method in createView to auto populate fields
@@ -119,8 +123,6 @@ class TaskDelete(DeleteView):
         # allows html to access project_id through: {{ view.project_id }}
         pk = self.kwargs.get("category_id")
         return get_object_or_404(Category, id=pk)
-
-
 
 
 class DetailView(generic.DetailView):

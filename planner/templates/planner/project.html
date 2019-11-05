@@ -14,9 +14,9 @@
 
                     {% endfor %}
                 </ul>
-                <p>project id: {{ view.project_id }}</p>
-                <p>category id: {{ category.id }}</p>
-                <br><br><br><br><br>
+{#                <p>project id: {{ view.project_id }}</p>#}
+{#                <p>category id: {{ category.id }}</p>#}
+{#                <br><br><br><br><br>#}
                 <form action="{% url "planner:add_task" view.project_id category.id %}" method='GET'>
                     <button type='submit' class="add-card-btn btn">Add Task</button>
                 </form>
