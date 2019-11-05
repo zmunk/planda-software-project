@@ -62,7 +62,7 @@ class CategoryCreate(CreateView):
     fields = ["category_name"]
 
     def get_success_url(self):
-        return reverse('planner-namespace:temp_project_page', args=(self.kwargs["pk"],))
+        return reverse('planner-namespace:project_page', args=(self.kwargs["pk"],))
 
     def get_project(self):
         pk = self.kwargs.get("pk")
@@ -77,16 +77,11 @@ class CategoryCreate(CreateView):
 # ----------- Task
 class TaskCreate(CreateView):
     model = Task
-<<<<<<< HEAD
-    fields = ["text"] ############
-    success_url = reverse_lazy("planner-namespace:project_page")
-=======
     fields = ["text"]
+
     def get_success_url(self):
-        # project_id  = something
-        return reverse('planner-namespace:temp_project_page', args=(self.kwargs["project_id"],))
+        return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
     # success_url = reverse_lazy("planner-namespace:project_page")
->>>>>>> fc904993ed6e125b5a51589cf8f8aad743d9acf0
 
     # def get_object(self, **kwargs):
     #     log.debug("entering taskcreate's method")
@@ -94,26 +89,30 @@ class TaskCreate(CreateView):
     #     log.debug(id)
     #     return get_object_or_404(Category, id=id)
 
-    def category_id(self):
-        # allows html to access project_id through: {{ view.project_id }}
-        pk = self.kwargs.get("category_id") ##TODO
+    def get_category(self):
+        # get current category
+        pk = self.kwargs.get("category_id")
         return get_object_or_404(Category, id=pk)
 
     def form_valid(self, form):
         log.debug("form_valid called")
-        current_category = self.category_id()
-        form.instance.category = current_category #fill category
-        form.instance.author = self.request.user #fill user
+        current_category = self.get_category()
+        form.instance.category = current_category  # fill category
+        form.instance.author = self.request.user  # fill user
         return super(TaskCreate, self).form_valid(form)
 
 
 class TaskDelete(DeleteView):
     template_name = "planner/remove-task.html"
     model = Task
-    success_url = reverse_lazy("planner-namespace:project_page")
+    # success_url = reverse_lazy("planner-namespace:project_page")
 
-    def get_object(self):
-        pk = self.kwargs.get("pk")
+    def get_success_url(self):
+        # project_id  = something
+        return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
+
+    def get_object(self, **kwargs):
+        pk = self.kwargs.get("project_id")
         return get_object_or_404(Task, id=pk)
 
 
@@ -121,11 +120,19 @@ class DetailView(generic.DetailView):
     model = Task
     template_name = "planner/detail.html"
 
+    def project_id(self):
+        pk = self.kwargs.get("project_id")  # TODO
+        return pk
+
 
 class TaskUpdate(UpdateView):
     model = Task
     fields = "__all__"
-    success_url = reverse_lazy("planner-namespace:project_page")
+    # success_url = reverse_lazy("planner-namespace:project_page")
+
+    def get_success_url(self):
+        # project_id  = something
+        return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
 
 
 # ----------- Project
