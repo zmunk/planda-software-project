@@ -46,7 +46,7 @@
 				<form class="login-container" method="POST">
                     <!---------------------- LOGIN -------------------------->
 {#					<form class="" method="POST">#}
-{#                    {%csrf_token%}#}
+                    {%csrf_token%}
 {#                      <label for="uname"><b>Username</b></label>#}
 {#                      <span class="username_field">{{ form.username }}</span>#}
 {#                        <div class="input e-mail" type="email">#}
@@ -75,14 +75,21 @@
 
 
                     <!------------------------------------------------------>
+                <!-- TODO: connect login form -->
+
                     <div class="input">
-						<input class="e-mail" type="email" placeholder="E-Mail or Username" value="{{ form.username }}">
+						<input class="e-mail" type="username" placeholder="E-Mail or Username" value="{{ form.username }}">
 					</div>
 					<div class="input">
 						<input class="password" type="password" placeholder="Password" value="{{ form.password }}">
 					</div>
-                    <a class="login-btn" href="{% url "authentic:login_view" %}">Log In</a>
-{#                                          <button type="submit"></button>#}
+{#                    <a class="login-btn" href="{% url "authentic:login_view" %}">Log In</a>#}
+
+                    {% for field, error in form.errors.items %}
+                        {% if field != '__all__' %}{{ field }}{% endif %}
+                        <span style="color:red">{{ error | striptags }}</span>
+                    {% endfor %}
+                                          <button type="submit"></button>
                     <!--------------------------------------------------->
 				</form>
 			</div>
