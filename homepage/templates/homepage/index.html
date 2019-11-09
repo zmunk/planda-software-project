@@ -83,13 +83,13 @@
 					<div class="input">
 						<input class="password" type="password" placeholder="Password" value="{{ form.password }}">
 					</div>
-{#                    <a class="login-btn" href="{% url "authentic:login_view" %}">Log In</a>#}
+                    <a class="login-btn" href="{% url "authentic:login_view" %}">Log In</a>
 
-                    {% for field, error in form.errors.items %}
-                        {% if field != '__all__' %}{{ field }}{% endif %}
-                        <span style="color:red">{{ error | striptags }}</span>
-                    {% endfor %}
-                                          <button type="submit"></button>
+{#                    {% for field, error in form.errors.items %}#}
+{#                        {% if field != '__all__' %}{{ field }}{% endif %}#}
+{#                        <span style="color:red">{{ error | striptags }}</span>#}
+{#                    {% endfor %}#}
+{#                                          <button type="submit"></button>#}
                     <!--------------------------------------------------->
 				</form>
 			</div>
