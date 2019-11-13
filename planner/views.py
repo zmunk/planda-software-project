@@ -25,6 +25,7 @@ class ProjectCreate(CreateView):
     # overriding form_valid method in createView to auto populate fields
     def form_valid(self, form):
         form.instance.user = self.request.user
+        # form.instance.user.add(self.request.user)#TODO
         return super(ProjectCreate, self).form_valid(form)
 
 
