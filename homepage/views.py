@@ -4,8 +4,6 @@ from django.views import generic
 
 from django.contrib.auth.decorators import login_required
 
-
-
 class IndexView(generic.ListView):
     template_name = "homepage/index.html"
 
