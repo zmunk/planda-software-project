@@ -4,42 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Planda{% endblock %}</title>
-
-
+    <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
-    <!-- Static Files -->
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="{% static 'trello-style.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.0/dragula.min.css'>
+    <!-- Icons -->
     <link rel="shortcut icon" href="{% static 'planner/images/favicon-32x32.png' %}">
     <link rel="apple-touch-icon" href="{% static 'planner/images/apple-touch-icon.png' %}">
-
-    <!-- font awesome -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-default">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
         <img src="{% static 'planner/images/planda.png' %}" alt="Planda">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar4">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Link <span class="sr-only">Home</span></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Dashboard</a>
             </li>
-            <li class="nav-item active"><a class="nav-link" href="#">My Projects</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">My Account</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-            <a href="{% url 'authentic:logout_view' %}" class="nav-link">Log out</a>
+            <li class="nav-item">
+                <a class="nav-link" href="#">My Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
         </ul>
+        <a class="nav-link" href="#">Log out</a>
     </div>
 </nav>
 

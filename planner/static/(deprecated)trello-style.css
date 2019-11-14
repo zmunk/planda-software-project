@@ -1,3 +1,5 @@
+/* UNUSED (deprecated) */
+
 /* Base styles */
 
 :root {
@@ -142,7 +144,7 @@
 
 .add-list-btn {
     width: 100%;
-    flex: 0 0 27rem;
+    /*flex: 0 0 54rem;*/
     display: block;
     font-size: 1.4rem;
     font-weight: 400;
