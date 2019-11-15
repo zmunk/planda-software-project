@@ -7,7 +7,7 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ["text", "author"]
 
-# testing
+
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project

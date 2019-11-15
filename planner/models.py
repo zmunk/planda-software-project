@@ -13,6 +13,9 @@ class Project(models.Model):
     def __str__(self):
         return self.title + " - " + str(self.user)
 
+    def get_absolute_url(self):
+        # where to go when new project is created
+        return reverse("planner:projects_listed")
 
 class Category(models.Model):
     category_name = models.CharField(max_length=250) 
