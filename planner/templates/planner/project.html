@@ -4,15 +4,11 @@
 {% block body %}
 
     <section class="lists-container">
-
         {% for category in category_list %}
-
             <div class="list panel">
                 <h3 class="list-title">{{ category.category_name }}</h3>
                 <ul class="list-items">
-
                     {% for task in category.task_set.all %}
-
                         <li class="item">
                             <div class="row no-gutters">
                                 <div class="col-xs-10 col-md-11">
@@ -26,21 +22,26 @@
                                 </div>
                             </div>
                         </li>
-
                     {% endfor %}
-
                 </ul>
                 <form class="add-task-btn-form" action="{% url "planner:add_task" view.project_id category.id %}"
                       method='GET'>
                     <button type='submit' class="add-task-btn btn">Add a task</button>
                 </form>
             </div>
-
         {% endfor %}
 
-        <form class="panel" action="{% url "planner:add_category" view.project_id %}" method='GET'>
-            <button type="submit" class="add-list-btn btn">Add a list</button>
-        </form>
+        {#        <form class="panel" action="{% url "planner:add_category" view.project_id %}" method='GET'>#}
+        {#            <button type="submit" class="add-list-btn btn">Add a list</button>#}
+        {#        </form>#}
+        <div class="panel">
+            <button id="add-list-btn" type="submit" class="add-list-btn btn">Add a list</button>
+            <form id="add-list-form" method="post" action="#">
+                {% csrf_token %}
+                <input id="add-list-input" class="form-control input-sm" type="text" name="category_name">
+                <button class="hidden" type="submit"></button>
+            </form>
+        </div>
 
     </section>
 
@@ -48,5 +49,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.0/dragula.min.js'></script>
     <script src="{% static 'js/dragging.js' %}"></script>
+    <!-- Reactive Forms -->
+    <script src="{% static 'js/add_list.js' %}"></script>
 
 {% endblock %}

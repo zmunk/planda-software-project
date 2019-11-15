@@ -3,7 +3,6 @@
 {% block title %}Projects{% endblock %}
 
 {% block body %}
-    <script src="{% static 'js/add_project.js' %}"></script>
 
     <div class="container" style="height: 3rem">
         <button id="add-project-btn" type="button" class="btn btn-primary">Add Project</button>
@@ -11,10 +10,10 @@
             {% csrf_token %}
             <div class="form-group row">
                 <div class="col-xs-2">
-                    <input class="form-control input-sm" type="text" name="title">
+                    <input id="add-project-input" class="form-control input-sm" type="text" name="title">
                 </div>
                 <div class="col-xs-2">
-                    <button type="submit" style="visibility: hidden; font-size: 0;"></button>
+                    <button class="hidden" type="submit"></button>
                 </div>
             </div>
         </form>
@@ -39,7 +38,7 @@
         </div>
     </div>
 
-
+<script src="{% static 'js/add_project.js' %}"></script>
 
 {% endblock %}
 

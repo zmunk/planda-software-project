@@ -10,6 +10,7 @@ class Project(models.Model):
     title = models.CharField(max_length=1000)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default="", on_delete=models.CASCADE)
     users_list = models.ManyToManyField(User, related_name='users_list') #new
+
     def __str__(self):
         return self.title + " - " + str(self.user)
 
@@ -27,9 +28,6 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name + "(Category of " + self.project.title + ")"
 
-    def get_absolute_url(self):
-        # go to album that was just created
-        return reverse("planner:dashboard")
 
     # class ArticleAdmin(admin.ModelAdmin):
     #     def save_model(self, request, obj, form, change):

@@ -16,7 +16,7 @@ urlpatterns = [
     path("projects/", views.ProjectListAndCreate.as_view(), name="projects_listed"),  # lists user's projects
 
     # /planner/project/<project_id>
-    path("project/<int:project_id>", views.ProjectView.as_view(), name="project_page"), # TODO
+    path("project/<int:project_id>", views.ProjectWithCategoryCreate.as_view(), name="project_page"),
     # /planner/dashboard/
     path("dashboard/", views.DashboardView.as_view(), name="dashboard"),
     # ADD CATEGORY: /planner/project/<project_id>/add/category/

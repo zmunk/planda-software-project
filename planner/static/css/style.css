@@ -48,6 +48,10 @@ body {
     outline-color: #fa0;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 /* Lists */
 
 .lists-container::-webkit-scrollbar {

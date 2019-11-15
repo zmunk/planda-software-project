@@ -17,6 +17,33 @@ import logging as log
 log.debug("DEBUGGING")
 ####
 
+class ProjectWithCategoryCreate(CreateView):
+    model = Category
+    fields = ["category_name"]
+    template_name = "planner/project.html"
+
+    def get_success_url(self):
+        return reverse('planner:project_page', args=(self.kwargs["project_id"],))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get("project_id")
+        context["category_list"] = Category.objects.filter(project__pk=pk)
+        return context
+
+    def project_id(self):
+        # allows html to access project_id through: {{ view.project_id }}
+        pk = self.kwargs.get("project_id")
+        return pk
+
+    def get_project(self):
+        pk = self.kwargs.get("project_id")
+        return get_object_or_404(Project, id=pk)
+
+    # overriding form_valid method in createView to auto populate fields
+    def form_valid(self, form):
+        form.instance.project = self.get_project()
+        return super(ProjectWithCategoryCreate, self).form_valid(form)
 
 # --- Projects Listed View (renders projects list and allows for adding new projects)
 class ProjectListAndCreate(CreateView):
