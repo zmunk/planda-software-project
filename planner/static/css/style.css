@@ -44,19 +44,6 @@ body {
 }
 /* end navbar */
 
-
-.btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font: inherit;
-    background: none;
-    border: none;
-    color: inherit;
-    padding: 0;
-    cursor: pointer;
-}
-
 :focus {
     outline-color: #fa0;
 }

@@ -20,7 +20,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="">
         <img src="{% static 'planner/images/planda.png' %}" alt="Planda">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -33,6 +33,9 @@
                 <a class="nav-link" href="#">Dashboard</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{% url "planner:projects_listed" %}">My Projects</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#">My Account</a>
             </li>
             <li class="nav-item">
@@ -42,12 +45,22 @@
                 <a class="nav-link" href="#">Contact</a>
             </li>
         </ul>
-        <a class="nav-link" href="#">Log out</a>
+        <a class="nav-link" href="{% url "homepage:index" %}">Log out</a>
     </div>
 </nav>
 
 {% block body %}
 {% endblock %}
+
+<!-- Footer -->
+<footer class="page-footer font-small blue">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2019 Planda Dev Team</div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 
 </body>
 </html>

@@ -25,7 +25,7 @@ def project_list_view(request):
     form = ProjectForm(request.POST or None)
     form.instance.user = curr_user
     if request.method == "POST":
-        text = request.POST.get("new")
+        text = request.POST.get("title")
         if not Project.objects.filter(title=text).exists():
             Project.objects.create(title=text, user=curr_user)
 

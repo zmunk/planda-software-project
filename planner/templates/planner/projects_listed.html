@@ -1,41 +1,46 @@
 {% extends "planner/base.html" %}
+{% load static %}
 {% block title %}Projects{% endblock %}
 
 {% block body %}
-    <!--suppress JSCheckFunctionSignatures -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#add-project-form").hide();
-            $(document).on("click", function (event) {
-                $("#add-project-form").hide();
-                $("#add-project-btn").show();
+    <script src="{% static 'js/add_project.js' %}"></script>
 
-            });
-            $("#add-project-btn").on("click", function (event) {
-                event.stopPropagation();
-                $("#add-project-form").show();
-                $("#add-project-btn").hide();
-            });
+    <div class="container" style="height: 3rem">
+        <button id="add-project-btn" type="button" class="btn btn-primary">Add Project</button>
+        <form id="add-project-form" method="post" action="#" style="margin-bottom: 0; padding: 0;">
+            {% csrf_token %}
+            <div class="form-group row">
+                <div class="col-xs-2">
+                    <input class="form-control input-sm" type="text" name="title">
+                </div>
+                <div class="col-xs-2">
+                    <!--  -->
+                    <button type="submit" style="visibility: hidden; font-size: 0;"></button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-            $("#add-project-form").on("click", function (event) {
-                event.stopPropagation();
-            })
-        });
-    </script>
+    <div class="container">
+        <h2 style="text-align: left">Your Projects</h2>
+        <div class="list-group">
+            {% for project in project_list %}
+                <a href="{% url "planner:project_page" project.pk %}"
+                   class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ project.title }}</h5>
+                        <small>3 days ago</small>
+                    </div>
+                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
+                        varius
+                        blandit.</p>
+                    <small>Donec id elit non mi porta.</small>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
 
-    <button id="add-project-btn">Add Project</button>
-    <form id="add-project-form" method="post" action="#">
-        {% csrf_token %}
-        <input type="text" name="new">
-        <button type="submit" style="visibility: hidden;">
-            Add Item
-        </button>
-    </form>
 
-    <h2>Your Projects</h2>
-    {% for project in project_list %}
-        <h3><a href="{% url "planner:project_page" project.pk %}">{{ project.title }}</a></h3>
-    {% endfor %}
 
 {% endblock %}
 
