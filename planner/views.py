@@ -37,7 +37,7 @@ def project_list_view(request):
 class ProjectCreate(CreateView):
     model = Project
     fields = ["title"]
-    success_url = reverse_lazy("planner-namespace:projects_listed")
+    success_url = reverse_lazy("planner:projects_listed")
 
     # overriding form_valid method in createView to auto populate fields
     def form_valid(self, form):
@@ -81,7 +81,7 @@ class CategoryCreate(CreateView):
     fields = ["category_name"]
 
     def get_success_url(self):
-        return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
+        return reverse('planner:project_page', args=(self.kwargs["project_id"],))
 
     def project_id(self):
         pk = self.kwargs.get("project_id")
@@ -103,7 +103,7 @@ class TaskCreate(CreateView):
     fields = ["text"]
 
     def get_success_url(self):
-        return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
+        return reverse('planner:project_page', args=(self.kwargs["project_id"],))
 
     def project_id(self):
         pk = self.kwargs.get("project_id")
@@ -128,7 +128,7 @@ class TaskDelete(DeleteView):
 
     def get_success_url(self):
         # project_id  = something
-        return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
+        return reverse('planner:project_page', args=(self.kwargs["project_id"],))
 
     def get_project_id(self, **kwargs):
         pk = self.kwargs.get("project_id")
@@ -158,7 +158,7 @@ class TaskUpdate(UpdateView):
     fields = ["text"]
 
     def get_success_url(self):
-        return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
+        return reverse('planner:project_page', args=(self.kwargs["project_id"],))
 
     def project_id(self):
         pk = self.kwargs.get("project_id")

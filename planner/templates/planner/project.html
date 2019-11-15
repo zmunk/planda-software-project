@@ -20,7 +20,7 @@
                                 </div>
                                 <div class="col-xs-2 col-md-1 task-delete-btn-container">
                                     <a class="task-delete-btn"
-                                       href="{% url "planner-namespace:delete_task" view.project_id task.pk %}">
+                                       href="{% url "planner:delete_task" view.project_id task.pk %}">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>
@@ -38,7 +38,7 @@
 
         {% endfor %}
 
-        <form class="panel" action="{% url "planner-namespace:add_category" view.project_id %}" method='GET'>
+        <form class="panel" action="{% url "planner:add_category" view.project_id %}" method='GET'>
             <button type="submit" class="add-list-btn btn">Add a list</button>
         </form>
 

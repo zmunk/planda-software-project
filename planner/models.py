@@ -26,7 +26,7 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         # go to album that was just created
-        return reverse("planner-namespace:dashboard")
+        return reverse("planner:dashboard")
 
     # class ArticleAdmin(admin.ModelAdmin):
     #     def save_model(self, request, obj, form, change):
@@ -44,6 +44,6 @@ class Task(models.Model):
 
     def get_absolute_url(self):
         # refresh page
-        return reverse("planner-namespace:detail", kwargs={"pk": self.pk})
+        return reverse("planner:detail", kwargs={"pk": self.pk})
 
 
