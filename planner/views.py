@@ -4,16 +4,33 @@ from django.shortcuts import render, redirect, get_object_or_404, render_to_resp
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 from .models import Task, Category, Project
-from .forms import TaskForm
+from .forms import TaskForm, ProjectForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.template import RequestContext
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+#### DEBUGGER
 import logging as log
-log.basicConfig(level=log.DEBUG)
+# log.basicConfig(level=log.DEBUG) # comment this to suppress debug logging
 log.debug("DEBUGGING")
+####
+
+
+# --------- Testing
+def project_list_view(request):
+    template = "planner/projects_listed.html"
+    curr_user = request.user
+    form = ProjectForm(request.POST or None)
+    form.instance.user = curr_user
+    if request.method == "POST":
+        text = request.POST.get("new")
+        if not Project.objects.filter(title=text).exists():
+            Project.objects.create(title=text, user=curr_user)
+
+    project_list = Project.objects.filter(user=curr_user)
+    return render(request, template, {'project_list': project_list})
 
 
 # ----------- Project
@@ -24,8 +41,9 @@ class ProjectCreate(CreateView):
 
     # overriding form_valid method in createView to auto populate fields
     def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
         form.instance.user = self.request.user
-        # form.instance.user.add(self.request.user)#TODO
         return super(ProjectCreate, self).form_valid(form)
 
 
@@ -42,7 +60,7 @@ class ProjectView(generic.ListView):
         # allows html to access project_id through: {{ view.project_id }}
         pk = self.kwargs.get("project_id")
         return pk
-    
+
     def categories(self):
         project_name = self.kwargs.get("project_name")
         return Category.objects.filter(project__title=project_name)
@@ -157,5 +175,3 @@ class DashboardView(generic.ListView):
 
     def get_queryset(self):
         return HttpResponse("")
-
-

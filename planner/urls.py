@@ -13,7 +13,7 @@ urlpatterns = [
     # TODO: remove "planner" from all urls
 
     # /planner/projects/
-    path("projects/", views.ProjectsListed.as_view(), name="projects_listed"),  # lists user's projects
+    path("projects/", views.project_list_view, name="projects_listed"),  # lists user's projects
 
     # /planner/project/<project_id>
     path("project/<int:project_id>", views.ProjectView.as_view(), name="project_page"), # TODO

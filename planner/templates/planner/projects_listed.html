@@ -1,15 +1,43 @@
+{% extends "planner/base.html" %}
+{% block title %}Projects{% endblock %}
 
- <form action="{% url "planner:add_project" %}" method='GET'>
-    <button type='submit' class="add-card-btn btn">Add Project</button>
-</form>
+{% block body %}
+    <!--suppress JSCheckFunctionSignatures -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#add-project-form").hide();
+            $(document).on("click", function (event) {
+                $("#add-project-form").hide();
+                $("#add-project-btn").show();
+
+            });
+            $("#add-project-btn").on("click", function (event) {
+                event.stopPropagation();
+                $("#add-project-form").show();
+                $("#add-project-btn").hide();
+            });
+
+            $("#add-project-form").on("click", function (event) {
+                event.stopPropagation();
+            })
+        });
+    </script>
+
+    <button id="add-project-btn">Add Project</button>
+    <form id="add-project-form" method="post" action="#">
+        {% csrf_token %}
+        <input type="text" name="new">
+        <button type="submit" style="visibility: hidden;">
+            Add Item
+        </button>
+    </form>
+
+    <h2>Your Projects</h2>
+    {% for project in project_list %}
+        <h3><a href="{% url "planner:project_page" project.pk %}">{{ project.title }}</a></h3>
+    {% endfor %}
+
+{% endblock %}
 
 
-<h2>Your Projects</h2>
-{% for project in project_list %}
-    <h3><a href="{% url "planner:project_page" project.pk %}">{{project.title}}</a></h3>
-
-{#    <h3><a href="/planner/projects/{{project.title}}" %{{project.title}} >{{project.title}}</a></h3>#}
-
-
-{% endfor %}
 
