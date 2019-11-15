@@ -67,8 +67,8 @@ body {
     height: calc(100vh - 8.6rem);
 }
 
+/* panel is task lists and list-add button */
 .panel {
-    /* task lists and list-add button */
     flex: 0 0 15rem;
     flex-direction: column;
     display: flex;
