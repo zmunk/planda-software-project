@@ -44,12 +44,30 @@
         </div>
     </div>
     <div class="right-container">
-        <div class="login-parent-container">
-                <!----------------------  LOGIN  -------------------------->
-                <!-- TODO -->
-                <a href="{% url "authentic:login_view" %}">Login</a>
-                <!--------------------------------------------------->
-        </div>
+        <form class="modal-content animate" method="POST">
+    {%csrf_token%}
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <span class="username_field">{{ form.username }}</span>
+
+      <label for="psw"><b>Password</b></label>
+      <span class="password_field" >{{form.password}}</span>
+      <button type="submit">Log In</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+    </div>
+        </form>
+
+    <div class="container"  style="background-color:#f1f1f1">
+      <span><a class="forgStyle" href="#">forgot password?</a></span>
+    </div>
+    <!-- <span style=" list-style-type: none;">{{form.non_field_errors}}</span> -->
+    {% for field, error in form.errors.items %}
+        {% if field != '__all__' %}{{ field }}{% endif %}
+        <span style="color:red">{{ error | striptags }}</span>
+    {% endfor %}
+  </form>
         <div class="start-container">
             <div class="start-title">Create your own project with us</div>
             <div class="project-container">
