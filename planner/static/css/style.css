@@ -196,3 +196,130 @@ span.task-author {
 .add-list-btn::after {
     content: '...';
 }
+
+/***************************************************/
+/* Kebab Dropdown Menu */
+.kebab {
+    position: relative;
+}
+
+.kebab-btn {
+    margin: 0.5rem 0.5rem 0;
+}
+
+.kebab-btn,
+.kebab-menu-item-btn {
+    background: none;
+    border: 0 none;
+    line-height: normal;
+    overflow: visible;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    text-align: left;
+    outline: none;
+    cursor: pointer;
+}
+
+.triple-dot {
+    color: var(--list-title-color);
+    margin: 0 auto;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.kebab-menu {
+    position: absolute;
+    left: -0.5rem;
+    top: 100%;
+    z-index: 900;
+    float: left;
+    padding: 10px 0;
+    margin-top: 9px;
+    background-color: #fff;
+    border: 1px solid #ccd8e0;
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    transform: translate(0, 15px) scale(.95);
+    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+    pointer-events: none;
+}
+
+.kebab-menu-caret {
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    width: 18px;
+    height: 10px;
+    float: left;
+    overflow: hidden;
+}
+
+.kebab-menu-caret-outer,
+.kebab-menu-caret-inner {
+    position: absolute;
+    display: inline-block;
+    margin-left: -1px;
+    font-size: 0;
+    line-height: 1;
+}
+
+.kebab-menu-caret-outer {
+    border-bottom: 10px solid #c1d0da;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    height: auto;
+    left: 0;
+    top: 0;
+    width: auto;
+}
+
+.kebab-menu-caret-inner {
+    top: 1px;
+    left: 1px;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid #fff;
+}
+
+.kebab-menu-items {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.kebab-menu-item {
+    display: block;
+}
+
+.kebab-menu-item-btn {
+    min-width: 100%;
+    color: #66757f;
+    cursor: pointer;
+    display: block;
+    font-size: 13px;
+    line-height: 18px;
+    padding: 5px 20px;
+    position: relative;
+    white-space: nowrap;
+}
+
+.kebab-menu-item:hover {
+    background-color: #489fe5;
+}
+
+.kebab-menu-item:hover .kebab-menu-item-btn {
+    color: #fff;
+}
+
+.kebab-btn:hover .kebab-dot,
+.show-kebab-menu .kebab-dot {
+    background-color: #516471;
+}
+
+.show-kebab-menu .kebab-menu {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+    pointer-events: auto;
+}

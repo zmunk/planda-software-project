@@ -6,7 +6,29 @@
     <section class="lists-container">
         {% for category in category_list %}
             <div class="list panel">
-                <h3 class="list-title">{{ category.category_name }}</h3>
+                <div class="d-flex w-100 justify-content-between">
+                    <h3 class="list-title">{{ category.category_name }}</h3>
+                    <div class="kebab">
+                        <button id="kebab-btn" class="kebab-btn">
+                            <i class="fa fa-ellipsis-v triple-dot" aria-hidden="true"></i>
+                        </button>
+
+                        <div class="kebab-menu">
+                            <div class="kebab-menu-caret">
+                                <div class="kebab-menu-caret-outer"></div>
+                                <div class="kebab-menu-caret-inner"></div>
+                            </div>
+                            <ul class="kebab-menu-items" tabindex="-1" role="menu" aria-labelledby="kebab-btn"
+                                aria-hidden="true">
+                                <li class="kebab-menu-item" role="presentation">
+                                    <button type="button" class="kebab-menu-item-btn" role="menuitem">Delete</button>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
                 <ul class="list-items">
                     {% for task in category.task_set.all %}
                         <li class="item">
@@ -48,5 +70,7 @@
     <script src="{% static 'js/dragging.js' %}"></script>
     <!-- Reactive Forms -->
     <script src="{% static 'js/add_list.js' %}"></script>
+    <!-- Kebab Dropdown Menu -->
+    <script src="{% static 'js/kebab dropdown.js' %}"></script>
 
 {% endblock %}
