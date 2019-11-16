@@ -13,10 +13,12 @@ urlpatterns = [
     # TODO: remove "planner" from all urls
 
     # /planner/projects/
-    path("projects/", views.ProjectListAndCreate.as_view(), name="projects_listed"),  # lists user's projects
+    path("projects/", views.ProjectCreateView.as_view(), name="projects_listed"),  # lists user's projects
 
     # /planner/project/<project_id>
     path("project/<int:project_id>", views.ProjectWithCategoryCreate.as_view(), name="project_page"),
+    # DELETE PROJECT
+    path("delete/project/<int:project_id>", views.ProjectDeleteView.as_view(), name="delete_project"),
     # /planner/dashboard/
     path("dashboard/", views.DashboardView.as_view(), name="dashboard"),
     # ADD CATEGORY: /planner/project/<project_id>/add/category/

@@ -27,18 +27,27 @@
                    class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ project.title }}</h5>
-                        <small>3 days ago</small>
+                        <small>{{ project.pk }}</small>
+
                     </div>
                     <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
-                        varius
-                        blandit.</p>
-                    <small>Donec id elit non mi porta.</small>
+                        varius blandit.</p>
+
+
+                    <div class="d-flex w-100 justify-content-between">
+                        <small>Donec id elit non mi porta.</small>
+                        <form action="{% url "planner:delete_project" project.pk %}">
+                            <button class="btn" href="#">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
                 </a>
             {% endfor %}
         </div>
     </div>
 
-<script src="{% static 'js/add_project.js' %}"></script>
+    <script src="{% static 'js/add_project.js' %}"></script>
 
 {% endblock %}
 

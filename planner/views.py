@@ -17,6 +17,40 @@ import logging as log
 log.debug("DEBUGGING")
 ####
 
+class ProjectCreateView(CreateView):
+    model = Project
+    fields = ["title"]
+    template_name = "planner/projects_listed.html"
+
+    def get_success_url(self):
+        return reverse("planner:projects_listed")
+
+    def get_context_data(self, **kwargs):
+        kwargs["project_list"] = self.model.objects.filter(user=self.request.user)
+        return super(ProjectCreateView, self).get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.instance.user = self.request.user
+        return super(ProjectCreateView, self).form_valid(form)
+
+
+class ProjectDeleteView(DeleteView):
+    model = Project
+
+    def get_success_url(self):
+        return reverse("planner:projects_listed")
+
+    def get_object(self, **kwargs):
+        pk = self.kwargs.get("project_id")
+        return get_object_or_404(Project, id=pk)
+
+    def get(self, *args, **kwargs):
+        return self.delete(*args, **kwargs)
+
+
+# Project page
 class ProjectWithCategoryCreate(CreateView):
     model = Category
     fields = ["category_name"]
