@@ -98,8 +98,8 @@ body {
     display: flex;
     flex-direction: column;
     align-content: start;
-    padding: 0 0.6rem 0;
-    margin-bottom: 0.5rem;
+    padding: 0.1rem 0.6rem 0.6rem;
+    margin-bottom: 0;
     overflow-y: auto;
 }
 
