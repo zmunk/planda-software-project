@@ -27,6 +27,7 @@ class ProjectCreateView(CreateView):
         return reverse("planner:projects_listed")
 
     def get_context_data(self, **kwargs):        
+        #display projects that they users_list contain the current logged in user
         kwargs["project_list"] = self.model.objects.filter(users_list=self.request.user)
         return super(ProjectCreateView, self).get_context_data(**kwargs)
 
@@ -34,16 +35,17 @@ class ProjectCreateView(CreateView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
 
-        project_title = form.cleaned_data['title']
+
+        project_title = form.cleaned_data['title'] #getting the entered title
+        user_username = self.request.user.username #username of current logged in user
+        user = User.objects.get(username= user_username) #user object of current logged in user
         
-        user_username = self.request.user.username
-        user = User.objects.get(username= user_username)
-        
+        #creating a project object adn filling the fields, then saving it. 
         project_obj = Project.objects.create(user = user)
         project_obj.users_list.add(user)
         project_obj.title = project_title
         project_obj.save()
-        
+
         return redirect(self.get_success_url())
 
 
@@ -89,67 +91,6 @@ class ProjectWithCategoryCreate(CreateView):
     def form_valid(self, form):
         form.instance.project = self.get_project()
         return super(ProjectWithCategoryCreate, self).form_valid(form)
-
-# --- Projects Listed View (renders projects list and allows for adding new projects)
-class ProjectListAndCreate(CreateView):
-    model = Project
-    fields = ["title"]
-    template_name = "planner/projects_listed.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        curr_user = self.request.user
-        context["project_list"] = self.model.objects.filter(user=curr_user)
-        return context
-
-    def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        form.instance.user = self.request.user
-        return super(ProjectListAndCreate, self).form_valid(form)
-
-
-# ----------- Project Page
-class ProjectView(generic.ListView):
-    template_name = "planner/project.html"
-    context_object_name = "category_list"
-
-    def get_queryset(self):
-        # gives category_list to project html page
-        pk = self.kwargs.get("project_id")
-        return Category.objects.filter(project__pk=pk)
-
-    def project_id(self):
-        # allows html to access project_id through: {{ view.project_id }}
-        pk = self.kwargs.get("project_id")
-        return pk
-
-    def categories(self):
-        project_name = self.kwargs.get("project_name")
-        return Category.objects.filter(project__title=project_name)
-
-
-# ----------- Category
-class CategoryCreate(CreateView):
-    model = Category
-    fields = ["category_name"]
-
-    def get_success_url(self):
-        return reverse('planner:project_page', args=(self.kwargs["project_id"],))
-
-    def project_id(self):
-        pk = self.kwargs.get("project_id")
-        return pk
-
-    def get_project(self):
-        pk = self.project_id()
-        return get_object_or_404(Project, id=pk)
-
-    # overriding form_valid method in createView to auto populate fields
-    def form_valid(self, form):
-        form.instance.project = self.get_project()
-        return super(CategoryCreate, self).form_valid(form)
-
 
 # ----------- Task
 class TaskCreate(CreateView):
