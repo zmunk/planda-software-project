@@ -27,6 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls, name="admin-page"),
     # /planner/
     path('planner/', include('planner.urls', namespace="planner-namespace")),
+    # /dashboard/
+    path('auth/', include('dashboard.urls')),
 ]
 
 if settings.DEBUG:
