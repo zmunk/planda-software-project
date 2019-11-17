@@ -13,6 +13,7 @@ from django.utils.decorators import method_decorator
 
 #### DEBUGGER
 import logging as log
+from django.contrib.auth.models import User
 # log.basicConfig(level=log.DEBUG) # comment this to suppress debug logging
 log.debug("DEBUGGING")
 ####
@@ -26,13 +27,31 @@ class ProjectCreateView(CreateView):
         return reverse("planner:projects_listed")
 
     def get_context_data(self, **kwargs):
+        # (self.request.user in userlist) #TODO
         kwargs["project_list"] = self.model.objects.filter(user=self.request.user)
         return super(ProjectCreateView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
+
+        # project_obj.users_list.add(self.request.user)
+        # print(self.request.user.username)
+        # print(self.request.user.id)
+        # print(self.request.user.password)
+        # print(self.request.user.email)
+
+        # user_username = self.request.user.username
+        # user = User.objects.get(username= user_username)
+        
+        # project_obj = Project.objects.create(user = user)
+        # print(user.username)
+
+        # project_obj.users_list.add(user.id)
         form.instance.user = self.request.user
+        # form.instance.users_list.add(self.request.user.id)
+        # TODO form.instance.userlist.add(self.request.user
+
         return super(ProjectCreateView, self).form_valid(form)
 
 

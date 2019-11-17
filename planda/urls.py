@@ -28,7 +28,7 @@ urlpatterns = [
     # /planner/
     path('planner/', include('planner.urls', namespace="planner-namespace")),
     # /dashboard/
-    path('auth/', include('dashboard.urls')),
+    path('dashboard/', include('dashboard.urls')),
 ]
 
 if settings.DEBUG:

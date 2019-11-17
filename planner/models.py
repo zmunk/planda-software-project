@@ -9,7 +9,7 @@ from django.contrib import admin
 class Project(models.Model):
     title = models.CharField(max_length=1000)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default="", on_delete=models.CASCADE)
-    users_list = models.ManyToManyField(User, related_name='users_list') #new
+    users_list = models.ManyToManyField(User, related_name='users_list') 
 
     def __str__(self):
         return self.title + " - " + str(self.user)
