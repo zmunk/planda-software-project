@@ -26,33 +26,25 @@ class ProjectCreateView(CreateView):
     def get_success_url(self):
         return reverse("planner:projects_listed")
 
-    def get_context_data(self, **kwargs):
-        # (self.request.user in userlist) #TODO
-        kwargs["project_list"] = self.model.objects.filter(user=self.request.user)
+    def get_context_data(self, **kwargs):        
+        kwargs["project_list"] = self.model.objects.filter(users_list=self.request.user)
         return super(ProjectCreateView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
 
-        # project_obj.users_list.add(self.request.user)
-        # print(self.request.user.username)
-        # print(self.request.user.id)
-        # print(self.request.user.password)
-        # print(self.request.user.email)
-
-        # user_username = self.request.user.username
-        # user = User.objects.get(username= user_username)
+        project_title = form.cleaned_data['title']
         
-        # project_obj = Project.objects.create(user = user)
-        # print(user.username)
-
-        # project_obj.users_list.add(user.id)
-        form.instance.user = self.request.user
-        # form.instance.users_list.add(self.request.user.id)
-        # TODO form.instance.userlist.add(self.request.user
-
-        return super(ProjectCreateView, self).form_valid(form)
+        user_username = self.request.user.username
+        user = User.objects.get(username= user_username)
+        
+        project_obj = Project.objects.create(user = user)
+        project_obj.users_list.add(user)
+        project_obj.title = project_title
+        project_obj.save()
+        
+        return redirect(self.get_success_url())
 
 
 class ProjectDeleteView(DeleteView):
