@@ -7,10 +7,10 @@ app_name = "authentic"
 urlpatterns = [
 
     # /auth/login
-    path("login", views.login_view, name ="login_view"),
+    path("login/", views.login_view, name="login_view"),
     # /auth/signup
-    path('signup', views.signup_view, name="signup_view"),
+    path('signup/', views.signup_view, name="signup_view"),
     # /auth/logout
-    path('logout', views.logout_view, name="logout_view"),
+    path('logout/', views.logout_view, name="logout_view"),
    
 ]

@@ -1,15 +1,55 @@
+{% extends "planner/base.html" %}
+{% load static %}
+{% block title %}Projects{% endblock %}
 
- <form action="{% url "planner:add_project" %}" method='GET'>
-    <button type='submit' class="add-card-btn btn">Add Project</button>
-</form>
+{% block body %}
+
+    <div class="container" style="height: 3rem">
+        <button id="add-project-btn" type="button" class="btn btn-primary">Add Project</button>
+        <form id="add-project-form" method="post" action="#" style="margin-bottom: 0; padding: 0;">
+            {% csrf_token %}
+            <div class="form-group row">
+                <div class="col-xs-2">
+                    <input id="add-project-input" class="form-control input-sm" type="text" name="title">
+                </div>
+                <div class="col-xs-2">
+                    <button class="hidden" type="submit"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="container">
+        <h2 style="text-align: left">Your Projects</h2>
+        <div class="list-group">
+            {% for project in project_list %}
+                <a href="{% url "planner:project_page" project.pk %}"
+                   class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ project.title }}</h5>
+                        <small>{{ project.pk }}</small>
+
+                    </div>
+                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
+                        varius blandit.</p>
 
 
-<h2>Your Projects</h2>
-{% for project in project_list %}
-    <h3><a href="{% url "planner:project_page" project.pk %}">{{project.title}}</a></h3>
+                    <div class="d-flex w-100 justify-content-between">
+                        <small>Donec id elit non mi porta.</small>
+                        <form action="{% url "planner:delete_project" project.pk %}">
+                            <button class="btn" href="#">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
 
-{#    <h3><a href="/planner/projects/{{project.title}}" %{{project.title}} >{{project.title}}</a></h3>#}
+    <script src="{% static 'js/add_project.js' %}"></script>
+
+{% endblock %}
 
 
-{% endfor %}
 

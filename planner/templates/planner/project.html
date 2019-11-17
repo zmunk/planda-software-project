@@ -1,46 +1,44 @@
 {% extends "planner/base.html" %}
+{% load static %}
 
 {% block body %}
-    {#        <p>project id: {{ view.project_id }}</p>#}
-
-    {#    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.0/dragula.min.css'>#}
-
-
-
-
-
-
-
-
-
-      <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.0/dragula.min.css'>
-{#<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700'><link rel="stylesheet" href="./style.css">#}
-
-
-
-
-
-
-
 
     <section class="lists-container">
         {% for category in category_list %}
-            <div class="list">
-                <h3 class="list-title">{{ category.category_name }}</h3>
+            <div class="list panel">
+                <div class="d-flex w-100 justify-content-between">
+                    <h3 class="list-title">{{ category.category_name }}</h3>
+                    <div class="kebab">
+                        <button id="kebab-btn" class="kebab-btn">
+                            <i class="fa fa-ellipsis-v triple-dot" aria-hidden="true"></i>
+                        </button>
+
+                        <div class="kebab-menu">
+                            <div class="kebab-menu-caret">
+                                <div class="kebab-menu-caret-outer"></div>
+                                <div class="kebab-menu-caret-inner"></div>
+                            </div>
+                            <ul class="kebab-menu-items" tabindex="-1" role="menu" aria-labelledby="kebab-btn"
+                                aria-hidden="true">
+                                <li class="kebab-menu-item" role="presentation">
+                                    <button type="button" class="kebab-menu-item-btn" role="menuitem">Delete</button>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
                 <ul class="list-items">
                     {% for task in category.task_set.all %}
-{#                        <li onclick="location.href='{% url "planner-namespace:update_task" view.project_id task.pk %}'">#}
-                        <li>
-                            <div class="row no-gutters"  class="item">
-
+                        <li class="item">
+                            <div class="row no-gutters">
                                 <div class="col-xs-10 col-md-11">
-                                    {{ task.text }}
-                                    <span style="font-size: xx-small">{{ task.author }}</span>
+                                    {{ task.text }}&emsp;<span class="task-author">{{ task.author }}</span>
                                 </div>
-                                <div class="col-xs-2 col-md-1">
-                                    <a style="font-size: small; color: grey"
-                                       href="{% url "planner-namespace:delete_task" view.project_id task.pk %}">
+                                <div class="col-xs-2 col-md-1 task-delete-btn-container">
+                                    <a class="task-delete-btn"
+                                       href="{% url "planner:delete_task" view.project_id task.pk %}">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>
@@ -48,83 +46,31 @@
                         </li>
                     {% endfor %}
                 </ul>
-                {#                <p>project id: {{ view.project_id }}</p>#}
-                {#                <p>category id: {{ category.id }}</p>#}
-                {#                <br><br><br><br><br>#}
-                <form action="{% url "planner:add_task" view.project_id category.id %}" method='GET'>
-                    <button type='submit' class="add-card-btn btn">Add Task</button>
+                <form class="add-task-btn-form" action="{% url "planner:add_task" view.project_id category.id %}"
+                      method='GET'>
+                    <button type='submit' class="add-task-btn btn">Add a task</button>
                 </form>
             </div>
         {% endfor %}
-        <form action="{% url "planner-namespace:add_category" view.project_id %}" method='GET'>
-            <button type="submit" class="add-list-btn btn">Add a list</button>
-        </form>
+
+        <div class="panel">
+            <button id="add-list-btn" type="submit" class="add-list-btn btn">Add a list</button>
+            <form id="add-list-form" method="post" action="#">
+                {% csrf_token %}
+                <input id="add-list-input" class="form-control input-sm" type="text" name="category_name">
+                <button class="hidden" type="submit"></button>
+            </form>
+        </div>
+
     </section>
 
-    <!-- dragula -->
-
+    <!-- Dragula -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.0/dragula.min.js'></script>
-
-    <script>
-        var d = dragula({
-            moves: function (el, cont, handle) {
-                return handle.className !== 'title'
-            }
-        })
-        var cs = document.querySelectorAll('.list-items')
-        for (var i in cs) {
-            d.containers.push(cs[i])
-        }
-    </script>
-
-
-    <style>
-
-        {#    * {#}
-        {#  font-family: 'Roboto', sans-serif !important;#}
-        {#}#}
-
-        html, body {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: row;
-          flex-wrap: wrap;
-          {#background-color: #0079BF;#}
-        }
-
-        {#.list-items {#}
-        {#  display: flex;#}
-        {#  flex-direction: column;#}
-        {#  flex-wrap: wrap;#}
-          {#background-color: #e3e3e3;#}
-        {#  padding: 15px;#}
-        {#  border-radius: 4px;#}
-        {#  margin: 0 5px;#}
-        {#  width: 250px;#}
-        {#  min-height: 200px;#}
-          {#box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);#}
-        {#}#}
-        .list-items .list-title {
-          {#font-size: 20px;#}
-          {#font-weight: 700;#}
-          line-height: 1.3;
-        }
-
-        .item {
-          margin-top: 5px;
-          padding: 10px;
-          background-color: red;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-          border-radius: 4px;
-        }
-
-    </style>
+    <script src="{% static 'js/dragging.js' %}"></script>
+    <!-- Reactive Forms -->
+    <script src="{% static 'js/add_list.js' %}"></script>
+    <!-- Kebab Dropdown Menu -->
+    <script src="{% static 'js/kebab dropdown.js' %}"></script>
 
 {% endblock %}
-
-
-</html>

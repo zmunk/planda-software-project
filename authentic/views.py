@@ -1,4 +1,6 @@
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .forms import UserLoginForm, UserRegisterForm
 from django.contrib.auth import (
@@ -7,7 +9,7 @@ from django.contrib.auth import (
     login,
     logout
     )
-    
+
 
 def login_view(request):
     next = request.GET.get('next')

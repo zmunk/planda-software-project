@@ -4,31 +4,101 @@ from django.shortcuts import render, redirect, get_object_or_404, render_to_resp
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 from .models import Task, Category, Project
-from .forms import TaskForm
+from .forms import TaskForm, ProjectForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.template import RequestContext
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+#### DEBUGGER
 import logging as log
-log.basicConfig(level=log.DEBUG)
+# log.basicConfig(level=log.DEBUG) # comment this to suppress debug logging
 log.debug("DEBUGGING")
+####
 
-
-# ----------- Project
-class ProjectCreate(CreateView):
+class ProjectCreateView(CreateView):
     model = Project
     fields = ["title"]
-    success_url = reverse_lazy("planner-namespace:projects_listed")
+    template_name = "planner/projects_listed.html"
+
+    def get_success_url(self):
+        return reverse("planner:projects_listed")
+
+    def get_context_data(self, **kwargs):
+        kwargs["project_list"] = self.model.objects.filter(user=self.request.user)
+        return super(ProjectCreateView, self).get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.instance.user = self.request.user
+        return super(ProjectCreateView, self).form_valid(form)
+
+
+class ProjectDeleteView(DeleteView):
+    model = Project
+
+    def get_success_url(self):
+        return reverse("planner:projects_listed")
+
+    def get_object(self, **kwargs):
+        pk = self.kwargs.get("project_id")
+        return get_object_or_404(Project, id=pk)
+
+    def get(self, *args, **kwargs):
+        return self.delete(*args, **kwargs)
+
+
+# Project page
+class ProjectWithCategoryCreate(CreateView):
+    model = Category
+    fields = ["category_name"]
+    template_name = "planner/project.html"
+
+    def get_success_url(self):
+        return reverse('planner:project_page', args=(self.kwargs["project_id"],))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get("project_id")
+        context["category_list"] = Category.objects.filter(project__pk=pk)
+        return context
+
+    def project_id(self):
+        # allows html to access project_id through: {{ view.project_id }}
+        pk = self.kwargs.get("project_id")
+        return pk
+
+    def get_project(self):
+        pk = self.kwargs.get("project_id")
+        return get_object_or_404(Project, id=pk)
 
     # overriding form_valid method in createView to auto populate fields
     def form_valid(self, form):
+        form.instance.project = self.get_project()
+        return super(ProjectWithCategoryCreate, self).form_valid(form)
+
+# --- Projects Listed View (renders projects list and allows for adding new projects)
+class ProjectListAndCreate(CreateView):
+    model = Project
+    fields = ["title"]
+    template_name = "planner/projects_listed.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        curr_user = self.request.user
+        context["project_list"] = self.model.objects.filter(user=curr_user)
+        return context
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
         form.instance.user = self.request.user
-        # form.instance.user.add(self.request.user)#TODO
-        return super(ProjectCreate, self).form_valid(form)
+        return super(ProjectListAndCreate, self).form_valid(form)
 
 
+# ----------- Project Page
 class ProjectView(generic.ListView):
     template_name = "planner/project.html"
     context_object_name = "category_list"
@@ -42,19 +112,10 @@ class ProjectView(generic.ListView):
         # allows html to access project_id through: {{ view.project_id }}
         pk = self.kwargs.get("project_id")
         return pk
-    
+
     def categories(self):
         project_name = self.kwargs.get("project_name")
         return Category.objects.filter(project__title=project_name)
-
-
-# @method_decorator(login_required, name='dispatch') // Do not remove this line!
-class ProjectsListed(generic.ListView):
-    template_name = "planner/projects_listed.html"
-    context_object_name = "project_list"
-
-    def get_queryset(self):
-        return Project.objects.filter(user=self.request.user)
 
 
 # ----------- Category
@@ -63,7 +124,7 @@ class CategoryCreate(CreateView):
     fields = ["category_name"]
 
     def get_success_url(self):
-        return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
+        return reverse('planner:project_page', args=(self.kwargs["project_id"],))
 
     def project_id(self):
         pk = self.kwargs.get("project_id")
@@ -85,7 +146,7 @@ class TaskCreate(CreateView):
     fields = ["text"]
 
     def get_success_url(self):
-        return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
+        return reverse('planner:project_page', args=(self.kwargs["project_id"],))
 
     def project_id(self):
         pk = self.kwargs.get("project_id")
@@ -110,7 +171,7 @@ class TaskDelete(DeleteView):
 
     def get_success_url(self):
         # project_id  = something
-        return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
+        return reverse('planner:project_page', args=(self.kwargs["project_id"],))
 
     def get_project_id(self, **kwargs):
         pk = self.kwargs.get("project_id")
@@ -140,7 +201,7 @@ class TaskUpdate(UpdateView):
     fields = ["text"]
 
     def get_success_url(self):
-        return reverse('planner-namespace:project_page', args=(self.kwargs["project_id"],))
+        return reverse('planner:project_page', args=(self.kwargs["project_id"],))
 
     def project_id(self):
         pk = self.kwargs.get("project_id")
@@ -157,5 +218,3 @@ class DashboardView(generic.ListView):
 
     def get_queryset(self):
         return HttpResponse("")
-
-

@@ -1,0 +1,325 @@
+/* Theme colors */
+:root {
+    --main-bg-color: coral;
+    --list-bg: #275e2a;
+    --list-title-color: #c3dbc4;
+    --list-scrollbar: #1c431e;
+    --task-text-color: #1c431e;
+    --task-hover-bg: #dadada;
+    --add-task-text-color: #609f62;
+    --add-task-hover-text-color: #1c431e;
+    --add-task-hover-bg: #39873c;
+}
+
+/* Base styles */
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #E8EAED;
+}
+
+/* start navbar */
+.navbar {
+    background-color: #fff;
+  margin-bottom: 10px;
+}
+
+.navbar-brand {
+    padding: 0px;
+    height: 40px;
+}
+
+.navbar-brand > img {
+    height: 100%;
+    padding: 0px;
+    width: auto;
+}
+/* end navbar */
+
+:focus {
+    outline-color: #fa0;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+/* Lists */
+
+.lists-container::-webkit-scrollbar {
+    height: 2.4rem;
+}
+
+.lists-container::-webkit-scrollbar-thumb {
+    background-color: #cccccc; /* bottom scrollbar */
+    border-top-width: 0;
+}
+
+.lists-container {
+    display: flex;
+    align-items: start;
+    padding: 0 0.8rem 0.8rem;
+    overflow-x: auto;
+    height: calc(100vh - 8.6rem);
+}
+
+/* panel is task lists and list-add button */
+.panel {
+    flex: 0 0 15rem;
+    flex-direction: column;
+    display: flex;
+    max-height: calc(100vh - 15rem);
+    border-radius: 0.3rem;
+    margin-right: 1rem;
+}
+
+.list {
+    background-color: var(--list-bg);
+}
+
+.list-title {
+    font-size: 1.0rem;
+    font-weight: 700;
+    color: var(--list-title-color);
+    padding: 0.5rem 1rem 0;
+    line-height: 1.3;
+}
+
+.list-items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    padding: 0.1rem 0.6rem 0.6rem;
+    margin-bottom: 0;
+    overflow-y: auto;
+}
+
+.list-items::-webkit-scrollbar {
+    width: 1.0rem;
+}
+
+.list-items::-webkit-scrollbar-thumb {
+    background-color: var(--list-scrollbar);
+    border-right: 0.3rem solid var(--list-bg);
+}
+
+.item {
+    list-style-type: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.3;
+    background-color: #fff;
+    padding: 0.65rem 0.6rem;
+    color: var(--task-text-color);
+    border-bottom: 0.1rem solid #ccc;
+    border-radius: 0.3rem;
+    margin-bottom: 0.6rem;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
+.item:last-of-type {
+    margin-bottom: 0;
+}
+
+.item:hover {
+    background-color: var(--task-hover-bg);
+}
+
+span.task-author {
+    font-size: xx-small;
+}
+
+.task-delete-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-delete-btn i {
+    color: gray;
+    font-size: small;
+}
+
+.task-delete-btn i:hover {
+    color: black;
+}
+
+.add-task-btn-form {
+    margin: 0;
+}
+
+.add-task-btn {
+    width: 100%;
+    height: 100%;
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--add-task-text-color);
+    padding: 0.4rem 1rem 0.5rem;
+    text-align: left;
+    cursor: pointer;
+}
+
+.add-task-btn:hover {
+    background-color: var(--add-task-hover-bg);
+    color: var(--add-task-hover-text-color);
+}
+
+.add-list-btn {
+    display: block;
+    width: 100%;
+    height: 2rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    padding: 0 0.6rem 0;
+    text-align: left;
+    cursor: pointer; /* what does this do? */
+    background-color: #c4c4c4;
+    color: #7e7e7e;
+}
+
+.add-list-btn:hover {
+    background-color: #a3a3a3;
+}
+
+.add-task-btn::after,
+.add-list-btn::after {
+    content: '...';
+}
+
+/***************************************************/
+/* Kebab Dropdown Menu */
+.kebab {
+    position: relative;
+}
+
+.kebab-btn {
+    margin: 0.5rem 0.5rem 0;
+}
+
+.kebab-btn,
+.kebab-menu-item-btn {
+    background: none;
+    border: 0 none;
+    line-height: normal;
+    overflow: visible;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    text-align: left;
+    outline: none;
+    cursor: pointer;
+}
+
+.triple-dot {
+    color: var(--list-title-color);
+    margin: 0 auto;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.kebab-menu {
+    position: absolute;
+    left: -0.5rem;
+    top: 100%;
+    z-index: 900;
+    float: left;
+    padding: 10px 0;
+    margin-top: 9px;
+    background-color: #fff;
+    border: 1px solid #ccd8e0;
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    transform: translate(0, 15px) scale(.95);
+    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+    pointer-events: none;
+}
+
+.kebab-menu-caret {
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    width: 18px;
+    height: 10px;
+    float: left;
+    overflow: hidden;
+}
+
+.kebab-menu-caret-outer,
+.kebab-menu-caret-inner {
+    position: absolute;
+    display: inline-block;
+    margin-left: -1px;
+    font-size: 0;
+    line-height: 1;
+}
+
+.kebab-menu-caret-outer {
+    border-bottom: 10px solid #c1d0da;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    height: auto;
+    left: 0;
+    top: 0;
+    width: auto;
+}
+
+.kebab-menu-caret-inner {
+    top: 1px;
+    left: 1px;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid #fff;
+}
+
+.kebab-menu-items {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.kebab-menu-item {
+    display: block;
+}
+
+.kebab-menu-item-btn {
+    min-width: 100%;
+    color: #66757f;
+    cursor: pointer;
+    display: block;
+    font-size: 13px;
+    line-height: 18px;
+    padding: 5px 20px;
+    position: relative;
+    white-space: nowrap;
+}
+
+.kebab-menu-item:hover {
+    background-color: #489fe5;
+}
+
+.kebab-menu-item:hover .kebab-menu-item-btn {
+    color: #fff;
+}
+
+.kebab-btn:hover .kebab-dot,
+.show-kebab-menu .kebab-dot {
+    background-color: #516471;
+}
+
+.show-kebab-menu .kebab-menu {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+    pointer-events: auto;
+}
