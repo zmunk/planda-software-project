@@ -82,6 +82,10 @@ class ProjectWithCategoryCreate(CreateView):
         # allows html to access project_id through: {{ view.project_id }}
         pk = self.kwargs.get("project_id")
         return pk
+    
+    def project_title(self):
+        project = self.get_project()
+        return project.title
 
     def get_project(self):
         pk = self.kwargs.get("project_id")

@@ -197,6 +197,10 @@ span.task-author {
     content: '...';
 }
 
+#add-list-input {
+    height: 2rem;
+}
+
 /***************************************************/
 /* Kebab Dropdown Menu */
 .kebab {
