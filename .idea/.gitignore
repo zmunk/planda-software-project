@@ -8,3 +8,5 @@
 #sql 
 >>>>>>> ac16f47fcf90638ad871a37846789f16557a427a
 *.sqlite3
+# Datasource local storage ignored files
+/dataSources/
