@@ -18,6 +18,24 @@ from django.contrib.auth.models import User
 log.debug("DEBUGGING")
 ####
 
+
+class ProjectUpdateView(UpdateView):
+    model = Project
+
+    def get_success_url(self):
+        project_id = self.kwargs.get["project_id"]
+        return reverse("planner:project_page", args=(project_id,))
+
+    def form_valid(self, form):
+        new_user = form.cleaned_data["new_user"]
+        # do shit here
+        project_id = self.kwargs.get["project_id"]
+        project = Project.objects.get(pk=project_id)
+        project.users_list.add(new_user) # TODO fix
+        project.save()
+        return redirect(self.get_success_url())
+
+# Project List
 class ProjectCreateView(CreateView):
     model = Project
     fields = ["title"]
@@ -35,13 +53,12 @@ class ProjectCreateView(CreateView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
 
-
         project_title = form.cleaned_data['title'] #getting the entered title
         user_username = self.request.user.username #username of current logged in user
-        user = User.objects.get(username= user_username) #user object of current logged in user
+        user = User.objects.get(username=user_username) #user object of current logged in user
         
-        #creating a project object adn filling the fields, then saving it. 
-        project_obj = Project.objects.create(user = user)
+        # creating a project object adn filling the fields, then saving it.
+        project_obj = Project.objects.create(user=user)
         project_obj.users_list.add(user)
         project_obj.title = project_title
         project_obj.save()

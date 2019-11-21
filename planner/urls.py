@@ -30,6 +30,9 @@ urlpatterns = [
     # TASK DETAILS: /planner/project/<project_id>/task/<task_id>/
     path("project/<int:project_id>/task/<int:pk>/", views.DetailView.as_view(), name="detail"),
 
+    # ADD USER
+    path("project/<int:project_id>/add/user/<str:new_username>/", views.ProjectUpdateView.as_view(), name="add_user")
+
 
 
 ]
