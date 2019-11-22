@@ -186,8 +186,9 @@ class TaskUpdate(UpdateView):
 
 
 # ----------- Project
-class DashboardView(generic.ListView):
-    template_name = "dashboard/index.html"
-
-    def get_queryset(self):
-        return HttpResponse("")
+# commented for testing
+# class DashboardView(generic.ListView):
+#     template_name = "dashboard/index.html"
+#
+#     def get_queryset(self):
+#         return HttpResponse("")
