@@ -5,7 +5,7 @@ from django.urls import reverse_lazy, reverse
 from django.views import generic
 from .models import Task, Category, Project
 from .forms import TaskForm, ProjectForm
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, View
 from django.template import RequestContext
 
 from django.contrib.auth.decorators import login_required
@@ -19,7 +19,7 @@ log.debug("DEBUGGING")
 ####
 
 
-class ProjectUpdateView(UpdateView):
+class ProjectUpdateView(View):
     model = Project
 
     def get_success_url(self):
@@ -28,7 +28,6 @@ class ProjectUpdateView(UpdateView):
 
     def form_valid(self, form):
         new_user = form.cleaned_data["new_user"]
-        # do shit here
         project_id = self.kwargs.get["project_id"]
         project = Project.objects.get(pk=project_id)
         project.users_list.add(new_user) # TODO fix
@@ -45,7 +44,7 @@ class ProjectCreateView(CreateView):
         return reverse("planner:projects_listed")
 
     def get_context_data(self, **kwargs):        
-        #display projects that they users_list contain the current logged in user
+        # display projects that they users_list contain the current logged in user
         kwargs["project_list"] = self.model.objects.filter(users_list=self.request.user)
         return super(ProjectCreateView, self).get_context_data(**kwargs)
 
@@ -53,9 +52,9 @@ class ProjectCreateView(CreateView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
 
-        project_title = form.cleaned_data['title'] #getting the entered title
-        user_username = self.request.user.username #username of current logged in user
-        user = User.objects.get(username=user_username) #user object of current logged in user
+        project_title = form.cleaned_data['title']  # getting the entered title
+        user_username = self.request.user.username  # username of current logged in user
+        user = User.objects.get(username=user_username)  # user object of current logged in user
         
         # creating a project object adn filling the fields, then saving it.
         project_obj = Project.objects.create(user=user)

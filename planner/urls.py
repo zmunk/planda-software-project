@@ -31,7 +31,7 @@ urlpatterns = [
     path("project/<int:project_id>/task/<int:pk>/", views.DetailView.as_view(), name="detail"),
 
     # ADD USER
-    path("project/<int:project_id>/add/user/<str:new_username>/", views.ProjectUpdateView.as_view(), name="add_user")
+    path("project/<int:project_id>/add/user/", views.ProjectUpdateView.as_view(), name="add_user")
 
 
 
