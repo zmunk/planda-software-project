@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model, user_logged_in
 from django.contrib.auth.models import User
 from django.contrib import admin
-
+#
 
 class Project(models.Model):
     title = models.CharField(max_length=1000)
