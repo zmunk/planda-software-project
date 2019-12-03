@@ -13,7 +13,8 @@ app_name = "planner"
 
 urlpatterns = [
     # LANDING PAGE AND LOGIN
-    path("", LoginView.as_view(template_name="planner/landing_page.html"), name="landing_page"),
+    # LoginView.as_view(template_name="planner/landing_page.html")
+    path("", views.LandingPageWithLogin.as_view(), name="landing_page"),
     # LOGOUT
     path("logout/", registration_views.logout_view, name="logout"),
     # SIGNUP

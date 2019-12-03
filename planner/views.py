@@ -1,9 +1,10 @@
-
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.urls import reverse
 from .models import Task, Category, Project
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, View
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import AuthenticationForm
 from registration.forms import LoginForm
 
 
@@ -15,29 +16,11 @@ from django.contrib.auth.models import User
 log.debug("DEBUGGING")
 ####
 
-def homepage(request):
-    return render(request, "planner/landing_page.html")
 
-# class CustomLoginView(LoginView):
-#     """
-#     Custom login view.
-#     """
-#
-#     form_class = LoginForm
-#     template_name = 'planner/landing_page.html'
-#
-#     def get(self, request, *args, **kwargs):
-#         if self.request.user.is_authenticated and self.request.user.is_staff and has_2fa(self.request):
-#             return redirect('{}'.format(self.request.GET.get('next', 'portal_home')))
-#         return super(CustomLoginView, self).get(request, *args, **kwargs)
-#
-#     def form_valid(self, form):
-#         if self.request.user.is_staff and not has_2fa(self.request):
-#             log.info('is staff but does not have 2FA, redirecting to Authy account creator')
-#             auth_login(self.request, form.get_user(), backend='django.contrib.auth.backends.ModelBackend')
-#             return redirect('2fa_register')
-#
-#         return super(CustomLoginView, self).form_valid(form)
+class LandingPageWithLogin(LoginView):
+    template_name = 'planner/landing_page.html'
+    form_class = AuthenticationForm
+    redirect_authenticated_user = True
 
 class ProjectUpdateView(View):
     model = Project
@@ -181,15 +164,6 @@ class TaskDelete(DeleteView):
         return get_object_or_404(Category, id=pk)
 
 
-# class DetailView(generic.DetailView):
-#     model = Task
-#     template_name = "planner/detail.html"
-#
-#     def project_id(self):
-#         pk = self.kwargs.get("project_id")
-#         return pk
-
-
 class TaskUpdate(UpdateView):
     model = Task
     fields = ["text"]
@@ -205,11 +179,3 @@ class TaskUpdate(UpdateView):
         pk = self.kwargs.get("task_id")
         return get_object_or_404(Task, id=pk)
 
-
-# ----------- Project
-# commented for testing
-# class DashboardView(generic.ListView):
-#     template_name = "dashboard/index.html"
-#
-#     def get_queryset(self):
-#         return HttpResponse("")
