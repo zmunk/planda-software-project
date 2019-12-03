@@ -1,0 +1,16 @@
+{% extends "planner/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+    <div class="container">
+        <form method="post" class="form-group">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <button type="submit" class="btn btn-success">Login</button>
+            <p>Don't have an account? <a href="#">Create one here.</a></p>
+        </form>
+    </div>
+{% endblock %}

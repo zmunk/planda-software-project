@@ -1,5 +1,5 @@
 {% load static %}
-{#{% load account %}#}
+{% load crispy_forms_tags %}
 
 <!DOCTYPE html>
 <html>
@@ -9,7 +9,7 @@
     {#	<link rel="stylesheet" type="text/css" href="main.css">#}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'homepage/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
     <link rel="shortcut icon" href="{% static 'planner/images/favicon-32x32.png' %}">
     <link rel="apple-touch-icon" href="{% static 'planner/images/apple-touch-icon.png' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
@@ -22,10 +22,10 @@
     <div class="left-container">
         <div class="navigation">
             <div class="title">Planda</div>
-            <div class="contact">Get in touch with us</div>
+            <div class="contact">Get in touch with us now</div>
         </div>
         <div class="logo-container">
-            <div class="logo"><img src="{% static "homepage/planda head.svg" %}"></div>
+            <div class="logo"><img src="{% static "planner/images/planda head.svg" %}"></div>
         </div>
         <div class="social">
             <div class="social-btn">
@@ -44,36 +44,43 @@
         </div>
     </div>
     <div class="right-container">
-        <form class="modal-content animate" method="POST">
-    {%csrf_token%}
-    <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <span class="username_field">{{ form.username }}</span>
+        <div class="container mt-3 mx-auto">
+            <form id="login-form" method="post" class="" role="form">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <div class="col-5">
+                        <input id="id_username" name="username" type="text" class="form-control"
+                               placeholder="Username"/>
+                    </div>
+                    <div class="col-5">
+                        <input id="id_password" name="password" type="password" class="form-control"
+                               placeholder="Password"/>
+                    </div>
+                    <div class="col-2">
+                        <input type="submit" value="Login"
+                               class="btn btn-primary"/>
+                    </div>
+                </div>
 
-      <label for="psw"><b>Password</b></label>
-      <span class="password_field" >{{form.password}}</span>
-      <button type="submit">Log In</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    </div>
-        </form>
+                {% if form.errors %}
+                    <p>
+                        <span class="badge badge-danger">
+                        Your username and password didn't match.
+                        Please try again.
+                        </span>
+                    </p>
+                {% endif %}
 
-    <div class="container"  style="background-color:#f1f1f1">
-      <span><a class="forgStyle" href="#">forgot password?</a></span>
-    </div>
-    <!-- <span style=" list-style-type: none;">{{form.non_field_errors}}</span> -->
-    {% for field, error in form.errors.items %}
-        {% if field != '__all__' %}{{ field }}{% endif %}
-        <span style="color:red">{{ error | striptags }}</span>
-    {% endfor %}
-  </form>
+
+                <input type="hidden" name="next" value="{{ next }}"/>
+            </form>
+        </div>
         <div class="start-container">
             <div class="start-title">Create your own project with us</div>
             <div class="project-container">
                 <div class="tell-us-more">Tell us more about your project</div>
             </div>
-            <a href="{% url 'authentic:signup_view' %}" class="start-btn">Sign up</a>
+            <a href="{% url 'planner:register' %}" class="start-btn">Sign up</a>
         </div>
     </div>
 </div>

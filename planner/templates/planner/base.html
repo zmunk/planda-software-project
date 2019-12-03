@@ -3,7 +3,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Planda{% endblock %}</title>
+    <title>
+        {% block title %}Planda{% endblock %}
+    </title>
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -45,8 +47,12 @@
                 <a class="nav-link" href="#">Contact</a>
             </li>
         </ul>
-{#        {{ self.request.user.username }} TODO #}
-        <a class="nav-link" href="{% url "homepage:index" %}">Log out</a>
+    {% block login_info %}
+        <span class="navbar-text">
+            Logged in as <span class="font-italic">{% block username %}username{% endblock %}</span>
+        </span>
+        <a class="nav-link" href="{% url "planner:logout" %}">Log out</a>
+    {% endblock %}
     </div>
 </nav>
 
@@ -56,9 +62,9 @@
 <!-- Footer -->
 <footer class="page-footer font-small blue">
 
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2019 Planda Dev Team</div>
-  <!-- Copyright -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2019 Planda Dev Team</div>
+    <!-- Copyright -->
 
 </footer>
 <!-- Footer -->

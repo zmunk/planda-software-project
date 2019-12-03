@@ -17,18 +17,23 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from registration import views as registration_views
 
 urlpatterns = [
     # /
-    path('', include('homepage.urls')),
+    # path('', include('homepage.urls')),
+    path('', include("django.contrib.auth.urls")),
+    path('register/', registration_views.register, name="register"),
+    # path('', include('django.contrib.auth.urls')),
     # /auth/
-    path('auth/', include('authentic.urls')),
+    # path('auth/', include('authentic.urls')),
     # /admin/
     path('admin/', admin.site.urls, name="admin-page"),
     # /planner/
-    path('planner/', include('planner.urls', namespace="planner-namespace")),
+    path('', include('planner.urls', namespace="planner-namespace")),
     # /dashboard/
     path('dashboard/', include('dashboard.urls')),
+
 ]
 
 if settings.DEBUG:

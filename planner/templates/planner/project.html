@@ -1,6 +1,14 @@
 {% extends "planner/base.html" %}
 {% load static %}
 
+{% block title %}
+    {{ view.project_title }}
+{% endblock %}
+
+{% block username %}
+{{ user.username }}
+{% endblock %}
+
 {% block body %}
 <!-- <div class="container"> -->
     <div class="d-flex w-100 justify-content-between">

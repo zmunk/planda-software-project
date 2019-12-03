@@ -1,15 +1,12 @@
-from django.contrib import messages
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404, render_to_response
-from django.urls import reverse_lazy, reverse
-from django.views import generic
-from .models import Task, Category, Project
-from .forms import TaskForm, ProjectForm
-from django.views.generic.edit import CreateView, UpdateView, DeleteView, View
-from django.template import RequestContext
 
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
+from django.shortcuts import render, redirect, get_object_or_404, render_to_response
+from django.urls import reverse
+from .models import Task, Category, Project
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, View
+from django.contrib.auth.views import LoginView
+from registration.forms import LoginForm
+
+
 
 #### DEBUGGER
 import logging as log
@@ -18,6 +15,29 @@ from django.contrib.auth.models import User
 log.debug("DEBUGGING")
 ####
 
+def homepage(request):
+    return render(request, "planner/landing_page.html")
+
+# class CustomLoginView(LoginView):
+#     """
+#     Custom login view.
+#     """
+#
+#     form_class = LoginForm
+#     template_name = 'planner/landing_page.html'
+#
+#     def get(self, request, *args, **kwargs):
+#         if self.request.user.is_authenticated and self.request.user.is_staff and has_2fa(self.request):
+#             return redirect('{}'.format(self.request.GET.get('next', 'portal_home')))
+#         return super(CustomLoginView, self).get(request, *args, **kwargs)
+#
+#     def form_valid(self, form):
+#         if self.request.user.is_staff and not has_2fa(self.request):
+#             log.info('is staff but does not have 2FA, redirecting to Authy account creator')
+#             auth_login(self.request, form.get_user(), backend='django.contrib.auth.backends.ModelBackend')
+#             return redirect('2fa_register')
+#
+#         return super(CustomLoginView, self).form_valid(form)
 
 class ProjectUpdateView(View):
     model = Project
@@ -33,6 +53,7 @@ class ProjectUpdateView(View):
         project.users_list.add(new_user) # TODO fix
         project.save()
         return redirect(self.get_success_url())
+
 
 # Project List
 class ProjectCreateView(CreateView):
@@ -112,6 +133,7 @@ class ProjectWithCategoryCreate(CreateView):
         form.instance.project = self.get_project()
         return super(ProjectWithCategoryCreate, self).form_valid(form)
 
+
 # ----------- Task
 class TaskCreate(CreateView):
     model = Task
@@ -159,13 +181,13 @@ class TaskDelete(DeleteView):
         return get_object_or_404(Category, id=pk)
 
 
-class DetailView(generic.DetailView):
-    model = Task
-    template_name = "planner/detail.html"
-
-    def project_id(self):
-        pk = self.kwargs.get("project_id")
-        return pk
+# class DetailView(generic.DetailView):
+#     model = Task
+#     template_name = "planner/detail.html"
+#
+#     def project_id(self):
+#         pk = self.kwargs.get("project_id")
+#         return pk
 
 
 class TaskUpdate(UpdateView):
@@ -185,8 +207,8 @@ class TaskUpdate(UpdateView):
 
 
 # ----------- Project
-class DashboardView(generic.ListView):
-    template_name = "dashboard/index.html"
-
-    def get_queryset(self):
-        return HttpResponse("")
+# class DashboardView(generic.ListView):
+#     template_name = "dashboard/index.html"
+#
+#     def get_queryset(self):
+#         return HttpResponse("")

@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'homepage',
-    'authentic',
+    'crispy_forms',
+    'registration.apps.RegistrationConfig',
     'dashboard',
 ]
 
@@ -119,6 +119,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+LOGIN_REDIRECT_URL = 'planner:projects_listed'
+LOGOUT_REDIRECT_URL = '/'
+
+LOGIN_URL = '/' # redirects here if not logged in
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATIC_URL = '/static/'
 
