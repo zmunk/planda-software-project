@@ -207,6 +207,7 @@ class TaskUpdate(UpdateView):
 
 
 # ----------- Project
+# commented for testing
 # class DashboardView(generic.ListView):
 #     template_name = "dashboard/index.html"
 #
