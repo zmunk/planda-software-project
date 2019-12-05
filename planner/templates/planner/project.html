@@ -14,6 +14,7 @@
     <div class="d-flex w-100 justify-content-between">
         <div class="container">
             <h1>{{ view.project_title }}</h1></div>
+        {#        <div id="testing">testing</div>#}
         <div class="container w-25" style="background: none">
 
             <form method="post" action="{% url "planner:add_user" view.project_id %}">
@@ -65,13 +66,26 @@
                                     </a>
                                 </div>
                             </div>
+
                         </li>
                     {% endfor %}
                 </ul>
-                <form class="add-task-btn-form" action="{% url "planner:add_task" view.project_id category.id %}"
-                      method='GET'>
-                    <button type='submit' class="add-task-btn btn">Add a task</button>
-                </form>
+
+                <div class="add-task-btn-wrapper">
+                    <button id="task-btn-{{ category.pk }}" class="add-task-btn btn"
+                            onclick="add_task_clicked({{ category.pk }})">
+                        Add a task
+                    </button>
+                    <form id="task-form-{{ category.pk }}" class="add-task-form" method="post"
+                          action="{% url "planner:add_task" view.project_id category.pk %}"
+                          onfocusout="add_task_form_unfocused()">
+                        {% csrf_token %}
+                        <input id="task-input-{{ category.pk }}"
+                               class="add-task-input form-control input-sm"
+                               type="text" name="text">
+                        <button class="hidden" type="submit"></button>
+                    </form>
+                </div>
             </div>
         {% endfor %}
 
@@ -92,6 +106,7 @@
     <script src="{% static 'js/dragging.js' %}"></script>
     <!-- Reactive Forms -->
     <script src="{% static 'js/add_list.js' %}"></script>
+    <script src="{% static 'js/add_task.js' %}"></script>
     <!-- Kebab Dropdown Menu -->
     <script src="{% static 'js/kebab dropdown.js' %}"></script>
 

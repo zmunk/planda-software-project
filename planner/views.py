@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView, View
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from registration.forms import LoginForm
-from.forms import AddUserForm
+from.forms import AddUserForm, AddTaskForm
 
 #### DEBUGGER
 import logging as log
@@ -16,7 +16,6 @@ from django.contrib.auth.models import User
 log.basicConfig(level=log.DEBUG) # comment this to suppress debug logging
 log.debug("DEBUGGING")
 ####
-
 
 
 class LandingPageWithLogin(LoginView):
@@ -41,16 +40,6 @@ class AddUserToProject(View):
             project.users_list.add(new_user)
             project.save()
             return redirect(self.get_success_url(project_id))
-
-    def form_valid(self, form):
-        log.debug("hello world")
-        new_username = form.cleaned_data["new_user"]
-        new_user = User.objects.get(username=new_username)
-        project_id = self.kwargs.get["project_id"]
-        project = Project.objects.get(pk=project_id)
-        project.users_list.add(new_user)
-        project.save()
-        return redirect(self.get_success_url())
 
 
 # Project List
@@ -133,28 +122,22 @@ class ProjectWithCategoryCreate(CreateView):
 
 
 # ----------- Task
-class TaskCreate(CreateView):
+class TaskCreate(View):
     model = Task
-    fields = ["text"]
 
-    def get_success_url(self):
-        return reverse('planner:project_page', args=(self.kwargs["project_id"],))
+    def get_success_url(self, project_id):
+        return reverse("planner:project_page", args=(project_id,))
 
-    def project_id(self):
-        pk = self.kwargs.get("project_id")
-        return pk
-
-    def get_category(self):
-        # get current category
-        pk = self.kwargs.get("category_id")
-        return get_object_or_404(Category, id=pk)
-
-    def form_valid(self, form):
-        log.debug("form_valid called")
-        current_category = self.get_category()
-        form.instance.category = current_category  # fill category
-        form.instance.author = self.request.user  # fill user
-        return super(TaskCreate, self).form_valid(form)
+    def post(self, request, project_id, category_id):
+        form = AddTaskForm(request.POST)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            text = cleaned_data["text"]
+            category = Category.objects.get(pk=category_id)
+            curr_user = request.user
+            new_task = Task(text=text, category=category, author=curr_user)
+            new_task.save()
+            return redirect(self.get_success_url(project_id))
 
 
 class TaskDelete(DeleteView):

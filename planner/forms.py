@@ -8,12 +8,13 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ["text", "author"]
 
+class AddTaskForm(forms.Form):
+    text = forms.CharField(max_length=1000)
 
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ["title"]
-
 
 class AddUserForm(forms.Form):
     new_user = forms.CharField(max_length=1000)

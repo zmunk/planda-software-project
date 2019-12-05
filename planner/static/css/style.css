@@ -49,7 +49,7 @@ body {
 }
 
 .hidden {
-    visibility: hidden;
+    display: none;
 }
 
 /* Lists */
@@ -154,7 +154,7 @@ span.task-author {
     color: black;
 }
 
-.add-task-btn-form {
+.add-task-btn-wrapper {
     margin: 0;
 }
 
@@ -168,6 +168,15 @@ span.task-author {
     padding: 0.4rem 1rem 0.5rem;
     text-align: left;
     cursor: pointer;
+}
+
+.add-task-form {
+    padding: 0rem 0.6rem 0.2rem;
+    width: 100%;
+    margin: 0;
+}
+
+.testing-input {
 }
 
 .add-task-btn:hover {
