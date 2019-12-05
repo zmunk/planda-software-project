@@ -13,7 +13,6 @@ app_name = "planner"
 
 urlpatterns = [
     # LANDING PAGE AND LOGIN
-    # LoginView.as_view(template_name="planner/landing_page.html")
     path("", views.LandingPageWithLogin.as_view(), name="landing_page"),
     # LOGOUT
     path("logout/", registration_views.logout_view, name="logout"),
@@ -22,17 +21,18 @@ urlpatterns = [
     # LIST PROJECTS
     path("projects/", login_required(views.ProjectCreateView.as_view()), name="projects_listed"),
     # PROJECT PAGE
-    path("project/<int:project_id>", login_required(views.ProjectWithCategoryCreate.as_view()), name="project_page"),
+    path("project/<int:project_id>/", login_required(views.ProjectWithCategoryCreate.as_view()), name="project_page"),
     # DELETE PROJECT
-    path("delete/project/<int:project_id>", login_required(views.ProjectDeleteView.as_view()), name="delete_project"),
+    path("delete/project/<int:project_id>/", login_required(views.ProjectDeleteView.as_view()), name="delete_project"),
     # ADD TASK
     path("project/<int:project_id>/category/<int:category_id>/add/task/", login_required(views.TaskCreate.as_view()), name="add_task"),
     # DELETE TASK
-    path("project/<int:project_id>/delete/task/<int:task_id>/", views.TaskDelete.as_view(), name="delete_task"),
+    path("project/<int:project_id>/delete/task/<int:task_id>/", login_required(views.TaskDelete.as_view()), name="delete_task"),
     # UPDATE TASK
-    path("project/<int:project_id>/update/task/<int:task_id>/", views.TaskUpdate.as_view(), name="update_task"),
+    path("project/<int:project_id>/update/task/<int:task_id>/", login_required(views.TaskUpdate.as_view()), name="update_task"),
     # ADD USER TO PROJECT
-    path("project/<int:project_id>/add/user/", views.ProjectUpdateView.as_view(), name="add_user")
+    path("project/<int:project_id>/add/user/", login_required(views.AddUserToProject.as_view()), name="add_user"),
+# views.ProjectUpdateView.as_view()
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

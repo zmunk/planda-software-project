@@ -6,24 +6,25 @@
 {% endblock %}
 
 {% block username %}
-{{ user.username }}
+    {{ user.username }}
 {% endblock %}
 
 {% block body %}
-<!-- <div class="container"> -->
+    <!-- <div class="container"> -->
     <div class="d-flex w-100 justify-content-between">
         <div class="container">
-    <h1>{{ view.project_title }}</h1></div>
-    <div class="container w-25" style="background: none">
-            <form method="get" action="{% url "planner:add_user" view.project_id %}">
-                {% csrf_token %}
-                <!-- <div class="row"> -->
+            <h1>{{ view.project_title }}</h1></div>
+        <div class="container w-25" style="background: none">
 
-                <input style="height: 1.8rem" class="form-control input-sm" type="text" name="new_user">
-                <button class="pull-right btn btn-light" type="submit">Add new user</button>
-                <!-- </div> -->
-            </form></div></div>
-<!-- </div> -->
+            <form method="post" action="{% url "planner:add_user" view.project_id %}">
+                {% csrf_token %}
+                <input style="height: 1.8rem" class="add-user-input form-control input-sm" type="text" name="new_user">
+                <button class="add-user-btn pull-right btn btn-light" type="submit">Add new user</button>
+            </form>
+
+        </div>
+    </div>
+    <!-- </div> -->
     <section class="lists-container">
         {% for category in category_list %}
             <div class="list panel">

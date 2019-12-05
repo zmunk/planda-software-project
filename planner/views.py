@@ -1,20 +1,22 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.urls import reverse
+from django.views.generic.detail import SingleObjectMixin
+
 from .models import Task, Category, Project
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, View
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from registration.forms import LoginForm
-
-
+from.forms import AddUserForm
 
 #### DEBUGGER
 import logging as log
 from django.contrib.auth.models import User
-# log.basicConfig(level=log.DEBUG) # comment this to suppress debug logging
+log.basicConfig(level=log.DEBUG) # comment this to suppress debug logging
 log.debug("DEBUGGING")
 ####
+
 
 
 class LandingPageWithLogin(LoginView):
@@ -22,18 +24,31 @@ class LandingPageWithLogin(LoginView):
     form_class = AuthenticationForm
     redirect_authenticated_user = True
 
-class ProjectUpdateView(View):
+
+class AddUserToProject(View):
     model = Project
 
-    def get_success_url(self):
-        project_id = self.kwargs.get["project_id"]
+    def get_success_url(self, project_id):
         return reverse("planner:project_page", args=(project_id,))
 
+    def post(self, request, project_id):
+        form = AddUserForm(request.POST)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            new_username = cleaned_data["new_user"]
+            new_user = User.objects.get(username=new_username)
+            project = Project.objects.get(pk=project_id)
+            project.users_list.add(new_user)
+            project.save()
+            return redirect(self.get_success_url(project_id))
+
     def form_valid(self, form):
-        new_user = form.cleaned_data["new_user"]
+        log.debug("hello world")
+        new_username = form.cleaned_data["new_user"]
+        new_user = User.objects.get(username=new_username)
         project_id = self.kwargs.get["project_id"]
         project = Project.objects.get(pk=project_id)
-        project.users_list.add(new_user) # TODO fix
+        project.users_list.add(new_user)
         project.save()
         return redirect(self.get_success_url())
 

@@ -1,5 +1,6 @@
 from django import forms
 from .models import Task, Project
+from django.db import models
 
 
 class TaskForm(forms.ModelForm):
@@ -13,3 +14,6 @@ class ProjectForm(forms.ModelForm):
         model = Project
         fields = ["title"]
 
+
+class AddUserForm(forms.Form):
+    new_user = forms.CharField(max_length=1000)

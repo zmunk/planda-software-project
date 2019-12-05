@@ -17,12 +17,6 @@ def register(request):
 
     return render(request, "registration/register.html", {"form": form})
 
-from django.conf import settings
-from django.shortcuts import redirect
-
-def my_view(request):
-    if not request.user.is_authenticated:
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
 
 def logout_view(request):
     logout(request)

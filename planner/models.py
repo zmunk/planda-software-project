@@ -1,10 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
-from django.contrib.auth import get_user_model, user_logged_in
 from django.contrib.auth.models import User
-from django.contrib import admin
-#
+
 
 class Project(models.Model):
     title = models.CharField(max_length=1000)
@@ -18,6 +16,7 @@ class Project(models.Model):
         # where to go when new project is created
         return reverse("planner:projects_listed")
 
+
 class Category(models.Model):
     category_name = models.CharField(max_length=250) 
     project = models.ForeignKey(Project, default="", on_delete=models.CASCADE)
@@ -27,12 +26,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category_name + "(Category of " + self.project.title + ")"
-
-
-    # class ArticleAdmin(admin.ModelAdmin):
-    #     def save_model(self, request, obj, form, change):
-    #         obj.user = request.user
-    #         super().save_model(request, obj, form, change)
 
 
 class Task(models.Model):
