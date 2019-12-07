@@ -121,6 +121,25 @@ class ProjectWithCategoryCreate(CreateView):
         return super(ProjectWithCategoryCreate, self).form_valid(form)
 
 
+#####
+
+class CategoryDeleteView(DeleteView):
+    model = Category
+
+    def get_success_url(self):
+        return reverse("planner:project_page")
+
+    def get_object(self, **kwargs):
+        pk = self.kwargs.get("category_id")
+        return get_object_or_404(Category, id=pk)
+
+    def get(self, *args, **kwargs):
+        print("HI")
+        return self.delete(*args, **kwargs)
+
+###
+
+
 # ----------- Task
 class TaskCreate(View):
     model = Task

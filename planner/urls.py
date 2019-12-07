@@ -24,6 +24,8 @@ urlpatterns = [
     path("project/<int:project_id>/", login_required(views.ProjectWithCategoryCreate.as_view()), name="project_page"),
     # DELETE PROJECT
     path("delete/project/<int:project_id>/", login_required(views.ProjectDeleteView.as_view()), name="delete_project"),
+    # DELETE CATEGORY
+    path("delete/project/<int:category_id>/", login_required(views.CategoryDeleteView.as_view()), name="delete_category"),
     # ADD TASK
     path("project/<int:project_id>/category/<int:category_id>/add/task/", login_required(views.TaskCreate.as_view()), name="add_task"),
     # DELETE TASK

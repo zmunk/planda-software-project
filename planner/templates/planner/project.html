@@ -41,12 +41,20 @@
                                 <div class="kebab-menu-caret-outer"></div>
                                 <div class="kebab-menu-caret-inner"></div>
                             </div>
-                            <ul class="kebab-menu-items" tabindex="-1" role="menu" aria-labelledby="kebab-btn"
-                                aria-hidden="true">
-                                <li class="kebab-menu-item" role="presentation">
-                                    <button type="button" class="kebab-menu-item-btn" role="menuitem">Delete</button>
-                                </li>
-                            </ul>
+
+                            <form action="{% url 'planner:delete_category' category_id=category.pk %}" method='POST' >
+                                {% csrf_token %}
+                                <ul class="kebab-menu-items" tabindex="-1" role="menu" aria-labelledby="kebab-btn"
+                                    aria-hidden="true">
+                                        <li class="kebab-menu-item" role="presentation">
+                                            <button type="button" class="kebab-menu-item-btn" role="menuitem">Delete</button>
+                                        </li>
+                                </ul>
+                        </form>
+
+             
+
+
                         </div>
 
                     </div>
