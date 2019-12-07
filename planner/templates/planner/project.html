@@ -19,8 +19,10 @@
 
             <form method="post" action="{% url "planner:add_user" view.project_id %}">
                 {% csrf_token %}
-                <input style="height: 1.8rem" class="add-user-input form-control input-sm" type="text" name="new_user">
-                <button class="add-user-btn pull-right btn btn-light" type="submit">Add new user</button>
+                <div class="row">
+                <input class="col-md-7 add-user-input form-control input-sm" type="text" name="new_user">
+                <button class="col-md-4 add-user-btn pull-right btn btn-light" type="submit">Add new user</button>
+                    </div>
             </form>
 
         </div>

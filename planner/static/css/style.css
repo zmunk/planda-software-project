@@ -51,6 +51,17 @@ body {
 .hidden {
     display: none;
 }
+/* Add User */
+.add-user-input {
+    height: 1.8rem;
+    margin: 0.2rem;
+}
+
+.add-user-btn {
+    height: 1.8rem;
+    font-size: x-small;
+    margin: 0.2rem;
+}
 
 /* Lists */
 
