@@ -31,30 +31,28 @@
             <div class="list panel">
                 <div class="d-flex w-100 justify-content-between">
                     <h3 class="list-title">{{ category.category_name }}</h3>
-                    <div class="kebab">
-                        <button id="kebab-btn" class="kebab-btn">
-                            <i class="fa fa-ellipsis-v triple-dot" aria-hidden="true"></i>
-                        </button>
+                    <div class="kebab"> 
+
+                        <!--MENU BUTTON ### 
+
+                        <button id="kebab-btn" class="kebab-btn"> 
+                            <i class="fa fa-ellipsis-v triple-dot" aria-hidden="true"></i>  
+                        </button> 
+
+                        MENU BUTTON ### -->
+
+                        <form action="{% url "planner:delete_category" category.pk view.project_id %}">
+                                <button class="btn" href="#">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                        </form>
+
 
                         <div class="kebab-menu">
                             <div class="kebab-menu-caret">
                                 <div class="kebab-menu-caret-outer"></div>
                                 <div class="kebab-menu-caret-inner"></div>
-                            </div>
-
-                            <form action="{% url 'planner:delete_category' category_id=category.pk %}" method='POST' >
-                                {% csrf_token %}
-                                <ul class="kebab-menu-items" tabindex="-1" role="menu" aria-labelledby="kebab-btn"
-                                    aria-hidden="true">
-                                        <li class="kebab-menu-item" role="presentation">
-                                            <button type="button" class="kebab-menu-item-btn" role="menuitem">Delete</button>
-                                        </li>
-                                </ul>
-                        </form>
-
-             
-
-
+                            </div> 
                         </div>
 
                     </div>
