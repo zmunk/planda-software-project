@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.contrib.auth import logout
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib import messages
 
 from planda import settings
 from registration.tokens import account_activation_token
@@ -20,6 +21,13 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
+            # if user.mail is in database: display error
+            if User.objects.filter(username=user.username).exists():
+                messages.error(request, "That username already exists")
+
+            if User.objects.filter(email=user.email).exists():
+                messages.error(request, "An account already exists with that email")
+
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
@@ -31,7 +39,11 @@ def register(request):
                 'token': account_activation_token.make_token(user),
             })
             send_mail(subject, message, "plandasoftware@gmail.com", [user.email])
-            return redirect(reverse("planner:account_activation_sent"))
+            messages.success(request, "Account successfully created!")
+            return redirect(reverse("planner:landing_page"))
+        else:
+            for msg in form.error_messages:
+                messages.error(request, f"{msg}: {form.error_messages[msg]}")
     else:
         form = RegisterForm()
 

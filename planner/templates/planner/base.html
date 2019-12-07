@@ -56,8 +56,16 @@
     </div>
 </nav>
 
+{% if messages %}
+    {% for message in messages %}
+        <script>M.toast({html: "{{ message }}", classes: 'blue', displayLength: 2000});</script>
+    {% endfor %}
+{% endif %}
+
+<div class="container">
 {% block body %}
 {% endblock %}
+</div>
 
 <!-- Footer -->
 <footer class="page-footer font-small blue">

@@ -70,7 +70,8 @@ body {
 }
 
 .lists-container::-webkit-scrollbar-thumb {
-    background-color: #cccccc; /* bottom scrollbar */
+    /* bottom scrollbar */
+    background-color: #cccccc;
     border-top-width: 0;
 }
 
