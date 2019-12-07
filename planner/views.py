@@ -52,7 +52,7 @@ class ProjectCreateView(CreateView):
         return reverse("planner:projects_listed")
 
     def get_context_data(self, **kwargs):        
-        # display projects that they users_list contain the current logged in user
+        # display projects that the users_list contain the current logged in user
         kwargs["project_list"] = self.model.objects.filter(users_list=self.request.user)
         return super(ProjectCreateView, self).get_context_data(**kwargs)
 
