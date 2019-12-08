@@ -28,8 +28,8 @@ body {
 
 /* start navbar */
 .navbar {
-    background-color: #fff;
-  margin-bottom: 10px;
+    background-color: #fff !important;
+    margin-bottom: 10px;
 }
 
 .navbar-brand {
@@ -347,4 +347,9 @@ span.task-author {
     opacity: 1;
     transform: translate(0, 0) scale(1);
     pointer-events: auto;
+}
+
+/*********/
+.fa-trash {
+    color: var(--add-task-text-color);
 }

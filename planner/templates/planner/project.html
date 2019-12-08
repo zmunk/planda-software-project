@@ -20,9 +20,9 @@
             <form method="post" action="{% url "planner:add_user" view.project_id %}">
                 {% csrf_token %}
                 <div class="row">
-                <input class="col-md-7 add-user-input form-control input-sm" type="text" name="new_user">
-                <button class="col-md-4 add-user-btn pull-right btn btn-light" type="submit">Add new user</button>
-                    </div>
+                    <input class="col-md-7 add-user-input form-control input-sm" type="text" name="new_user">
+                    <button class="col-md-4 add-user-btn pull-right btn btn-light" type="submit">Add new user</button>
+                </div>
             </form>
 
         </div>
@@ -33,15 +33,29 @@
             <div class="list panel">
                 <div class="d-flex w-100 justify-content-between">
                     <h3 class="list-title">{{ category.category_name }}</h3>
-                    <div class="kebab"> 
 
-                        <!--MENU BUTTON ### 
 
-                        <button id="kebab-btn" class="kebab-btn"> 
-                            <i class="fa fa-ellipsis-v triple-dot" aria-hidden="true"></i>  
-                        </button> 
-
-                        MENU BUTTON ### -->
+                    <!-- kebab -->
+{#                    <div class="kebab" id="kebab-{{ category.pk }}">#}
+{#                        <button id="kebab-btn-{{ category.pk }}" class="kebab-btn btn kebab-click"#}
+{#                                onclick="kebab_clicked({{ category.pk }})">#}
+{#                            <i class="fa fa-ellipsis-v triple-dot" aria-hidden="true"></i>#}
+{#                        </button>#}
+{##}
+{#                        <div class="kebab-menu kebab-click" id="kebab-menu-{{ category.pk }}">#}
+{#                            <div class="kebab-menu-caret">#}
+{#                                <div class="kebab-menu-caret-outer"></div>#}
+{#                                <div class="kebab-menu-caret-inner"></div>#}
+{#                            </div>#}
+{#                            <ul class="kebab-menu-items" tabindex="-1" role="menu" aria-labelledby="kebab-btn-{{ category.pk }}"#}
+{#                                aria-hidden="true">#}
+{#                                <li class="kebab-menu-item" role="presentation">#}
+{#                                    <button type="button" class="kebab-menu-item-btn" role="menuitem">Delete</button>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    </div>#}
+                    <!-- -->
 
                         <form action="{% url "planner:delete_category" category.pk view.project_id %}">
                                 <button class="btn" href="#">
@@ -50,14 +64,6 @@
                         </form>
 
 
-                        <div class="kebab-menu">
-                            <div class="kebab-menu-caret">
-                                <div class="kebab-menu-caret-outer"></div>
-                                <div class="kebab-menu-caret-inner"></div>
-                            </div> 
-                        </div>
-
-                    </div>
                 </div>
 
                 <ul class="list-items">
@@ -79,6 +85,7 @@
                     {% endfor %}
                 </ul>
 
+                <!-- Add Task to List -->
                 <div class="add-task-btn-wrapper">
                     <button id="task-btn-{{ category.pk }}" class="add-task-btn btn"
                             onclick="add_task_clicked({{ category.pk }})">
@@ -94,6 +101,7 @@
                         <button class="hidden" type="submit"></button>
                     </form>
                 </div>
+                <!-- -->
             </div>
         {% endfor %}
 
