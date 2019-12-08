@@ -21,10 +21,10 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            # if user.mail is in database: display error
+
             if User.objects.filter(username=user.username).exists():
                 messages.error(request, "That username already exists")
-
+            # if user.mail is in database: display error
             if User.objects.filter(email=user.email).exists():
                 messages.error(request, "An account already exists with that email")
 
