@@ -22,7 +22,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="">
+    <a class="navbar-brand" href="{% url "planner:landing_page" %}">
         <img src="{% static 'planner/images/planda.png' %}" alt="Planda">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -56,8 +56,16 @@
     </div>
 </nav>
 
+{% if messages %}
+    {% for message in messages %}
+        <script>M.toast({html: "{{ message }}", classes: 'blue', displayLength: 2000});</script>
+    {% endfor %}
+{% endif %}
+
+{#<div class="container">#}
 {% block body %}
 {% endblock %}
+{#</div>#}
 
 <!-- Footer -->
 <footer class="page-footer font-small blue">

@@ -28,8 +28,8 @@ body {
 
 /* start navbar */
 .navbar {
-    background-color: #fff;
-  margin-bottom: 10px;
+    background-color: #fff !important;
+    margin-bottom: 10px;
 }
 
 .navbar-brand {
@@ -70,7 +70,8 @@ body {
 }
 
 .lists-container::-webkit-scrollbar-thumb {
-    background-color: #cccccc; /* bottom scrollbar */
+    /* bottom scrollbar */
+    background-color: #cccccc;
     border-top-width: 0;
 }
 
@@ -346,4 +347,9 @@ span.task-author {
     opacity: 1;
     transform: translate(0, 0) scale(1);
     pointer-events: auto;
+}
+
+/*********/
+.fa-trash {
+    color: var(--add-task-text-color);
 }
