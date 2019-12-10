@@ -41,8 +41,6 @@ def register(request):
 def logout_view(request):
     logout(request)
 
-
-
 def account_activation_sent(request):
     return render(request, 'registration/confirmation_sent.html')
 
