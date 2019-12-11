@@ -207,3 +207,9 @@ class TaskUpdate(UpdateView):
         pk = self.kwargs.get("task_id")
         return get_object_or_404(Task, id=pk)
 
+# USER PROFILE
+def UserProfile(request):
+    user = request.user 
+    return render(request, 'planner/profile_page.html', context={'user':user})
+
+
