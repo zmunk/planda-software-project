@@ -46,8 +46,9 @@ class AddUserToProject(View):
             project = Project.objects.get(pk=project_id)
             project.users_list.add(new_user)
             project.save()
+            projects = Project.objects.all()
             messages.info(request, "User was added")
-            return redirect(self.get_success_url(project_id))
+            return redirect(self.get_success_url(project_id), {'projects' : projects})
 
 
 # Project List
@@ -108,7 +109,9 @@ class ProjectWithCategoryCreate(CreateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get("project_id")
         context["category_list"] = Category.objects.filter(project__pk=pk)
+        context["users_list"] = Project.objects.get(id = pk).users_list.all()
         return context
+
 
     def project_id(self):
         # allows html to access project_id through: {{ view.project_id }}
