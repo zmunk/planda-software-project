@@ -10,6 +10,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from registration.forms import LoginForm
 from.forms import AddUserForm, AddTaskForm
 
+from django.contrib import messages
+
 #### DEBUGGER
 import logging as log
 from django.contrib.auth.models import User
@@ -35,10 +37,16 @@ class AddUserToProject(View):
         if form.is_valid():
             cleaned_data = form.cleaned_data
             new_username = cleaned_data["new_user"]
-            new_user = User.objects.get(username=new_username)
+            new_user = User.objects.filter(username=new_username)
+            if not new_user.exists():
+                messages.info(request, "User dose not exist")
+                return redirect(self.get_success_url(project_id))
+                    # return render(request, 'planner/popup.html')
+            new_user = new_user[0]
             project = Project.objects.get(pk=project_id)
             project.users_list.add(new_user)
             project.save()
+            messages.info(request, "User was added")
             return redirect(self.get_success_url(project_id))
 
 
