@@ -30,7 +30,7 @@
     <!-- </div> -->
     <section class="lists-container">
         {% for category in category_list %}
-            <div class="list panel">
+            <div class="list panel" data-id="{{ category.pk }}">
                 <div class="d-flex w-100 justify-content-between">
                     <h3 class="list-title">{{ category.category_name }}</h3>
 
@@ -68,7 +68,7 @@
 
                 <ul class="list-items">
                     {% for task in category.task_set.all %}
-                        <li class="item">
+                        <li class="item" data-id="{{ task.pk }}">
                             <div class="row no-gutters">
                                 <div class="col-xs-10 col-md-11">
                                     {{ task.text }}&emsp;<span class="task-author">{{ task.author }}</span>
