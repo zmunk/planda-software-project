@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'planner.apps.PlannerConfig',
+    'registration.apps.RegistrationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'registration.apps.RegistrationConfig',
     'dashboard',
 ]
 

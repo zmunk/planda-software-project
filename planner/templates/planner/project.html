@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block body %}
+
     <!-- <div class="container"> -->
     <div class="d-flex w-100 justify-content-between">
         <div class="container">
@@ -23,10 +24,27 @@
                     <input class="col-md-7 add-user-input form-control input-sm" type="text" name="new_user">
                     <button class="col-md-4 add-user-btn pull-right btn btn-light" type="submit">Add new user</button>
                 </div>
+
             </form>
+
+
+            <h4>Project Team: </h4>
+                    {% for thing in users_list%}
+                        <h1 class="list-title"> {{ thing.username }}</h1>
+            {% endfor %}
+
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
 
         </div>
     </div>
+
     <!-- </div> -->
     <section class="lists-container">
         {% for category in category_list %}

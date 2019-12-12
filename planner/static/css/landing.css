@@ -178,6 +178,10 @@ body {
 	background-color: #17252A;
 }
 
+.resetPassLink  { 
+	color: #2B7A78;
+}
+
 .login-btn {
 	float: right; /***/
 	/*margin-top: 2rem;*/

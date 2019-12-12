@@ -1,14 +1,13 @@
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, reverse_lazy
 from django.views.generic import RedirectView
 from django.conf.urls.static import static
 from django.conf import settings
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 # from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from . import views
 from registration import views as registration_views
-
 app_name = "planner"
 
 urlpatterns = [
@@ -25,6 +24,13 @@ urlpatterns = [
 
     # SIGNUP
     path("register/", registration_views.register, name="register"),
+
+    # RESET PASSWORD
+    path('password/reset/', PasswordResetView.as_view(template_name='registration/password_reset.html'), name = 'password_reset'),
+    path('password_reset/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', PasswordResetConfirmView.as_view(),name='password_reset_confirm'),
+    path('reset/done/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+
     # LIST PROJECTS
     path("projects/", login_required(views.ProjectCreateView.as_view()), name="projects_listed"),
     # PROJECT PAGE
@@ -41,6 +47,8 @@ urlpatterns = [
     path("project/<int:project_id>/update/task/<int:task_id>/", login_required(views.TaskUpdate.as_view()), name="update_task"),
     # ADD USER TO PROJECT
     path("project/<int:project_id>/add/user/", login_required(views.AddUserToProject.as_view()), name="add_user"),
+    #PROFILE PAGE
+    path("myprofile", views.UserProfile,name="user_profile" )
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
