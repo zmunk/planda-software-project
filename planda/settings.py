@@ -126,13 +126,14 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/' # redirects here if not logged in
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
+# SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+
+
 STATICFILES_DIRS = (
   os.path.join(BASE_DIR, 'static/'),
 )

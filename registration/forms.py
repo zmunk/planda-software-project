@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, UserPicture
 
 
 class RegisterForm(UserCreationForm):
@@ -32,3 +32,7 @@ class LoginForm(forms.ModelForm):
 
 
 
+class ProfilePicForm(forms.ModelForm):
+      class Meta:
+            model = UserPicture
+            fields=['profile_pic']

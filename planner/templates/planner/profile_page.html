@@ -1,4 +1,7 @@
+{% extends "planner/base.html" %}
 
+
+{% block body %}
 <!-- Add icon library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -28,12 +31,7 @@
     width: 100%;
     font-size: 18px;
     }
-
-    a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
-    }
+ 
 
     button:hover, a:hover {
     opacity: 0.7;
@@ -43,7 +41,7 @@
 </style>
 
 <div class="card">
-  <!-- <img src="img.jpg" alt="John" style="width:100%"> -->
+  <img src="algo.png" alt="John" style="width:100%">
   <h1>{{user.username}}</h1>
   <p class="title"></p>
   <p>{{user.email}}</p>
@@ -53,3 +51,4 @@
   <a href="#"><i class="fa fa-facebook"></i></a> -->
   <p><a href="{% url "planner:projects_listed" %}"><button> My projects</button></a></p>
 </div>
+{% endblock %}

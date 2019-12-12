@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, UserPicture
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail, EmailMessage
 from django.shortcuts import render, redirect
@@ -72,3 +72,12 @@ def activate(request, uidb64, token):
         # return reverse("/")
     else:
         return render(request, 'registration/account_activation_invalid.html')
+
+def your_view(request):
+    if request.method == 'POST':
+        form = UserPicture(request.POST, request.FILES)
+        if form.is_valid():
+            userprofile = form.save()
+            userprofile.user = request.user
+            userprofile.save()
+
