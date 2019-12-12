@@ -15,6 +15,20 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Erica+One&display=swap" rel="stylesheet">
+    <!-- JQuery -->
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -73,9 +87,24 @@
 
 
                 <input type="hidden" name="next" value="{{ next }}"/>
-                <a href= "{% url 'planner:password_reset' %}" class="resetPassLink">Can't log in?</a>
+                <div class="row">
+                    <a href="{% url 'planner:password_reset' %}" class="resetPassLink col-6">Can't log in?</a>
+                    <div class="container col-6">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="toast" data-delay="2000">
+                                    <div class="toast-body">
+                                        {{ message }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+                </div>
             </form>
-            
+
+
         </div>
         <div class="start-container">
             <div class="start-title">Create your own project with us</div>
@@ -87,5 +116,7 @@
     </div>
 </div>
 
+<!-- Toasts -->
+<script src="{% static 'js/bootstrap toast.js' %}"></script>
 </body>
 </html>

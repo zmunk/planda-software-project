@@ -186,6 +186,7 @@ span.task-author {
     padding: 0rem 0.6rem 0.2rem;
     width: 100%;
     margin: 0;
+    display: none;
 }
 
 .testing-input {
@@ -216,6 +217,10 @@ span.task-author {
 .add-task-btn::after,
 .add-list-btn::after {
     content: '...';
+}
+
+#add-list-form {
+    display: none;
 }
 
 #add-list-input {

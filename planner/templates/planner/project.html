@@ -1,6 +1,8 @@
 {% extends "planner/base.html" %}
 {% load static %}
 
+
+
 {% block title %}
     {{ view.project_title }}
 {% endblock %}
@@ -11,12 +13,23 @@
 
 {% block body %}
 
-    <!-- <div class="container"> -->
-    <div class="d-flex w-100 justify-content-between">
-        <div class="container">
+    <div class="d-flex row justify-content-between" style="background: none;">
+        <div class="container col-4">
             <h1>{{ view.project_title }}</h1></div>
-        {#        <div id="testing">testing</div>#}
-        <div class="container w-25" style="background: none">
+        <div class="container col-4" style="background: none;">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="toast" data-delay="2000">
+                        <div class="toast-body">
+                            {{ message }}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+        <div class="container col-4" style="background: none;">
 
             <form method="post" action="{% url "planner:add_user" view.project_id %}">
                 {% csrf_token %}
@@ -29,17 +42,9 @@
 
 
             <h4>Project Team: </h4>
-                    {% for thing in users_list%}
-                        <h1 class="list-title"> {{ thing.username }}</h1>
+            {% for thing in users_list %}
+                <h1 class="list-title"> {{ thing.username }}</h1>
             {% endfor %}
-
-            {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
 
 
         </div>
@@ -54,32 +59,32 @@
 
 
                     <!-- kebab -->
-{#                    <div class="kebab" id="kebab-{{ category.pk }}">#}
-{#                        <button id="kebab-btn-{{ category.pk }}" class="kebab-btn btn kebab-click"#}
-{#                                onclick="kebab_clicked({{ category.pk }})">#}
-{#                            <i class="fa fa-ellipsis-v triple-dot" aria-hidden="true"></i>#}
-{#                        </button>#}
-{##}
-{#                        <div class="kebab-menu kebab-click" id="kebab-menu-{{ category.pk }}">#}
-{#                            <div class="kebab-menu-caret">#}
-{#                                <div class="kebab-menu-caret-outer"></div>#}
-{#                                <div class="kebab-menu-caret-inner"></div>#}
-{#                            </div>#}
-{#                            <ul class="kebab-menu-items" tabindex="-1" role="menu" aria-labelledby="kebab-btn-{{ category.pk }}"#}
-{#                                aria-hidden="true">#}
-{#                                <li class="kebab-menu-item" role="presentation">#}
-{#                                    <button type="button" class="kebab-menu-item-btn" role="menuitem">Delete</button>#}
-{#                                </li>#}
-{#                            </ul>#}
-{#                        </div>#}
-{#                    </div>#}
+                    {#                    <div class="kebab" id="kebab-{{ category.pk }}">#}
+                    {#                        <button id="kebab-btn-{{ category.pk }}" class="kebab-btn btn kebab-click"#}
+                    {#                                onclick="kebab_clicked({{ category.pk }})">#}
+                    {#                            <i class="fa fa-ellipsis-v triple-dot" aria-hidden="true"></i>#}
+                    {#                        </button>#}
+                    {##}
+                    {#                        <div class="kebab-menu kebab-click" id="kebab-menu-{{ category.pk }}">#}
+                    {#                            <div class="kebab-menu-caret">#}
+                    {#                                <div class="kebab-menu-caret-outer"></div>#}
+                    {#                                <div class="kebab-menu-caret-inner"></div>#}
+                    {#                            </div>#}
+                    {#                            <ul class="kebab-menu-items" tabindex="-1" role="menu" aria-labelledby="kebab-btn-{{ category.pk }}"#}
+                    {#                                aria-hidden="true">#}
+                    {#                                <li class="kebab-menu-item" role="presentation">#}
+                    {#                                    <button type="button" class="kebab-menu-item-btn" role="menuitem">Delete</button>#}
+                    {#                                </li>#}
+                    {#                            </ul>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
                     <!-- -->
 
-                        <form action="{% url "planner:delete_category" category.pk view.project_id %}">
-                                <button class="btn" href="#">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                        </form>
+                    <form action="{% url "planner:delete_category" category.pk view.project_id %}">
+                        <button class="btn" href="#">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
 
 
                 </div>
@@ -134,14 +139,20 @@
 
     </section>
 
+
+
     <!-- Dragula -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+    {#    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>#}
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.0/dragula.min.js'></script>
     <script src="{% static 'js/dragging.js' %}"></script>
     <!-- Reactive Forms -->
     <script src="{% static 'js/add_list.js' %}"></script>
-    <script src="{% static 'js/add_task.js' %}"></script>
+        <script src="{% static 'js/add_task.js' %}"></script>
+
     <!-- Kebab Dropdown Menu -->
     <script src="{% static 'js/kebab dropdown.js' %}"></script>
+    <!-- Toasts -->
+    <script src="{% static 'js/bootstrap toast.js' %}"></script>
+
 
 {% endblock %}

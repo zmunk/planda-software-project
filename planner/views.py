@@ -39,7 +39,7 @@ class AddUserToProject(View):
             new_username = cleaned_data["new_user"]
             new_user = User.objects.filter(username=new_username)
             if not new_user.exists():
-                messages.info(request, "User dose not exist")
+                messages.info(request, "User does not exist")
                 return redirect(self.get_success_url(project_id))
                     # return render(request, 'planner/popup.html')
             new_user = new_user[0]
@@ -47,8 +47,9 @@ class AddUserToProject(View):
             project.users_list.add(new_user)
             project.save()
             projects = Project.objects.all()
-            messages.info(request, "User was added")
-            return redirect(self.get_success_url(project_id), {'projects' : projects})
+            messages.info(request, "User was successfully added")
+            return redirect(self.get_success_url(project_id), {'projects': projects})
+        return redirect(self.get_success_url(project_id))
 
 
 # Project List
