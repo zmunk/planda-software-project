@@ -13,11 +13,10 @@
 
 {% block body %}
 
-    <div class="d-flex row justify-content-between" style="background: none;">
+    <div class="d-flex row justify-content-between">
         <div class="container col-4">
             <h1>{{ view.project_title }}</h1></div>
-        <div class="container col-4" style="background: none;">
-
+        <div class="container col-4">
             {% if messages %}
                 {% for message in messages %}
                     <div class="toast" data-delay="2000">
@@ -27,17 +26,14 @@
                     </div>
                 {% endfor %}
             {% endif %}
-
         </div>
-        <div class="container col-4" style="background: none;">
-
+        <div class="container col-4">
             <form method="post" action="{% url "planner:add_user" view.project_id %}">
                 {% csrf_token %}
                 <div class="row">
                     <input class="col-md-7 add-user-input form-control input-sm" type="text" name="new_user">
                     <button class="col-md-4 add-user-btn pull-right btn btn-light" type="submit">Add new user</button>
                 </div>
-
             </form>
 
 
@@ -50,7 +46,6 @@
         </div>
     </div>
 
-    <!-- </div> -->
     <section class="lists-container">
         {% for category in category_list %}
             <div class="list panel" data-id="{{ category.pk }}">
@@ -97,7 +92,7 @@
                                     {{ task.text }}&emsp;<span class="task-author">{{ task.author }}</span>
                                 </div>
                                 <div class="col-xs-2 col-md-1 task-delete-btn-container">
-                                    <a class="task-delete-btn"
+                                    <a class="task-delete-btn confirm-delete"
                                        href="{% url "planner:delete_task" view.project_id task.pk %}">
                                         <i class="fa fa-times"></i>
                                     </a>
@@ -139,20 +134,24 @@
 
     </section>
 
-
-
     <!-- Dragula -->
-    {#    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>#}
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.0/dragula.min.js'></script>
     <script src="{% static 'js/dragging.js' %}"></script>
     <!-- Reactive Forms -->
     <script src="{% static 'js/add_list.js' %}"></script>
-        <script src="{% static 'js/add_task.js' %}"></script>
+    <script src="{% static 'js/add_task.js' %}"></script>
 
     <!-- Kebab Dropdown Menu -->
     <script src="{% static 'js/kebab dropdown.js' %}"></script>
     <!-- Toasts -->
     <script src="{% static 'js/bootstrap toast.js' %}"></script>
+
+    <script>
+    $(document).on('click', '.confirm-delete', function(){
+    return confirm('Are you sure you want to delete this?');
+})
+    </script>
 
 
 {% endblock %}

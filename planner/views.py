@@ -172,25 +172,17 @@ class TaskCreate(View):
 
 
 class TaskDelete(DeleteView):
-    template_name = "planner/remove-task.html"
     model = Task
 
     def get_success_url(self):
-        # project_id  = something
         return reverse('planner:project_page', args=(self.kwargs["project_id"],))
-
-    def get_project_id(self, **kwargs):
-        pk = self.kwargs.get("project_id")
-        return pk
 
     def get_object(self, **kwargs):
         pk = self.kwargs.get("task_id")
         return get_object_or_404(Task, id=pk)
 
-    def category_id(self):
-        # allows html to access project_id through: {{ view.project_id }}
-        pk = self.kwargs.get("category_id")
-        return get_object_or_404(Category, id=pk)
+    def get(self, *args, **kwargs):
+        return self.delete(*args, **kwargs)
 
 
 class TaskUpdate(UpdateView):
