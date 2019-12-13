@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User, UserPicture
+from django.contrib.auth.models import User
+# from .models import UserPicture
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail, EmailMessage
 from django.shortcuts import render, redirect
@@ -14,12 +15,14 @@ from django.contrib import messages
 from planda import settings
 from registration.tokens import account_activation_token
 from .forms import RegisterForm
-
+from .models import UserProfile
 
 def register(request):
+    user_profile = UserProfile()
     if request.method == "POST":
-        form = RegisterForm(request.POST)
+        form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
+       
             user = form.save(commit=False)
 
             if User.objects.filter(username=user.username).exists():
@@ -30,6 +33,24 @@ def register(request):
 
             user.is_active = False
             user.save()
+
+            ################## TODO ##################
+            # data = form.cleaned_data
+            # print("##################")
+            # print(data['username'])
+            # print(request.FILES.get('picture'))
+            profile = UserProfile.objects.create(user=user)
+            # UserProfile.objects.filter(user=user).update(picture = form.fields['picture'])
+            # profile.picture = form.fields['picture']
+            # print(request.FILES['picture'])
+            # print(form.fields['picture'].image.url)
+            # form.instance.userprofile.picture = 
+            # print(form.instance.userprofile.picture)
+            # user_profile.user = request.user
+            # user_profile.picture = form.fields['picture']
+            # user_profile.save()
+            
+
             current_site = get_current_site(request)
             subject = 'Activate Your Planda Account'
             message = render_to_string('registration/account_activation_email.html', {
@@ -72,12 +93,3 @@ def activate(request, uidb64, token):
         # return reverse("/")
     else:
         return render(request, 'registration/account_activation_invalid.html')
-
-def your_view(request):
-    if request.method == 'POST':
-        form = UserPicture(request.POST, request.FILES)
-        if form.is_valid():
-            userprofile = form.save()
-            userprofile.user = request.user
-            userprofile.save()
-

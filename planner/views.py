@@ -11,7 +11,7 @@ from registration.forms import LoginForm
 from.forms import AddUserForm, AddTaskForm
 
 from django.contrib import messages
-
+from registration.models import UserProfile
 #### DEBUGGER
 import logging as log
 from django.contrib.auth.models import User
@@ -208,8 +208,15 @@ class TaskUpdate(UpdateView):
         return get_object_or_404(Task, id=pk)
 
 # USER PROFILE
-def UserProfile(request):
+
+def user_profile(request, *args, **kwargs):
+    colleagues = set()
     user = request.user 
-    return render(request, 'planner/profile_page.html', context={'user':user})
-
-
+    projects = Project.objects.filter(user=user)
+    for project in projects:
+       for colleague in project.users_list.all():
+               colleagues.add(colleague)
+    numberOfProjects = len(Project.objects.filter(user=user))
+    print(colleagues)
+    return render(request, 'planner/profile_page.html', context={'user':user,
+     'numberOfProjects':numberOfProjects, 'projects': projects, 'colleagues':colleagues})

@@ -38,7 +38,7 @@
                 <a class="nav-link" href="{% url "planner:projects_listed" %}">My Projects</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'planner:user_profile' %}">My Profile</a>
+                <a class="nav-link" href="{% url 'planner:user_profile' user.pk %}">My Profile</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
