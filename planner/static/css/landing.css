@@ -234,7 +234,7 @@ body {
 	left: 50%;
 	margin-top: 5px;
 	transform: translate(-50%, 0);
-	width: 50%;
+	/*width: 50%;*/
 }
 
 .tell-us-more {
@@ -351,3 +351,27 @@ body {
 		font-size: 10px;
 	}
 }
+
+/*****/
+
+/*.c1 {*/
+/*	!*width: 60%;*!*/
+/*	!*height: 100%;*!*/
+/*	background-color: #FEFFFF;*/
+/*	!*position: absolute;*!*/
+/*	!*top: 0;*!*/
+/*	!*right: 0;*!*/
+/*}*/
+
+/*.c2 {*/
+/*}*/
+
+/*.c3 {*/
+/*	background-color: #3AAFA9;*/
+/*	position: absolute;*/
+/*}*/
+
+/*.login-form-container {*/
+/*	margin: 1em;*/
+/*	background: cyan;*/
+/*}*/

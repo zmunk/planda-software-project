@@ -14,6 +14,7 @@
 /* Base styles */
 * {
     font-family: 'Roboto', sans-serif;
+    /*box-sizing: border-box;*/
 }
 
 *,
@@ -26,10 +27,20 @@ body {
     background-color: #E8EAED;
 }
 
-/* start navbar */
+.jumbotron {
+    background: -webkit-linear-gradient(to right, #1BADD8, #00003E);
+    background: linear-gradient(to right, #1BADD8, #00003E);
+    color: #b6f7ff;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    /*margin-top: 0;*/
+}
+
+/* Navbar */
+
 .navbar {
     background-color: #fff !important;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
 
 .navbar-brand {
@@ -42,6 +53,7 @@ body {
     padding: 0px;
     width: auto;
 }
+
 /* end navbar */
 
 :focus {
@@ -51,16 +63,36 @@ body {
 .hidden {
     display: none;
 }
+
+/* Toasts */
+.toast-body {
+    color: black;
+}
+
+/* Projects Listed */
+
+.project-list-page-container {
+    margin-top: 1rem;
+}
+
 /* Add User */
+
+.add-user-form {
+    display: none;
+}
+
 .add-user-input {
     height: 1.8rem;
     margin: 0.2rem;
+    width: 8rem;
 }
 
 .add-user-btn {
     height: 1.8rem;
     font-size: x-small;
     margin: 0.2rem;
+
+    width: 8rem;
 }
 
 /* Lists */
@@ -152,9 +184,9 @@ span.task-author {
 }
 
 .task-delete-btn-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .task-delete-btn i {
@@ -186,6 +218,7 @@ span.task-author {
     padding: 0rem 0.6rem 0.2rem;
     width: 100%;
     margin: 0;
+    display: none;
 }
 
 .testing-input {
@@ -216,6 +249,10 @@ span.task-author {
 .add-task-btn::after,
 .add-list-btn::after {
     content: '...';
+}
+
+#add-list-form {
+    display: none;
 }
 
 #add-list-input {
@@ -352,4 +389,9 @@ span.task-author {
 /*********/
 .fa-trash {
     color: var(--add-task-text-color);
+}
+
+/* Profile Page */
+.profile-header {
+    transform: translateY(5rem);
 }

@@ -27,6 +27,7 @@ class RegisterForm(UserCreationForm):
         # A user was found with this as a username, raise an error.
         raise forms.ValidationError('This email address is already in use.')
 
+
 class LoginForm(forms.ModelForm):
     """Simple login form"""
     class Meta:

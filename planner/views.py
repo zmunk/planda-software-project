@@ -39,7 +39,7 @@ class AddUserToProject(View):
             new_username = cleaned_data["new_user"]
             new_user = User.objects.filter(username=new_username)
             if not new_user.exists():
-                messages.info(request, "User dose not exist")
+                messages.info(request, "User does not exist")
                 return redirect(self.get_success_url(project_id))
                     # return render(request, 'planner/popup.html')
             new_user = new_user[0]
@@ -47,8 +47,9 @@ class AddUserToProject(View):
             project.users_list.add(new_user)
             project.save()
             projects = Project.objects.all()
-            messages.info(request, "User was added")
-            return redirect(self.get_success_url(project_id), {'projects' : projects})
+            messages.info(request, "User was successfully added")
+            return redirect(self.get_success_url(project_id), {'projects': projects})
+        return redirect(self.get_success_url(project_id))
 
 
 # Project List
@@ -74,7 +75,7 @@ class ProjectCreateView(CreateView):
         user = User.objects.get(username=user_username)  # user object of current logged in user
         
         # creating a project object adn filling the fields, then saving it.
-        project_obj = Project.objects.create(user=user)
+        project_obj = Project.objects.create(creator=user)
         project_obj.users_list.add(user)
         project_obj.title = project_title
         project_obj.save()
@@ -109,9 +110,8 @@ class ProjectWithCategoryCreate(CreateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get("project_id")
         context["category_list"] = Category.objects.filter(project__pk=pk)
-        context["users_list"] = Project.objects.get(id = pk).users_list.all()
+        context["users_list"] = Project.objects.get(id=pk).users_list.all()
         return context
-
 
     def project_id(self):
         # allows html to access project_id through: {{ view.project_id }}
@@ -125,6 +125,10 @@ class ProjectWithCategoryCreate(CreateView):
     def get_project(self):
         pk = self.kwargs.get("project_id")
         return get_object_or_404(Project, id=pk)
+
+    def creator_username(self):
+        project = self.get_project()
+        return project.creator.username
 
     # overriding form_valid method in createView to auto populate fields
     def form_valid(self, form):
@@ -171,25 +175,17 @@ class TaskCreate(View):
 
 
 class TaskDelete(DeleteView):
-    template_name = "planner/remove-task.html"
     model = Task
 
     def get_success_url(self):
-        # project_id  = something
         return reverse('planner:project_page', args=(self.kwargs["project_id"],))
-
-    def get_project_id(self, **kwargs):
-        pk = self.kwargs.get("project_id")
-        return pk
 
     def get_object(self, **kwargs):
         pk = self.kwargs.get("task_id")
         return get_object_or_404(Task, id=pk)
 
-    def category_id(self):
-        # allows html to access project_id through: {{ view.project_id }}
-        pk = self.kwargs.get("category_id")
-        return get_object_or_404(Category, id=pk)
+    def get(self, *args, **kwargs):
+        return self.delete(*args, **kwargs)
 
 
 class TaskUpdate(UpdateView):
@@ -212,11 +208,11 @@ class TaskUpdate(UpdateView):
 def user_profile(request, *args, **kwargs):
     colleagues = set()
     user = request.user 
-    projects = Project.objects.filter(user=user)
+    projects = Project.objects.filter(creator=user)
     for project in projects:
        for colleague in project.users_list.all():
                colleagues.add(colleague)
-    numberOfProjects = len(Project.objects.filter(user=user))
+    numberOfProjects = len(projects)
     print(colleagues)
     return render(request, 'planner/profile_page.html', context={'user':user,
      'numberOfProjects':numberOfProjects, 'projects': projects, 'colleagues':colleagues})
