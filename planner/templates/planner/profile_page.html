@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    Profile
+    {{ user.username }}'s Profile
 {% endblock %}
 
 {% block username %}
@@ -73,7 +73,8 @@
                                 alt="" class="img-fluid rounded shadow-sm"></div>
                     </div>
                 </div>
-            </div><!-- End profile widget -->
+            </div>
+            <!-- End profile widget -->
         </div>
     </div>
 {% endblock %}

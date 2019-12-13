@@ -6,11 +6,12 @@ from django.contrib.auth.models import User
 
 class Project(models.Model):
     title = models.CharField(max_length=1000)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default="", on_delete=models.CASCADE)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, default="", on_delete=models.CASCADE)
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, default="", on_delete=models.CASCADE)
     users_list = models.ManyToManyField(User, related_name='users_list') 
 
     def __str__(self):
-        return self.title + " - " + str(self.user)
+        return f"{self.title} by {self.creator}"
 
     def get_absolute_url(self):
         # where to go when new project is created

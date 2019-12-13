@@ -14,6 +14,7 @@ function add_task_form_unfocused() {
 
 
 $(document).ready(function () {
+    // alert('ahasdf');
     $(".add-task-form").hide(); // start by hiding add-task inputs
 });
 

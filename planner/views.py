@@ -75,7 +75,7 @@ class ProjectCreateView(CreateView):
         user = User.objects.get(username=user_username)  # user object of current logged in user
         
         # creating a project object adn filling the fields, then saving it.
-        project_obj = Project.objects.create(user=user)
+        project_obj = Project.objects.create(creator=user)
         project_obj.users_list.add(user)
         project_obj.title = project_title
         project_obj.save()
@@ -110,9 +110,8 @@ class ProjectWithCategoryCreate(CreateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get("project_id")
         context["category_list"] = Category.objects.filter(project__pk=pk)
-        context["users_list"] = Project.objects.get(id = pk).users_list.all()
+        context["users_list"] = Project.objects.get(id=pk).users_list.all()
         return context
-
 
     def project_id(self):
         # allows html to access project_id through: {{ view.project_id }}
@@ -126,6 +125,10 @@ class ProjectWithCategoryCreate(CreateView):
     def get_project(self):
         pk = self.kwargs.get("project_id")
         return get_object_or_404(Project, id=pk)
+
+    def creator_username(self):
+        project = self.get_project()
+        return project.creator.username
 
     # overriding form_valid method in createView to auto populate fields
     def form_valid(self, form):

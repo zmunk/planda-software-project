@@ -4,7 +4,8 @@
 {% block username %}{{ user.username }}{% endblock %}
 {% block body %}
 
-    <div class="container" style="height: 3rem">
+    <div class="container project-list-page-container">
+    <div class="container" style="height: 3rem; ">
         <button id="add-project-btn" type="button" class="btn btn-primary">Add Project</button>
         <form id="add-project-form" method="post" action="#" style="margin-bottom: 0; padding: 0;">
             {% csrf_token %}
@@ -45,6 +46,7 @@
                 </a>
             {% endfor %}
         </div>
+    </div>
     </div>
 
     <script src="{% static 'js/add_project.js' %}"></script>
