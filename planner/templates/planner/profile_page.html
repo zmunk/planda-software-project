@@ -1,55 +1,79 @@
+{% extends "planner/base.html" %}
+{% load static %}
 
-<!-- Add icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% block title %}
+    Profile
+{% endblock %}
 
-<style>
+{% block username %}
+    {{ user.username }}
+{% endblock %}
 
-    .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
-    margin: auto;
-    text-align: center;
-    }
+{% block body %}
 
-    .title {
-    color: grey;
-    font-size: 18px;
-    }
+    <div class="row py-5 px-4">
+        <div class="col-xl-4 col-md-6 col-sm-10 mx-auto">
 
-    button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-    }
+            <!-- Profile widget -->
+            <div class="bg-white shadow rounded overflow-hidden">
+                <div class="px-4 pt-0 pb-4 bg-dark">
+                    <div class="media align-items-end profile-header">
+                        <div class="profile mr-3">
+                            <!-- TODO: user profile photo -->
+                            <img src="https://d19m59y37dris4.cloudfront.net/university/1-1-1/img/teacher-4.jpg"
+                                 alt="{{ user.username }}" width="130" class="rounded mb-2 img-thumbnail">
+                            <!-- TODO: if user logged in show "edit profile" otherwise "follow" -->
+                            <!-- TODO: implement user-following -->
+                            <a href="#" class="btn btn-dark btn-sm btn-block">
+                                Edit profile
+                            </a>
+                        </div>
+                        <div class="media-body mb-5 text-white">
+                            <h4 class="mt-0 mb-0">{{ user.username }}</h4>
+                            <p class="small mb-4"><i class="fa fa-envelope mr-2"></i>{{ user.email }}</p>
+                        </div>
+                    </div>
+                </div>
 
-    a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
-    }
+                <div class="bg-light p-4 d-flex justify-content-end text-center">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                            <!-- TODO: dynamic project counter -->
+                            <h5 class="font-weight-bold mb-0 d-block">241</h5><small class="text-muted"> <i
+                                class="fa fa-trello mr-1"></i>Projects</small>
+                        </li>
+                        <li class="list-inline-item">
+                            <!-- TODO: dynamic follower counter -->
+                            <h5 class="font-weight-bold mb-0 d-block">84K</h5><small class="text-muted"> <i
+                                class="fa fa-user-circle-o mr-1"></i>Followers</small>
+                        </li>
+                    </ul>
+                </div>
 
-    button:hover, a:hover {
-    opacity: 0.7;
-    }
-
-
-</style>
-
-<div class="card">
-  <!-- <img src="img.jpg" alt="John" style="width:100%"> -->
-  <h1>{{user.username}}</h1>
-  <p class="title"></p>
-  <p>{{user.email}}</p>
-  <!-- <a href="#"><i class="fa fa-dribbble"></i></a>
-  <a href="#"><i class="fa fa-twitter"></i></a>
-  <a href="#"><i class="fa fa-linkedin"></i></a>
-  <a href="#"><i class="fa fa-facebook"></i></a> -->
-  <p><a href="{% url "planner:projects_listed" %}"><button> My projects</button></a></p>
-</div>
+                <div class="py-4 px-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <h5 class="mb-0">Projects</h5>
+                        <!-- TODO: show the "show all" button only if this user is logged in -->
+                        <a href="{% url "planner:projects_listed" %}" class="btn btn-link text-muted">Show all</a>
+                    </div>
+                    <div class="row">
+                        <!-- TODO: link to all projects -->
+                        <!-- TODO: connect unsplash API for randomly generated images -->
+                        <div class="col-lg-6 mb-2 pr-lg-1"><img
+                                src="https://images.unsplash.com/photo-1573641287741-f6e223d81a0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+                                alt="" class="img-fluid rounded shadow-sm"></div>
+                        <div class="col-lg-6 mb-2 pl-lg-1"><img
+                                src="https://res.cloudinary.com/mhmd/image/upload/v1556294927/dose-juice-1184444-unsplash_bmbutn.jpg"
+                                alt="" class="img-fluid rounded shadow-sm"></div>
+                        <div class="col-lg-6 pr-lg-1 mb-2"><img
+                                src="https://res.cloudinary.com/mhmd/image/upload/v1556294926/cody-davis-253925-unsplash_hsetv7.jpg"
+                                alt="" class="img-fluid rounded shadow-sm"></div>
+                        <div class="col-lg-6 pl-lg-1"><img
+                                src="https://res.cloudinary.com/mhmd/image/upload/v1556294928/tim-foster-734470-unsplash_xqde00.jpg"
+                                alt="" class="img-fluid rounded shadow-sm"></div>
+                    </div>
+                </div>
+            </div><!-- End profile widget -->
+        </div>
+    </div>
+{% endblock %}
