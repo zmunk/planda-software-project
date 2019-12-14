@@ -393,5 +393,5 @@ span.task-author {
 
 /* Profile Page */
 .profile-header {
-    transform: translateY(5rem);
+    /*transform: translateY(5rem);*/
 }

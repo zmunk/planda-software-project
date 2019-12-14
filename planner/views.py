@@ -8,15 +8,18 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView, View
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from registration.forms import LoginForm
-from.forms import AddUserForm, AddTaskForm
+from .forms import AddUserForm, AddTaskForm
 
 from django.contrib import messages
 
 #### DEBUGGER
 import logging as log
 from django.contrib.auth.models import User
-log.basicConfig(level=log.DEBUG) # comment this to suppress debug logging
+
+log.basicConfig(level=log.DEBUG)  # comment this to suppress debug logging
 log.debug("DEBUGGING")
+
+
 ####
 
 
@@ -41,7 +44,7 @@ class AddUserToProject(View):
             if not new_user.exists():
                 messages.info(request, "User does not exist")
                 return redirect(self.get_success_url(project_id))
-                    # return render(request, 'planner/popup.html')
+                # return render(request, 'planner/popup.html')
             new_user = new_user[0]
             project = Project.objects.get(pk=project_id)
             project.users_list.add(new_user)
@@ -61,7 +64,7 @@ class ProjectCreateView(CreateView):
     def get_success_url(self):
         return reverse("planner:projects_listed")
 
-    def get_context_data(self, **kwargs):        
+    def get_context_data(self, **kwargs):
         # display projects that they users_list contain the current logged in user
         kwargs["project_list"] = self.model.objects.filter(users_list=self.request.user)
         return super(ProjectCreateView, self).get_context_data(**kwargs)
@@ -73,7 +76,7 @@ class ProjectCreateView(CreateView):
         project_title = form.cleaned_data['title']  # getting the entered title
         user_username = self.request.user.username  # username of current logged in user
         user = User.objects.get(username=user_username)  # user object of current logged in user
-        
+
         # creating a project object adn filling the fields, then saving it.
         project_obj = Project.objects.create(creator=user)
         project_obj.users_list.add(user)
@@ -117,7 +120,7 @@ class ProjectWithCategoryCreate(CreateView):
         # allows html to access project_id through: {{ view.project_id }}
         pk = self.kwargs.get("project_id")
         return pk
-    
+
     def project_title(self):
         project = self.get_project()
         return project.title
@@ -136,23 +139,21 @@ class ProjectWithCategoryCreate(CreateView):
         return super(ProjectWithCategoryCreate, self).form_valid(form)
 
 
-
-# Category Deletion 
+# Category Deletion
 class CategoryDeleteView(DeleteView):
     model = Category
 
     def get_success_url(self):
-        pk = self.kwargs.get("project_id") 
-        #getting id of project and passing it to project page url
-        return reverse("planner:project_page", kwargs={'project_id':pk})
-        
+        pk = self.kwargs.get("project_id")
+        # getting id of project and passing it to project page url
+        return reverse("planner:project_page", kwargs={'project_id': pk})
+
     def get_object(self, **kwargs):
         pk = self.kwargs.get("category_id")
         return get_object_or_404(Category, id=pk)
 
     def get(self, *args, **kwargs):
         return self.delete(*args, **kwargs)
-
 
 
 # ----------- Task
@@ -203,9 +204,36 @@ class TaskUpdate(UpdateView):
         pk = self.kwargs.get("task_id")
         return get_object_or_404(Task, id=pk)
 
+
 # USER PROFILE
-def UserProfile(request):
-    user = request.user 
-    return render(request, 'planner/profile_page.html', context={'user':user})
+# def UserProfile(request):
+#     user = request.user
+#     return render(request, 'planner/profile_page.html', context={'user':user})
 
+def user_profile(request, *args, **kwargs):
+    colleagues = set()
+    user = request.user
+    projects = Project.objects.filter(users_list__in=[user, ])
+    # my_model.objects.filter(creator__in=creator_list)
+    for project in projects:
+        for colleague in project.users_list.all():
+            colleagues.add(colleague)
+    number_of_colleagues = len(colleagues)
 
+    number_of_projects = len(projects.filter())
+    first_four_projects = projects[:4]
+
+    stock_pictures = [
+        "https://images.unsplash.com/photo-1573641287741-f6e223d81a0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+        "https://res.cloudinary.com/mhmd/image/upload/v1556294927/dose-juice-1184444-unsplash_bmbutn.jpg",
+        "https://res.cloudinary.com/mhmd/image/upload/v1556294926/cody-davis-253925-unsplash_hsetv7.jpg",
+        "https://res.cloudinary.com/mhmd/image/upload/v1556294928/tim-foster-734470-unsplash_xqde00.jpg",
+    ]
+
+    proj_and_pics = zip(first_four_projects, stock_pictures)
+
+    return render(request, 'planner/profile_page.html',
+                  context={'user': user, 'number_of_projects': number_of_projects, 'projects': projects,
+                           'first_four_projects': first_four_projects, 'stock_pictures': stock_pictures,
+                           'proj_and_pics': proj_and_pics, 'colleagues': colleagues,
+                           'number_of_colleagues': number_of_colleagues})

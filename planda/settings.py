@@ -123,7 +123,7 @@ USE_TZ = True
 LOGIN_REDIRECT_URL = 'planner:projects_listed'
 LOGOUT_REDIRECT_URL = '/'
 
-LOGIN_URL = '/' # redirects here if not logged in
+LOGIN_URL = '/'  # redirects here if not logged in
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -136,7 +136,6 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = (
   os.path.join(BASE_DIR, 'static/'),
 )
-
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
