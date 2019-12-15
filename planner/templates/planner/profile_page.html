@@ -16,94 +16,85 @@
 {% endblock %}
 
 {% block body %}
-
-    {#    TODO #}
-    {#    {% for colleague in colleagues %}#}
-    {#        <a href="">{{ colleague.username }}</a><br/>#}
-    {#    {% endfor %}#}
-
-    <div class="row py-5 px-4">
-        <div class="col-xl-10 col-md-6 col-sm-10 mx-auto"> {# col-xl-10 col-md-6 col-sm-10 mx-auto #}
+    <div class="container-fluid">
+    <div class="row py-5"> {#  px-4 py-5 #}
+        <div class="col-xl-10 col-md-6 col-sm-10 mx-auto"> {#  #}
 
             <!-- Profile widget -->
-            <div class="bg-light shadow rounded overflow-hidden"> {# bg-dark px-4 pt-0 pb-4 #}
-                <div class="row "> {# p-4 #}
-
-                    <div class="col-4"> {# my-auto #}
-                        <div class="rounded container parent pt-lg-5">
-                            {# container my-auto px-lg-5 align-items-center mx-lg-4 #}
-
-                            <div class="child media profile-header" style="background: none;"> {# align-items-end #}
+            <div class="container-fluid bg-light shadow rounded overflow-hidden"> {#  #}
+                <div class="row"> {# row #}
+{##}
+                    <div class="col-4"> {# col-4 #}
+                        <div class="rounded container parent pt-lg-5"> {# rounded container parent pt-lg-5 #}
+{##}
+                            <div class="child media profile-header" style="background: none;">
                                 <div class="profile" style="background: none; margin:0 auto;">
-                                    <!-- TODO: fix user profile photo -->
                                     {% if profile_user.image %}
                                         <img src="{{ profile_user.image.url }}"
-                                             alt="{{ profile_user.username }}" class="profile-image rounded mb-2 img-thumbnail">
-                                        {# width="250" #}
+                                             alt="{{ profile_user.username }}"
+                                             class="profile-image rounded mb-2 img-thumbnail">
+                                         width="250"
                                     {% else %}
                                         <img src="{% static "planner/images/default.jpg" %}"
-                                             alt="{{ profile_user.username }}" class="profile-image rounded mb-2 img-thumbnail">
+                                             alt="{{ profile_user.username }}"
+                                             class="profile-image rounded mb-2 img-thumbnail">
                                     {% endif %}
-                                    <!-- TODO: if user logged in show "edit profile" otherwise "follow" -->
-                                    <!-- TODO: implement user-following -->
-                                    <a href="#" class="btn btn-dark btn-sm btn-block">
-                                        Edit profile
-                                    </a>
+                                    {% if editable %}
+                                        <a href="#" class="btn btn-dark btn-sm btn-block">
+                                            Edit profile
+                                        </a>
+                                    {% endif %}
                                 </div>
-
-
+{##}
+{##}
                             </div>
-
-                            <div class="child media-body m-3 "> {# text-white #}
+{##}
+                            <div class="child media-body m-3 ">
 
                                 <h4 class="mt-0 mb-0">{{ profile_user.username }}</h4>
                                 <p class="small mb-4"><i class="fa fa-envelope mr-2"></i>{{ profile_user.email }}</p>
                             </div>
-                            <div class="child p-4 d-flex text-center"> {# justify-content-end #}
+                            <div class="child p-4 d-flex text-center">
                                 <ul class="list-inline mb-0">
                                     <li class="list-inline-item">
-                                        <!-- TODO: dynamic project counter -->
-                                        <h5 class="font-weight-bold mb-0 d-block">{{ number_of_projects }}</h5><small
-                                            class="text-muted">
-                                        <i
-                                                class="fa fa-trello mr-1"></i>Projects</small>
+                                        <h5 class="font-weight-bold mb-0 d-block">{{ number_of_projects }}</h5>
+                                        <small class="text-muted">
+                                            <i class="fa fa-trello mr-1"></i>
+                                            Projects
+                                        </small>
                                     </li>
                                     <li class="list-inline-item">
-                                        <!-- TODO: dynamic follower counter -->
-                                        <h5 class="font-weight-bold mb-0 d-block">{{ number_of_colleagues }}</h5><small
-                                            class="text-muted">
-                                        <i
-                                                class="fa fa-user-circle-o mr-1"></i>Colleages</small>
+                                        <h5 class="font-weight-bold mb-0 d-block">{{ number_of_colleagues }}</h5>
+                                        <small class="text-muted">
+                                            <i class="fa fa-user-circle-o mr-1"></i>
+                                            Colleagues
+                                        </small>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-8 py-4 px-4 bg-dark rounded shadow">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h5 class="mb-0 text-light">Recent Projects</h5>
-                            <!-- TODO: show the "show all" button only if this user is logged in -->
+{##}
+                    <div class="col-8 px-4 py-4 bg-dark rounded shadow"> {# col-8 py-4 px-4 bg-dark rounded shadow #}
+                        <div class="d-flex align-items-center justify-content-between"> {# mb-3 #}
+                            <h5 class=" text-light">Recent Projects</h5>
                             {% if editable %}
-                            <a href="{% url "planner:projects_listed" %}" class="btn btn-link text-muted">Show
-                                all</a>
+                                <a href="{% url "planner:projects_listed" %}" class="btn btn-link text-muted">Show
+                                    all</a>
                             {% endif %}
                         </div>
                         <div class="row">
-                            <!-- TODO: link to all projects -->
                             <!-- TODO: connect unsplash API for randomly generated images -->
-
                             {% for project, image in proj_and_pics %}
-                                <div class="container col-lg-6 "> {# mb-2 pr-lg-1 #}
-                                    <a href="{% url 'planner:project_page' project.pk %}">
-                                        <img
-                                                {{ stock_pictures.forloop.counter }}
-                                                src="{{ image }}"
-                                                alt="" class="" style="width: 100%">
-                                        {# img-fluid rounded shadow-sm #}
-                                    </a>
-                                    <div class="carousel-caption bg-dark" style="opacity: 0.4;">
-                                        <h4>{{ project.title }}</h4>
+                                <div class="container col-lg-6 mt-3">
+                                    <div class="hovereffect">
+                                        <img class="img-responsive"
+                                             src="{{ image }}"
+                                             alt="">
+                                        <div class="overlay">
+                                            <h2>{{ project.title }}</h2>
+                                            <p><a href="{% url 'planner:project_page' project.pk %}">View</a></p>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -111,33 +102,9 @@
                         </div>
                     </div>
                 </div>
-
-
-                {#                <div class="py-4 px-4">#}
-                {#                    <div class="d-flex align-items-center justify-content-between mb-3">#}
-                {#                        <h5 class="mb-0">Projects</h5>#}
-                {#                        <!-- TODO: show the "show all" button only if this user is logged in -->#}
-                {#                        <a href="{% url "planner:projects_listed" %}" class="btn btn-link text-muted">Show all</a>#}
-                {#                    </div>#}
-                {#                    <div class="row">#}
-                {#                        <!-- TODO: link to all projects -->#}
-                {#                        <!-- TODO: connect unsplash API for randomly generated images -->#}
-                {#                        <div class="col-lg-6 mb-2 pr-lg-1"><img#}
-                {#                                src="https://images.unsplash.com/photo-1573641287741-f6e223d81a0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"#}
-                {#                                alt="" class="img-fluid rounded shadow-sm"></div>#}
-                {#                        <div class="col-lg-6 mb-2 pl-lg-1"><img#}
-                {#                                src="https://res.cloudinary.com/mhmd/image/upload/v1556294927/dose-juice-1184444-unsplash_bmbutn.jpg"#}
-                {#                                alt="" class="img-fluid rounded shadow-sm"></div>#}
-                {#                        <div class="col-lg-6 pr-lg-1 mb-2"><img#}
-                {#                                src="https://res.cloudinary.com/mhmd/image/upload/v1556294926/cody-davis-253925-unsplash_hsetv7.jpg"#}
-                {#                                alt="" class="img-fluid rounded shadow-sm"></div>#}
-                {#                        <div class="col-lg-6 pl-lg-1"><img#}
-                {#                                src="https://res.cloudinary.com/mhmd/image/upload/v1556294928/tim-foster-734470-unsplash_xqde00.jpg"#}
-                {#                                alt="" class="img-fluid rounded shadow-sm"></div>#}
-                {#                    </div>#}
-                {#                </div>#}
             </div>
             <!-- End profile widget -->
         </div>
+    </div>
     </div>
 {% endblock %}

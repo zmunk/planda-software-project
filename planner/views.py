@@ -228,7 +228,8 @@ class UserProfile(View):
         colleagues = set()
         for project in projects:
             for colleague in project.users_list.all():
-                colleagues.add(colleague)
+                if colleague != user:
+                    colleagues.add(colleague)
         number_of_colleagues = len(colleagues)
 
         number_of_projects = len(projects.filter())
