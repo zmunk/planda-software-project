@@ -205,18 +205,18 @@ class TaskUpdate(UpdateView):
         pk = self.kwargs.get("task_id")
         return get_object_or_404(Task, id=pk)
 
-######## User
 
+# --------- User
 class UserProfile(View):
-    model = User
     template_name = "planner/profile_page.html"
 
-    def get(self, request, user_id):
-        user = User.objects.get(pk=user_id)
-        context = self.get_context_data(user)
+    def get(self, request, username):
+        # Note: logged in user is request.user
+        user = User.objects.get(username=username)
+        context = self.get_context_data(user, request.user)
         return render(request, self.template_name, context)
 
-    def get_context_data(self, user):
+    def get_context_data(self, user, logged_in_user):
         projects = Project.objects.filter(users_list__in=[user, ])
 
         colleagues = set()
@@ -236,6 +236,13 @@ class UserProfile(View):
         ]
 
         proj_and_pics = zip(first_four_projects, stock_pictures)
+
+        # boolean that signifies whether the logged in user is the same as the user in the profile
+        if logged_in_user == user:
+            editable = True
+        else:
+            editable = False
+
         context = {'user': user,
                    'number_of_projects': number_of_projects,
                    'projects': projects,
@@ -243,7 +250,9 @@ class UserProfile(View):
                    'stock_pictures': stock_pictures,
                    'proj_and_pics': proj_and_pics,
                    'colleagues': colleagues,
-                   'number_of_colleagues': number_of_colleagues}
+                   'number_of_colleagues': number_of_colleagues,
+                   'editable': editable,
+                   'logged_in_user': logged_in_user}
         return context
 
 

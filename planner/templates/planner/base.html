@@ -55,7 +55,7 @@
 
             {% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'planner:user_profile' user.pk %}">My Profile</a>
+                <a class="nav-link" href="{% url 'planner:user_profile' user.username %}">My Profile</a>
             </li>
             {% endif %}
 
