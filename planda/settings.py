@@ -120,6 +120,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+AUTH_USER_MODEL = 'registration.User'
+
 LOGIN_REDIRECT_URL = 'planner:projects_listed'
 LOGOUT_REDIRECT_URL = '/'
 

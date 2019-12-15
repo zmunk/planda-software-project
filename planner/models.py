@@ -1,7 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from registration.models import User
 
 
 class Project(models.Model):
@@ -40,5 +41,7 @@ class Task(models.Model):
     def get_absolute_url(self):
         # refresh page
         return reverse("planner:detail", kwargs={"pk": self.pk})
+
+
 
 

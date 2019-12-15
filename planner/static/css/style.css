@@ -75,6 +75,12 @@ body {
     margin-top: 1rem;
 }
 
+#add-project-form {
+    margin-bottom: 0;
+    padding: 0;
+    display: none;
+}
+
 /* Add User */
 
 .add-user-form {

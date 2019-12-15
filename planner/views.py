@@ -14,7 +14,8 @@ from django.contrib import messages
 
 #### DEBUGGER
 import logging as log
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from registration.models import User
 
 log.basicConfig(level=log.DEBUG)  # comment this to suppress debug logging
 log.debug("DEBUGGING")
@@ -204,7 +205,11 @@ class TaskUpdate(UpdateView):
         pk = self.kwargs.get("task_id")
         return get_object_or_404(Task, id=pk)
 
+class UserProfile(View):
+    model = User
 
+    def get(self, request, *args, **kwargs):
+        pass
 # USER PROFILE
 # def UserProfile(request):
 #     user = request.user
