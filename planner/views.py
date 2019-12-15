@@ -67,8 +67,22 @@ class ProjectCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         # display projects that they users_list contain the current logged in user
-        kwargs["project_list"] = self.model.objects.filter(users_list=self.request.user)
+        projects = self.model.objects.filter(users_list=self.request.user)
+
+
+        self.project_teams = {}
+        for project in projects:
+            print(f"project.pk: {project.pk}")
+            print(f"project.users_list.all(): {project.users_list.all()}")
+            self.project_teams[project.pk] = ", ".join([user.username for user in project.users_list.all()])
+
+        kwargs["project_list"] = projects
+        kwargs["project_teams"] = self.project_teams
+
         return super(ProjectCreateView, self).get_context_data(**kwargs)
+
+    # def get_team(self, project_id):
+    #     return self.project_teams[project_id]
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.

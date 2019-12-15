@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'dashboard',
+    'planner.templatetags.project_list_extras',
 ]
 
 MIDDLEWARE = [

@@ -41,7 +41,7 @@ def register(request):
                 'token': account_activation_token.make_token(user),
             })
             send_mail(subject, message, "plandasoftware@gmail.com", [user.email])
-            messages.success(request, "Account successfully created!")
+            messages.success(request, "Check your email for activation link")
             return redirect(reverse("planner:landing_page"))
         else:
             for msg in form.error_messages:
@@ -55,8 +55,8 @@ def register(request):
 def logout_view(request):
     logout(request)
 
-def account_activation_sent(request):
-    return render(request, 'registration/confirmation_sent.html')
+# def account_activation_sent(request):
+#     return render(request, 'registration/confirmation_sent.html')
 
 
 def activate(request, uidb64, token):
@@ -70,6 +70,7 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
+        messages.success(request, "Account successfully activated!")
         return redirect('planner:landing_page')
         # return reverse("/")
     else:

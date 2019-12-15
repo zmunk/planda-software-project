@@ -18,7 +18,7 @@ urlpatterns = [
     # LOGOUT
     path("logout/", registration_views.logout_view, name="logout"),
     # USER CONFIRMATION
-    path("account_activation_sent", registration_views.account_activation_sent, name='account_activation_sent'),
+    # path("account_activation_sent", registration_views.account_activation_sent, name='account_activation_sent'),
     # ACTIVATING USER
     path('activate/<slug:uidb64>/<slug:token>/', registration_views.activate, name='activate'),
     # url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',

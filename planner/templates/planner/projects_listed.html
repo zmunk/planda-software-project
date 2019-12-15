@@ -1,5 +1,6 @@
 {% extends "planner/base.html" %}
 {% load static %}
+{% load project_list_extras %}
 {% block title %}Projects{% endblock %}
 {% block profilelink %}
 <li class="nav-item">
@@ -10,7 +11,8 @@
 {% block body %}
 
     <div class="container project-list-page-container">
-    <div class="container" style="height: 3rem; ">
+
+    <div class="container" style="height: 3rem;">
         <button id="add-project-btn" type="button" class="btn btn-primary">Add Project</button>
         <form id="add-project-form" method="post" action="#">
             {% csrf_token %}
@@ -26,22 +28,24 @@
     </div>
 
     <div class="container">
-        <h2 style="text-align: left">Your Projects</h2>
+        <h4 style="text-align: left">Your Projects</h4>
         <div class="list-group">
+
             {% for project in project_list %}
                 <a href="{% url "planner:project_page" project.pk %}"
                    class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">{{ project.title }}</h5>
+                        <h3 class="mb-1">{{ project.title }}</h3>
                         <small>{{ project.pk }}</small>
 
                     </div>
-                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
-                        varius blandit.</p>
+                    <p class="mb-1">
+                            Team: {{ project_teams|key:project.pk }}
+                    </p>
 
 
                     <div class="d-flex w-100 justify-content-between">
-                        <small>Donec id elit non mi porta.</small>
+                        <small>Created by {{ project.creator.username }}</small>
                         <form action="{% url "planner:delete_project" project.pk %}">
                             <button class="btn" href="#">
                                 <i class="fa fa-trash"></i>
@@ -50,6 +54,7 @@
                     </div>
                 </a>
             {% endfor %}
+
         </div>
     </div>
     </div>
