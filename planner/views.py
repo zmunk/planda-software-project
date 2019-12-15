@@ -223,7 +223,7 @@ class UserProfile(View):
         return render(request, self.template_name, context)
 
     def get_context_data(self, user, logged_in_user=None):
-        projects = Project.objects.filter(users_list__in=[user, ])
+        projects = Project.objects.filter(users_list__in=[user, ], private=False)
 
         colleagues = set()
         for project in projects:

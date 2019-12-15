@@ -8,8 +8,8 @@ from registration.models import User
 class Project(models.Model):
     title = models.CharField(max_length=1000)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, default="", on_delete=models.CASCADE)
-    # user = models.ForeignKey(settings.AUTH_USER_MODEL, default="", on_delete=models.CASCADE)
-    users_list = models.ManyToManyField(User, related_name='users_list') 
+    users_list = models.ManyToManyField(User, related_name='users_list')
+    private = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.title} by {self.creator}"
