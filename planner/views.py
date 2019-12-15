@@ -205,41 +205,73 @@ class TaskUpdate(UpdateView):
         pk = self.kwargs.get("task_id")
         return get_object_or_404(Task, id=pk)
 
+######## User
+
 class UserProfile(View):
     model = User
+    template_name = "planner/profile_page.html"
 
-    def get(self, request, *args, **kwargs):
-        pass
-# USER PROFILE
-# def UserProfile(request):
+    def get(self, request, user_id):
+        user = User.objects.get(pk=user_id)
+        context = self.get_context_data(user)
+        return render(request, self.template_name, context)
+
+    def get_context_data(self, user):
+        projects = Project.objects.filter(users_list__in=[user, ])
+
+        colleagues = set()
+        for project in projects:
+            for colleague in project.users_list.all():
+                colleagues.add(colleague)
+        number_of_colleagues = len(colleagues)
+
+        number_of_projects = len(projects.filter())
+        first_four_projects = projects[:4]
+
+        stock_pictures = [
+            "https://images.unsplash.com/photo-1573641287741-f6e223d81a0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+            "https://res.cloudinary.com/mhmd/image/upload/v1556294927/dose-juice-1184444-unsplash_bmbutn.jpg",
+            "https://res.cloudinary.com/mhmd/image/upload/v1556294926/cody-davis-253925-unsplash_hsetv7.jpg",
+            "https://res.cloudinary.com/mhmd/image/upload/v1556294928/tim-foster-734470-unsplash_xqde00.jpg",
+        ]
+
+        proj_and_pics = zip(first_four_projects, stock_pictures)
+        context = {'user': user,
+                   'number_of_projects': number_of_projects,
+                   'projects': projects,
+                   'first_four_projects': first_four_projects,
+                   'stock_pictures': stock_pictures,
+                   'proj_and_pics': proj_and_pics,
+                   'colleagues': colleagues,
+                   'number_of_colleagues': number_of_colleagues}
+        return context
+
+
+# def user_profile(request, *args, **kwargs):
+#     colleagues = set()
 #     user = request.user
-#     return render(request, 'planner/profile_page.html', context={'user':user})
-
-def user_profile(request, *args, **kwargs):
-    colleagues = set()
-    user = request.user
-    # print("url: " + str(user.image.url))
-    projects = Project.objects.filter(users_list__in=[user, ])
-    # my_model.objects.filter(creator__in=creator_list)
-    for project in projects:
-        for colleague in project.users_list.all():
-            colleagues.add(colleague)
-    number_of_colleagues = len(colleagues)
-
-    number_of_projects = len(projects.filter())
-    first_four_projects = projects[:4]
-
-    stock_pictures = [
-        "https://images.unsplash.com/photo-1573641287741-f6e223d81a0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-        "https://res.cloudinary.com/mhmd/image/upload/v1556294927/dose-juice-1184444-unsplash_bmbutn.jpg",
-        "https://res.cloudinary.com/mhmd/image/upload/v1556294926/cody-davis-253925-unsplash_hsetv7.jpg",
-        "https://res.cloudinary.com/mhmd/image/upload/v1556294928/tim-foster-734470-unsplash_xqde00.jpg",
-    ]
-
-    proj_and_pics = zip(first_four_projects, stock_pictures)
-
-    return render(request, 'planner/profile_page.html',
-                  context={'user': user, 'number_of_projects': number_of_projects, 'projects': projects,
-                           'first_four_projects': first_four_projects, 'stock_pictures': stock_pictures,
-                           'proj_and_pics': proj_and_pics, 'colleagues': colleagues,
-                           'number_of_colleagues': number_of_colleagues})
+#     # print("url: " + str(user.image.url))
+#     projects = Project.objects.filter(users_list__in=[user, ])
+#     # my_model.objects.filter(creator__in=creator_list)
+#     for project in projects:
+#         for colleague in project.users_list.all():
+#             colleagues.add(colleague)
+#     number_of_colleagues = len(colleagues)
+#
+#     number_of_projects = len(projects.filter())
+#     first_four_projects = projects[:4]
+#
+#     stock_pictures = [
+#         "https://images.unsplash.com/photo-1573641287741-f6e223d81a0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+#         "https://res.cloudinary.com/mhmd/image/upload/v1556294927/dose-juice-1184444-unsplash_bmbutn.jpg",
+#         "https://res.cloudinary.com/mhmd/image/upload/v1556294926/cody-davis-253925-unsplash_hsetv7.jpg",
+#         "https://res.cloudinary.com/mhmd/image/upload/v1556294928/tim-foster-734470-unsplash_xqde00.jpg",
+#     ]
+#
+#     proj_and_pics = zip(first_four_projects, stock_pictures)
+#
+#     return render(request, 'planner/profile_page.html',
+#                   context={'user': user, 'number_of_projects': number_of_projects, 'projects': projects,
+#                            'first_four_projects': first_four_projects, 'stock_pictures': stock_pictures,
+#                            'proj_and_pics': proj_and_pics, 'colleagues': colleagues,
+#                            'number_of_colleagues': number_of_colleagues})

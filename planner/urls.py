@@ -55,7 +55,7 @@ urlpatterns = [
     # ADD USER TO PROJECT
     path("project/<int:project_id>/add/user/", login_required(views.AddUserToProject.as_view()), name="add_user"),
     # PROFILE PAGE
-    path("profile/<int:user_id>", views.user_profile, name="user_profile")
+    path("profile/<int:user_id>", views.UserProfile.as_view(), name="user_profile")
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
