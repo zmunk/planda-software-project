@@ -212,11 +212,17 @@ class UserProfile(View):
 
     def get(self, request, username):
         # Note: logged in user is request.user
+        # print(request.user)
+        # print(request.user.is_authenticated)
+        print(username)
         user = User.objects.get(username=username)
-        context = self.get_context_data(user, request.user)
+        if request.user.is_authenticated:
+            context = self.get_context_data(user, request.user)
+        else:
+            context = self.get_context_data(user)
         return render(request, self.template_name, context)
 
-    def get_context_data(self, user, logged_in_user):
+    def get_context_data(self, user, logged_in_user=None):
         projects = Project.objects.filter(users_list__in=[user, ])
 
         colleagues = set()
@@ -238,12 +244,12 @@ class UserProfile(View):
         proj_and_pics = zip(first_four_projects, stock_pictures)
 
         # boolean that signifies whether the logged in user is the same as the user in the profile
-        if logged_in_user == user:
-            editable = True
-        else:
+        if not logged_in_user or logged_in_user != user:
             editable = False
+        else:
+            editable = True
 
-        context = {'user': user,
+        context = {'profile_user': user,
                    'number_of_projects': number_of_projects,
                    'projects': projects,
                    'first_four_projects': first_four_projects,
@@ -253,6 +259,7 @@ class UserProfile(View):
                    'number_of_colleagues': number_of_colleagues,
                    'editable': editable,
                    'logged_in_user': logged_in_user}
+
         return context
 
 

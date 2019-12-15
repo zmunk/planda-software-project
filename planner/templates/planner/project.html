@@ -5,6 +5,12 @@
     {{ view.project_title }}
 {% endblock %}
 
+{% block profilelink %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'planner:user_profile' user.username %}">My Profile</a>
+</li>
+{% endblock %}
+
 {% block username %}
     {{ user.username }}
 {% endblock %}

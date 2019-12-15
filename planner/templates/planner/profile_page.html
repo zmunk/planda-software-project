@@ -1,13 +1,18 @@
 {% extends "planner/base.html" %}
 {% load static %}
 
-
 {% block title %}
-    {{ user.username }}'s Profile
+    {{ profile_user.username }}'s Profile
 {% endblock %}
 
+{#{% block profilelink %}#}
+{#<li class="nav-item">#}
+{#    <a class="nav-link" href="{% url 'planner:user_profile' logged_in_user.username %}">My Profile</a>#}
+{#</li>#}
+{#{% endblock %}#}
+
 {% block username %}
-    {{ logged_in_user }}
+    {{ logged_in_user.username }}
 {% endblock %}
 
 {% block body %}
@@ -18,7 +23,7 @@
     {#    {% endfor %}#}
 
     <div class="row py-5 px-4">
-        <div class="col-xl-10 col-md-6 col-sm-10 mx-auto">
+        <div class="col-xl-10 col-md-6 col-sm-10 mx-auto"> {# col-xl-10 col-md-6 col-sm-10 mx-auto #}
 
             <!-- Profile widget -->
             <div class="bg-light shadow rounded overflow-hidden"> {# bg-dark px-4 pt-0 pb-4 #}
@@ -31,12 +36,13 @@
                             <div class="child media profile-header" style="background: none;"> {# align-items-end #}
                                 <div class="profile" style="background: none; margin:0 auto;">
                                     <!-- TODO: fix user profile photo -->
-                                    {% if user.image %}
-                                        <img src="{{ user.image.url }}"
-                                             alt="{{ user.username }}" width="250" class="rounded mb-2 img-thumbnail">
+                                    {% if profile_user.image %}
+                                        <img src="{{ profile_user.image.url }}"
+                                             alt="{{ profile_user.username }}" class="profile-image rounded mb-2 img-thumbnail">
+                                        {# width="250" #}
                                     {% else %}
                                         <img src="{% static "planner/images/default.jpg" %}"
-                                             alt="{{ user.username }}" width="250" class="rounded mb-2 img-thumbnail">
+                                             alt="{{ profile_user.username }}" class="profile-image rounded mb-2 img-thumbnail">
                                     {% endif %}
                                     <!-- TODO: if user logged in show "edit profile" otherwise "follow" -->
                                     <!-- TODO: implement user-following -->
@@ -50,8 +56,8 @@
 
                             <div class="child media-body m-3 "> {# text-white #}
 
-                                <h4 class="mt-0 mb-0">{{ user.username }}</h4>
-                                <p class="small mb-4"><i class="fa fa-envelope mr-2"></i>{{ user.email }}</p>
+                                <h4 class="mt-0 mb-0">{{ profile_user.username }}</h4>
+                                <p class="small mb-4"><i class="fa fa-envelope mr-2"></i>{{ profile_user.email }}</p>
                             </div>
                             <div class="child p-4 d-flex text-center"> {# justify-content-end #}
                                 <ul class="list-inline mb-0">
@@ -78,8 +84,10 @@
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h5 class="mb-0 text-light">Recent Projects</h5>
                             <!-- TODO: show the "show all" button only if this user is logged in -->
+                            {% if editable %}
                             <a href="{% url "planner:projects_listed" %}" class="btn btn-link text-muted">Show
                                 all</a>
+                            {% endif %}
                         </div>
                         <div class="row">
                             <!-- TODO: link to all projects -->

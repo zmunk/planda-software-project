@@ -401,3 +401,22 @@ span.task-author {
 .profile-header {
     /*transform: translateY(5rem);*/
 }
+
+.profile-image {
+    height: 300px;
+    width: 250px;
+    object-fit: cover;
+}
+
+.avatar-navbar {
+    height: 2rem;
+    /*height: 100%;*/
+    /*padding: 0px;*/
+    /*width: auto;*/
+}
+
+.avatar {
+    /*height: 100%;*/
+    /*padding: 0px;*/
+    /*width: auto;*/
+}
