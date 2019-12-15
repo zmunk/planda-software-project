@@ -15,11 +15,10 @@ from django.contrib import messages
 from planda import settings
 from registration.tokens import account_activation_token
 from .forms import RegisterForm
-from .models import UserProfile # TODO
+# from .models import UserProfile # TODO
 
 
 def register(request):
-    user_profile = UserProfile()
     if request.method == "POST":
         form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():

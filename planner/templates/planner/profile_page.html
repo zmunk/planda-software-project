@@ -31,9 +31,13 @@
                             <div class="child media profile-header" style="background: none;"> {# align-items-end #}
                                 <div class="profile" style="background: none; margin:0 auto;">
                                     <!-- TODO: fix user profile photo -->
-                                    {# <img src="{% static "planner/images/default.png" %}" alt="{{ user.username }}" width="130" class="rounded mb-2 img-thumbnail">#}
-                                    <img src="{% static "planner/images/default.jpg" %}"
-                                         alt="{{ user.username }}" width="250" class="rounded mb-2 img-thumbnail">
+                                    {% if user.image %}
+                                        <img src="{{ user.image.url }}"
+                                             alt="{{ user.username }}" width="250" class="rounded mb-2 img-thumbnail">
+                                    {% else %}
+                                        <img src="{% static "planner/images/default.jpg" %}"
+                                             alt="{{ user.username }}" width="250" class="rounded mb-2 img-thumbnail">
+                                    {% endif %}
                                     <!-- TODO: if user logged in show "edit profile" otherwise "follow" -->
                                     <!-- TODO: implement user-following -->
                                     <a href="#" class="btn btn-dark btn-sm btn-block">

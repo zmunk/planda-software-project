@@ -218,6 +218,7 @@ class UserProfile(View):
 def user_profile(request, *args, **kwargs):
     colleagues = set()
     user = request.user
+    # print("url: " + str(user.image.url))
     projects = Project.objects.filter(users_list__in=[user, ])
     # my_model.objects.filter(creator__in=creator_list)
     for project in projects:
