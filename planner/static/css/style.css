@@ -27,6 +27,10 @@ body {
     background-color: #E8EAED;
 }
 
+.content-wrap {
+    margin-bottom: 3rem;
+}
+
 .footer {
     padding-bottom: 0;
 }
@@ -41,6 +45,14 @@ body {
     color: #b6f7ff;
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 /* Navbar */
@@ -80,6 +92,10 @@ body {
 
 .project-list-page-container {
     margin-top: 1rem;
+}
+
+.project-list-header {
+    text-align: left;
 }
 
 #add-project-form {
@@ -274,15 +290,6 @@ span.task-author {
 
 /* Dragging */
 
-.draggable {
-    /*transition: all 0.2s ease;*/
-    /*transition-property: left, top;*/
-    /*position: absolute;*/
-    /*border-radius: 3px;*/
-    /*padding: 12px;*/
-    /*background-color: white;*/
-}
-
 .temp-storage {
     /* stores the list item that is currently being dragged */
     display: none;
@@ -294,16 +301,10 @@ span.task-author {
 }
 
 .current-item {
-    /*background: red;*/
     transform: translate(0, 0);
 }
 
-.testing1 {
-    /*background: white;*/
-    /*opacity: 0;*/
-}
 
-/***************************************************/
 /* Kebab Dropdown Menu */
 .kebab {
     position: relative;
@@ -448,6 +449,9 @@ span.task-author {
 
 .avatar-navbar {
     height: 2rem;
+    width: 2rem;
+
+    object-fit: cover;
     /*height: 100%;*/
     /*padding: 0px;*/
     /*width: auto;*/

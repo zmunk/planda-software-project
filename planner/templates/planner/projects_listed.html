@@ -28,7 +28,8 @@
     </div>
 
     <div class="container">
-        <h4 style="text-align: left">Your Projects</h4>
+    {% if project_list %}
+        <h4 class="project-list-header">Your Projects</h4>
         <div class="list-group">
 
             {% for project in project_list %}
@@ -56,6 +57,9 @@
             {% endfor %}
 
         </div>
+        {% else %}
+        <h4 class="project-list-header" >You have no projects</h4>
+    {% endif %}
     </div>
     </div>
 

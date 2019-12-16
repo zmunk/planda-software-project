@@ -63,25 +63,23 @@ class ProjectCreateView(CreateView):
     fields = ["title"]
     template_name = "planner/projects_listed.html"
 
-    def get_success_url(self):
-        return reverse("planner:projects_listed")
+    def get_success_url(self, project_id):
+        # return reverse("planner:projects_listed")
+        return reverse('planner:project_page', args=(project_id,))
 
     def get_context_data(self, **kwargs):
         # display projects that they users_list contain the current logged in user
+        context = super().get_context_data(**kwargs)
         projects = self.model.objects.filter(users_list=self.request.user)
-
 
         self.project_teams = {}
         for project in projects:
             self.project_teams[project.pk] = ", ".join([user.username for user in project.users_list.all()])
 
-        kwargs["project_list"] = projects
-        kwargs["project_teams"] = self.project_teams
+        context["project_list"] = projects
+        context["project_teams"] = self.project_teams
 
-        return super(ProjectCreateView, self).get_context_data(**kwargs)
-
-    # def get_team(self, project_id):
-    #     return self.project_teams[project_id]
+        return context #super(ProjectCreateView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
@@ -97,7 +95,9 @@ class ProjectCreateView(CreateView):
         project_obj.title = project_title
         project_obj.save()
 
-        return redirect(self.get_success_url())
+        project_id = project_obj.pk
+
+        return redirect(self.get_success_url(project_id))
 
 
 class ProjectDeleteView(DeleteView):
