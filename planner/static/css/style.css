@@ -1,15 +1,24 @@
 /* Theme colors */
+
 :root {
     --main-bg-color: coral;
-    --list-bg: #275e2a;
-    --list-title-color: #c3dbc4;
+    --list-bg: #45b648; /* #275e2a; */
+    --list-title-color:  white; /* #c3dbc4; */
     --list-scrollbar: #1c431e;
     --task-text-color: #1c431e;
-    --task-hover-bg: #dadada;
-    --add-task-text-color: #609f62;
-    --add-task-hover-text-color: #1c431e;
-    --add-task-hover-bg: #39873c;
+    --task-hover-bg: #dadada; /* #dadada; */
+    --add-task-text-color: #205323; /* #609f62; */
+    --add-task-hover-text-color: #205323; /* #1c431e; */
+    --add-task-hover-bg: #53ea5b; /* #39873c; */
 }
+
+/* dark -> light
+#343d46	(52,61,70)
+#4f5b66	(79,91,102)
+#65737e	(101,115,126)
+#a7adba	(167,173,186)
+#c0c5ce	(192,197,206)
+*/
 
 /* Base styles */
 * {
@@ -40,9 +49,9 @@ body {
 }
 
 .jumbotron {
-    background: -webkit-linear-gradient(to right, #1BADD8, #00003E);
-    background: linear-gradient(to right, #1BADD8, #00003E);
-    color: #b6f7ff;
+    background: -webkit-linear-gradient(to right, #3f3f3f, #000000);
+    background: linear-gradient(to right, #3f3f3f, #000000); /* #1BADD8, #00003E */
+    color: white;
     padding-top: 1rem;
     padding-bottom: 1rem;
 }

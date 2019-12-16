@@ -223,7 +223,10 @@ class TaskCreate(View):
             category = Category.objects.get(pk=category_id)
             results = Task.objects.filter(category=category).aggregate(Max('order'))
             current_order = results['order__max']
-            new_order = current_order + 1
+            if current_order:
+                new_order = current_order + 1
+            else:
+                new_order = 0
             curr_user = request.user
             new_task = Task(text=text, category=category, author=curr_user, order=new_order)
             new_task.save()
