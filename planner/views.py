@@ -111,8 +111,10 @@ class ProjectView(View):
         user = request.user
         project = Project.objects.get(pk=project_id)
         users_list = project.users_list.all()
-        if user not in users_list:  # redirect to previous page
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+        # redirect if user doesn't have access
+        if user not in users_list:
+            return redirect(reverse("planner:landing_page"))
 
         project_title = project.title
         creator_username = project.creator.username
