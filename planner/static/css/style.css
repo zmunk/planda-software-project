@@ -272,6 +272,23 @@ span.task-author {
     height: 2rem;
 }
 
+/* Dragging */
+
+.draggable {
+    /*transition: all 0.2s ease;*/
+    /*transition-property: left, top;*/
+}
+
+.temp-storage {
+    /* stores the list item that is currently being dragged */
+    display: none;
+    visibility: hidden;
+}
+
+.children-no-pointer-events * {
+    pointer-events: none;
+}
+
 /***************************************************/
 /* Kebab Dropdown Menu */
 .kebab {

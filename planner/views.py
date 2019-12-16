@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.urls import reverse
 from django.views.generic.detail import SingleObjectMixin
+from django.db.models import Max
 
 from .models import Task, Category, Project
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, View
@@ -72,8 +73,6 @@ class ProjectCreateView(CreateView):
 
         self.project_teams = {}
         for project in projects:
-            print(f"project.pk: {project.pk}")
-            print(f"project.users_list.all(): {project.users_list.all()}")
             self.project_teams[project.pk] = ", ".join([user.username for user in project.users_list.all()])
 
         kwargs["project_list"] = projects
@@ -154,6 +153,45 @@ class ProjectWithCategoryCreate(CreateView):
         return super(ProjectWithCategoryCreate, self).form_valid(form)
 
 
+class ProjectDataUpdate(View):
+    model = Project
+
+    def get_success_url(self, project_id):
+        # pk = self.kwargs.get("project_id")
+        return reverse("planner:project_page", kwargs={'project_id': project_id})
+
+    def get(self, request, project_id):
+        to_list = request.GET.get('to_list', None)
+        task_id = request.GET.get('task_id', None)
+        task_order = request.GET.get('task_order', None)
+        print("to list: " + to_list)
+        print("task id: " + task_id)
+        print("task order " + task_order)
+
+        curr_task = Task.objects.get(pk=task_id)
+        old_category = curr_task.category
+        old_order = curr_task.order
+
+        new_category = Category.objects.get(pk=to_list)
+        new_order = task_order
+
+        # TODO: update order of old category
+        for task in Task.objects.filter(category=old_category, order__gt=old_order):
+            task.order -= 1
+            task.save()
+
+        # TODO: update order of new category
+        for task in Task.objects.filter(category=new_category, order__gte=new_order):
+            task.order += 1
+            task.save()
+
+        curr_task.category = new_category
+        curr_task.order = new_order
+
+        curr_task.save()
+
+        return redirect(self.get_success_url(project_id))
+
 # Category Deletion
 class CategoryDeleteView(DeleteView):
     model = Category
@@ -184,8 +222,11 @@ class TaskCreate(View):
             cleaned_data = form.cleaned_data
             text = cleaned_data["text"]
             category = Category.objects.get(pk=category_id)
+            results = Task.objects.filter(category=category).aggregate(Max('order'))
+            current_order = results['order__max']
+            new_order = current_order + 1
             curr_user = request.user
-            new_task = Task(text=text, category=category, author=curr_user)
+            new_task = Task(text=text, category=category, author=curr_user, order=new_order)
             new_task.save()
             return redirect(self.get_success_url(project_id))
 
@@ -226,9 +267,6 @@ class UserProfile(View):
 
     def get(self, request, username):
         # Note: logged in user is request.user
-        # print(request.user)
-        # print(request.user.is_authenticated)
-        print(username)
         user = User.objects.get(username=username)
         if request.user.is_authenticated:
             context = self.get_context_data(user, request.user)

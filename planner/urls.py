@@ -38,6 +38,8 @@ urlpatterns = [
     path("projects/", login_required(views.ProjectCreateView.as_view()), name="projects_listed"),
     # PROJECT PAGE
     path("project/<int:project_id>/", login_required(views.ProjectWithCategoryCreate.as_view()), name="project_page"),
+    # PROJECT UPDATE
+    path("project/<int:project_id>/update", login_required(views.ProjectDataUpdate.as_view())),
     # DELETE PROJECT
     path("delete/project/<int:project_id>/", login_required(views.ProjectDeleteView.as_view()), name="delete_project"),
     # DELETE CATEGORY

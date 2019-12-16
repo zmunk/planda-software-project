@@ -1,5 +1,6 @@
 {% extends "planner/base.html" %}
 {% load static %}
+{% load project_extras %}
 
 {% block title %}
     {{ view.project_title }}
@@ -109,14 +110,17 @@
 
                 </div>
 
-                <ul class="list-items">
-                    {% for task in category.task_set.all %}
-                        <li class="item" data-id="{{ task.pk }}">
+                <ul class="list-items droppable" data-parentId="{{ category.pk }}">
+
+                    {% for task in category.task_set.all|sort_by:'order' %}
+                        <!-- TODO: task order -->
+                        <li class="item draggable" draggable="true" data-taskId="{{ task.pk }}" data-taskOrder="1">
                             <div class="row no-gutters">
                                 <div class="col-xs-10 col-md-11">
                                     {{ task.text }}&emsp;<span class="task-author">{{ task.author }}</span>
                                 </div>
                                 <div class="col-xs-2 col-md-1 task-delete-btn-container">
+                                    {{ task.order }}
                                     <a class="task-delete-btn"
                                        href="{% url "planner:delete_task" view.project_id task.pk %}">
                                         <i class="fa fa-times"></i>
@@ -126,6 +130,7 @@
 
                         </li>
                     {% endfor %}
+
                 </ul>
 
                 <!-- Add Task to List -->
@@ -158,9 +163,12 @@
         </div>
 
     </section>
+    <ul class="temp-storage">
+    <!-- invisible list that stores the task item that is behind dragged -->
+    </ul>
 
     <!-- Dragula -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.0/dragula.min.js'></script>
+{#    <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.0/dragula.min.js'></script>#}
     <script src="{% static 'js/dragging.js' %}"></script>
     <!-- Reactive Forms -->
     <script src="{% static 'js/add_list.js' %}"></script>

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'dashboard',
     'planner.templatetags.project_list_extras',
+    'planner.templatetags.project_extras',
 ]
 
 MIDDLEWARE = [
