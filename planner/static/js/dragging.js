@@ -35,6 +35,13 @@ droppableElements.forEach(elem => {
 
 function dragStart(e) {
     console.log("starting drag");
+
+    // let crt = e.target.cloneNode(true);
+    // crt.style.backgroundColor = "red";
+    // crt.style.visibility = "hidden"; /* or visibility: hidden, or any of the above */
+    // document.body.appendChild(crt);
+    // e.dataTransfer.setDragImage(crt, 0, 0);
+
     window.currentItem = e.target;
     window.currentItem.classList.add("current-item");
 
@@ -45,7 +52,9 @@ function dragStart(e) {
     to_list = window.homeParent.getAttribute("data-parentId");
     to_list_home = window.homeParent.getAttribute("data-parentId");
 
+    // window.homeParent.classList.add("testing1");
     setTimeout(function () {
+        // window.homeParent.classList.remove("testing1");
         window.homeParent.classList.add("children-no-pointer-events");
     }, 1);
 

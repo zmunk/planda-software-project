@@ -277,6 +277,10 @@ span.task-author {
 .draggable {
     /*transition: all 0.2s ease;*/
     /*transition-property: left, top;*/
+    /*position: absolute;*/
+    /*border-radius: 3px;*/
+    /*padding: 12px;*/
+    /*background-color: white;*/
 }
 
 .temp-storage {
@@ -287,6 +291,16 @@ span.task-author {
 
 .children-no-pointer-events * {
     pointer-events: none;
+}
+
+.current-item {
+    /*background: red;*/
+    transform: translate(0, 0);
+}
+
+.testing1 {
+    /*background: white;*/
+    /*opacity: 0;*/
 }
 
 /***************************************************/
