@@ -37,7 +37,10 @@ urlpatterns = [
     # LIST PROJECTS
     path("projects/", login_required(views.ProjectCreateView.as_view()), name="projects_listed"),
     # PROJECT PAGE
-    path("project/<int:project_id>/", login_required(views.ProjectWithCategoryCreate.as_view()), name="project_page"),
+    # path("project/<int:project_id>/", login_required(views.ProjectWithCategoryCreate.as_view()), name="project_page"),
+    path("project/<int:project_id>/", login_required(views.ProjectView.as_view()), name="project_page"),
+    # ADD CATEGORY
+    path("project/<int:project_id>/add/category/", login_required(views.CategoryCreate.as_view()), name="add_category"),
     # PROJECT UPDATE
     path("project/<int:project_id>/update", login_required(views.ProjectDataUpdate.as_view())),
     # DELETE PROJECT
@@ -53,7 +56,7 @@ urlpatterns = [
          name="delete_task"),
     # UPDATE TASK
     path("project/<int:project_id>/update/task/<int:task_id>/", login_required(views.TaskUpdate.as_view()),
-         name="update_task"),
+         name="update_task"),  # TODO: this is never called
     # ADD USER TO PROJECT
     path("project/<int:project_id>/add/user/", login_required(views.AddUserToProject.as_view()), name="add_user"),
     # PROFILE PAGE

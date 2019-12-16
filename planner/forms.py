@@ -11,6 +11,9 @@ class TaskForm(forms.ModelForm):
 class AddTaskForm(forms.Form):
     text = forms.CharField(max_length=1000)
 
+class AddCategoryForm(forms.Form):
+    category_name = forms.CharField(max_length=250)
+
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project

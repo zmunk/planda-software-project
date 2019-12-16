@@ -3,7 +3,7 @@
 {% load project_extras %}
 
 {% block title %}
-    {{ view.project_title }}
+    {{ project_title }}
 {% endblock %}
 
 {% block profilelink %}
@@ -25,8 +25,8 @@
       <div class="container col-4 d-flex ">
           <div class="container "> {# my-auto d-flex justify-content-center d-inline-block#}
 
-          <h1>{{ view.project_title }}</h1>
-          <i>Created by {{ view.creator_username }}</i>
+          <h1>{{ project_title }}</h1>
+          <i>Created by {{ creator_username }}</i>
               </div>
       </div>
 
@@ -55,8 +55,9 @@
                     <button class="add-user-btn btn btn-light">
                         Add user
                     </button>
+                    {# TODO #}
                     <form class="add-user-form" method="post"
-                          action="{% url "planner:add_user" view.project_id %}">
+                          action="{% url "planner:add_user" project_id %}">
                         {% csrf_token %}
                         <input class="add-user-input form-control input-sm float-right"
                                type="text" name="new_user">
@@ -100,7 +101,7 @@
                     {#                    </div>#}
                     <!-- -->
 
-                    <form action="{% url "planner:delete_category" category.pk view.project_id %}">
+                    <form action="{% url "planner:delete_category" category.pk project_id %}">
                         {% csrf_token %}
                         <button type="submit" class="category-delete-btn btn">
                             <i class="fa fa-trash"></i>
@@ -113,16 +114,14 @@
                 <ul class="list-items droppable" data-parentId="{{ category.pk }}">
 
                     {% for task in category.task_set.all|sort_by:'order' %}
-                        <!-- TODO: task order -->
                         <li class="item draggable" draggable="true" data-taskId="{{ task.pk }}" data-taskOrder="1">
                             <div class="row no-gutters">
                                 <div class="col-xs-10 col-md-11">
                                     {{ task.text }}&emsp;<span class="task-author">{{ task.author }}</span>
                                 </div>
                                 <div class="col-xs-2 col-md-1 task-delete-btn-container">
-                                    {{ task.order }}
                                     <a class="task-delete-btn"
-                                       href="{% url "planner:delete_task" view.project_id task.pk %}">
+                                       href="{% url "planner:delete_task" project_id task.pk %}">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>
@@ -140,7 +139,7 @@
                         Add a task
                     </button>
                     <form id="task-form-{{ category.pk }}" class="add-task-form" method="post"
-                          action="{% url "planner:add_task" view.project_id category.pk %}"
+                          action="{% url "planner:add_task" project_id category.pk %}"
                           onfocusout="add_task_form_unfocused()">
                         {% csrf_token %}
                         <input id="task-input-{{ category.pk }}"
@@ -155,7 +154,7 @@
 
         <div class="panel">
             <button id="add-list-btn" type="submit" class="add-list-btn btn">Add a list</button>
-            <form id="add-list-form" method="post" action="#">
+            <form id="add-list-form" method="post" action="{% url "planner:add_category" project_id %}">
                 {% csrf_token %}
                 <input id="add-list-input" class="form-control input-sm" type="text" name="category_name">
                 <button class="hidden" type="submit"></button>
