@@ -46,6 +46,7 @@ function dragStart(e) {
     window.currentItem.classList.add("current-item");
 
     task_id = window.currentItem.getAttribute("data-taskId");
+    task_home_order = window.currentItem.getAttribute("data-taskOrder");
 
     // the parent that the dragged item will return to
     window.homeParent = e.target.parentNode;
@@ -65,17 +66,16 @@ function dragEnd(e) {
     window.currentItem.classList.remove("current-item");
 
     if (temp.contains(window.currentItem)) {
-        // window.homeParent.insertBefore(window.currentItem, window.homeParent.children[task_home_order]);
+        window.homeParent.insertBefore(window.currentItem, window.homeParent.children[task_home_order]);
         // task_order = task_home_order;
         // to_list = to_list_home;
-        window.homeParent.appendChild(window.currentItem);
+        // window.homeParent.appendChild(window.currentItem);
         // TODO: insert in home order
         return;
     }
     console.log("to_list " + to_list);
     console.log("task_id " + task_id);
     console.log("task_order " + task_order);
-    // TODO: update database
     $.ajax({
         url: "update",
         data: {

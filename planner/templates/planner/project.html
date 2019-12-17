@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block profilelink %}
-<li class="nav-item">
-    <a class="nav-link" href="{% url 'planner:user_profile' user.username %}">My Profile</a>
-</li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'planner:user_profile' user.username %}">My Profile</a>
+    </li>
 {% endblock %}
 
 {% block username %}
@@ -19,38 +19,38 @@
 {% block body %}
 
     <div class="jumbotron jumbotron-fluid" style="">
-  <div class="container-fluid row">
-{#    <h1 class="display-4">Fluid jumbotron</h1>#}
-{#    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>#}
-      <div class="container col-4 d-flex ">
-          <div class="container "> {# my-auto d-flex justify-content-center d-inline-block#}
+        <div class="container-fluid row">
+            {#    <h1 class="display-4">Fluid jumbotron</h1>#}
+            {#    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>#}
+            <div class="container col-4 d-flex ">
+                <div class="container "> {# my-auto d-flex justify-content-center d-inline-block#}
 
-          <h1>{{ project_title }}</h1>
-          <i>Created by {{ creator_username }}</i>
-              </div>
-      </div>
+                    <h1>{{ project_title }}</h1>
+                    <i>Created by {{ creator_username }}</i>
+                </div>
+            </div>
 
-        <div class="container col-4">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="toast" data-delay="2000">
-                        <div class="toast-body">
-                            {{ message }}
+            <div class="container col-4">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="toast" data-delay="2000">
+                            <div class="toast-body">
+                                {{ message }}
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
-        <div class="container col-4 text-right" style="background: none;">
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="container col-4 text-right" style="background: none;">
 
 
-            <p>Project Team:
-            {% for user in users_list %}
-                 {{ user.username }}{% if not forloop.last %}, {% endif %}
-            {% endfor %}
-        </p>
+                <p>Project Team:
+                    {% for user in users_list %}
+                        {{ user.username }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
 
-        <!-- Add Task to List -->
+                <!-- Add Task to List -->
                 <div class="add-user-btn-wrapper">
                     <button class="add-user-btn btn btn-light">
                         Add user
@@ -67,9 +67,9 @@
                 <!-- -->
 
 
+            </div>
         </div>
-  </div>
-</div>
+    </div>
 
 
     <section class="lists-container">
@@ -114,12 +114,13 @@
                 <ul class="list-items droppable" data-parentId="{{ category.pk }}">
 
                     {% for task in category.task_set.all|sort_by:'order' %}
-                        <li class="item draggable" draggable="true" data-taskId="{{ task.pk }}" data-taskOrder="1">
+                        <li class="item draggable" draggable="true" data-taskId="{{ task.pk }}" data-taskOrder="{{ task.order }}">
                             <div class="row no-gutters">
                                 <div class="col-xs-10 col-md-11">
                                     {{ task.text }}&emsp;<span class="task-author">{{ task.author }}</span>
                                 </div>
                                 <div class="col-xs-2 col-md-1 task-delete-btn-container">
+
                                     <a class="task-delete-btn"
                                        href="{% url "planner:delete_task" project_id task.pk %}">
                                         <i class="fa fa-times"></i>
@@ -163,11 +164,11 @@
 
     </section>
     <ul class="temp-storage">
-    <!-- invisible list that stores the task item that is behind dragged -->
+        <!-- invisible list that stores the task item that is behind dragged -->
     </ul>
 
     <!-- Dragula -->
-{#    <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.0/dragula.min.js'></script>#}
+    {#    <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.0/dragula.min.js'></script>#}
     <script src="{% static 'js/dragging.js' %}"></script>
     <!-- Reactive Forms -->
     <script src="{% static 'js/add_list.js' %}"></script>

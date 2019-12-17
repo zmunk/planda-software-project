@@ -1,0 +1,17 @@
+* {
+    color: #1c431e;
+}
+
+.btn {
+
+    border: 1px solid #1c431e;
+    color: #1c431e;
+    background: none;
+}
+
+.btn:hover {
+
+    background-color: #1c431e;
+    color: white;
+    text-decoration: none;
+}

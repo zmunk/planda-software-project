@@ -140,7 +140,7 @@ class CategoryCreate(View):
         return reverse('planner:project_page', args=(self.kwargs["project_id"],))
 
     def post(self, request, project_id):
-        form = AddCategoryForm(request.POST)  # todo
+        form = AddCategoryForm(request.POST)
         if form.is_valid():
             cleaned_data = form.cleaned_data
             category_name = cleaned_data["category_name"]
@@ -223,7 +223,7 @@ class TaskCreate(View):
             category = Category.objects.get(pk=category_id)
             results = Task.objects.filter(category=category).aggregate(Max('order'))
             current_order = results['order__max']
-            if current_order:
+            if current_order is not None:
                 new_order = current_order + 1
             else:
                 new_order = 0
@@ -245,6 +245,13 @@ class TaskDelete(DeleteView):
         return get_object_or_404(Task, id=pk)
 
     def get(self, *args, **kwargs):
+        curr_task = self.get_object()
+        order = curr_task.order
+        category = curr_task.category
+        for task in Task.objects.filter(category=category, order__gt=order):
+            task.order -= 1
+            task.save()
+
         return self.delete(*args, **kwargs)
 
 
@@ -281,7 +288,6 @@ class AddUserToProject(View):
             if not new_user.exists():
                 messages.info(request, "User does not exist")
                 return redirect(self.get_success_url(project_id))
-                # return render(request, 'planner/popup.html')
 
             new_user = new_user[0]
             project = Project.objects.get(pk=project_id)
