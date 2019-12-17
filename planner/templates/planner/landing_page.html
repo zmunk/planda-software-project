@@ -40,25 +40,23 @@
                     Planda
                 </div>
             </div>
-{#            <div class="contact">Get in touch with us now</div>#}
         </div>
         <div class="logo-container">
             <div class="logo">
-                {# <img class="svg" src="{% static "planner/images/planda head.svg" %}" alt="Planda">#}
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="245" height="214"
                      preserveAspectRatio="xMidYMid meet">
-                    <rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"/>
+                    <rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"></rect>
                     <g class="currentLayer" style=""><title>Layer 1</title>
                         <g transform="translate(0,214) scale(0.10000000149011612,-0.10000000149011612) " fill="#2b7a78"
                            stroke="none" id="svg_1" class="selected" fill-opacity="1">
                             <path d="M225 2047 c-101 -48 -161 -148 -153 -255 8 -111 81 -205 181 -234 23 -6 43 -12 45 -13 1 -1 -9 -22 -23 -47 -64 -115 -105 -285 -105 -436 0 -265 108 -511 306 -702 193 -186 425 -284 699 -297 322 -14 621 105 836 334 85 90 119 140 174 255 71 147 89 227 89 398 0 172 -21 273 -84 408 -22 46 -40 86 -40 88 0 2 9 4 20 4 64 0 168 84 197 158 46 121 -3 264 -112 328 -55 32 -145 42 -210 24 -61 -17 -136 -85 -164 -149 l-21 -50 -63 38 c-350 213 -794 213 -1144 0 l-62 -37 -11 33 c-18 53 -65 111 -116 141 -67 40 -170 44 -239 11z m1265 -103 c547 -150 845 -700 650 -1201 -86 -222 -285 -423 -513 -520 -146 -61 -231 -77 -412 -77 -130 1 -174 5 -237 22 -315 86 -560 297 -668 574 -47 122 -63 224 -57 362 7 143 23 210 82 331 138 287 419 488 745 536 105 15 306 2 410 -27z"
-                                  id="svg_2" fill="#2b7a78" fill-opacity="1"/>
+                                  id="svg_2" fill="#2b7a78" fill-opacity="1"></path>
                             <path d="M714 1460 c-63 -25 -140 -98 -174 -166 -21 -41 -25 -63 -25 -134 0 -71 4 -94 27 -142 54 -117 152 -181 285 -186 71 -4 89 -1 137 21 78 36 138 95 171 169 71 159 5 345 -150 426 -70 36 -197 41 -271 12z"
-                                  id="svg_3" fill="#2b7a78" fill-opacity="1"/>
+                                  id="svg_3" fill="#2b7a78" fill-opacity="1"></path>
                             <path d="M1522 1466 c-78 -26 -150 -92 -191 -176 -21 -45 -26 -69 -26 -135 0 -97 29 -167 94 -231 65 -64 122 -88 218 -92 71 -4 88 -1 142 23 62 28 136 96 164 151 81 160 12 363 -151 444 -58 29 -184 37 -250 16z"
-                                  id="svg_4" fill="#2b7a78" fill-opacity="1"/>
+                                  id="svg_4" fill="#2b7a78" fill-opacity="1"></path>
                             <path d="M1171 794 c-12 -15 -21 -37 -21 -49 0 -35 37 -75 70 -75 42 0 59 9 76 41 28 55 -8 109 -72 109 -23 0 -39 -8 -53 -26z"
-                                  id="svg_5" fill="#2b7a78" fill-opacity="1"/>
+                                  id="svg_5" fill="#2b7a78" fill-opacity="1"></path>
                         </g>
                     </g>
                 </svg>
@@ -77,7 +75,6 @@
             <div class="social-btn">
                 <i class="fab fa-codepen icon"></i>
             </div>
-{#            <div class="social-title">Keep up with the latest news</div>#}
         </div>
     </div>
     <div class="right-container">
@@ -87,12 +84,14 @@
             <fieldset class="form-group mb-0">
                 <div class="form-group row">
                     <div class="col-5">
-                        <input id="id_username" name="username" type="text" class="form-control"
+                        <input id="id_username" name="username" type="text" class="form-control input-sm"
                                placeholder="Username"/>
                     </div>
                     <div class="col-5">
-                        <input id="id_password" name="password" type="password" class="form-control"
+                        <input id="id_password" name="password" type="password" class="form-control input-sm"
                                placeholder="Password"/>
+{#                        <button type="button" id="btnToggle" class="toggle"><i id="eyeIcon" class="fa fa-eye"></i></button>#}
+                    <button type="button" id="btnToggle" class="psw-toggle"><i id="eyeIcon" class="fa fa-eye"></i></button>
                     </div>
                     <div class="col-2">
                         <input type="submit" value="Login"
@@ -135,10 +134,8 @@
         </div>
         <div class="start-container">
             <div class="start-title">Organizing is a journey, <br>not a destination</div>
-{#            <div class="project-container">#}
                 <div class="tell-us-more">Get started today</div>
             <a href="{% url 'planner:register' %}" class="signup-btn mt-3">Sign up</a>
-{#                        </div>#}
 
         </div>
     </div>
@@ -148,6 +145,7 @@
 <script src="{% static 'js/bootstrap toast.js' %}"></script>
 <!-- SVG Jquery -->
 <script src="{% static 'js/svg jquery.js' %}"></script>
-
+<!-- Password Toggle -->
+<script src="{% static 'js/password toggle.js' %}"></script>
 </body>
 </html>
