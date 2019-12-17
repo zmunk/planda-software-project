@@ -140,7 +140,7 @@ class CategoryCreate(View):
         return reverse('planner:project_page', args=(self.kwargs["project_id"],))
 
     def post(self, request, project_id):
-        form = AddCategoryForm(request.POST) # todo
+        form = AddCategoryForm(request.POST)  # todo
         if form.is_valid():
             cleaned_data = form.cleaned_data
             category_name = cleaned_data["category_name"]
@@ -325,10 +325,10 @@ class UserProfile(View):
         first_four_projects = projects[:4]
 
         stock_pictures = [
-            "https://images.unsplash.com/photo-1573641287741-f6e223d81a0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-            "https://res.cloudinary.com/mhmd/image/upload/v1556294927/dose-juice-1184444-unsplash_bmbutn.jpg",
-            "https://res.cloudinary.com/mhmd/image/upload/v1556294926/cody-davis-253925-unsplash_hsetv7.jpg",
-            "https://res.cloudinary.com/mhmd/image/upload/v1556294928/tim-foster-734470-unsplash_xqde00.jpg",
+            "../static/planner/images/unsplash1.jpg",
+            "../static/planner/images/unsplash2.jpg",
+            "../static/planner/images/unsplash3.jpg",
+            "../static/planner/images/unsplash4.jpg",
         ]
 
         proj_and_pics = zip(first_four_projects, stock_pictures)

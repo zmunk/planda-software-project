@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Planda{% endblock %}</title>
+    <!-- Icons -->
+    <link rel="shortcut icon" href="{% static 'planner/images/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'planner/images/apple-touch-icon.png' %}">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<h3 class="text-center pt-5">
+    <img src="{% static "planner/images/planda.png" %}" style="height: 3rem">
+</h3>
+
+{% block body %}
+{% endblock %}
+
+<style>
+
+    * {
+        color: #1c431e;
+    }
+
+    .btn {
+
+        border: 1px solid #1c431e;
+        color: #1c431e;
+        background: none;
+    }
+
+    .btn:hover {
+
+        background-color: #1c431e;
+        color: white;
+        text-decoration: none;
+    }
+</style>
+</body>
+</html>

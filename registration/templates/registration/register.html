@@ -1,26 +1,7 @@
-{% load static %}
+{% extends "registration/base.html" %}
 
-
-<!------ Include the above in your HEAD tag ---------->
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Create an account</title>
-    <!-- Icons -->
-    <link rel="shortcut icon" href="{% static 'planner/images/favicon-32x32.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'planner/images/apple-touch-icon.png' %}">
-
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-
-<body id="signup">
-<h3 class="text-center pt-5">
-    <img src="{% static "planner/images/planda.png" %}" style="height: 3rem">
-</h3>
+{% block title %}Sign up{% endblock %}
+{% block body %}
 <div class="container">
     <div id="login-row" class="row justify-content-center align-items-center">
         <div id="login-column" class="col-md-6">
@@ -53,35 +34,4 @@
         </div>
     </div>
 </div>
-
-<style>
-
-* {
-    color: #1c431e;
-}
-
-.signup-btn {
-
-    border: 1px solid #1c431e;
-    color: #1c431e;
-    background: none;
-    /*background: red;*/
-    /*border-style: none;*/
-    /*background: var(--button-color);*/
-    /*outline: none;*/
-}
-
-.signup-btn:hover {
-
-    background-color: #1c431e;
-    color: white;
-    text-decoration: none;
-
-    /*color: #fff;*/
-    /*background-color: var(--main-fg-color);*/
-    /*text-decoration: none;*/
-}
-</style>
-
-</body>
-</html>
+{% endblock %}
