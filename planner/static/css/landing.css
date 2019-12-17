@@ -1,17 +1,19 @@
 /*@import url('https://fonts.googleapis.com/css?family=Montserrat');*/
 /* Theme colors */
 :root {
-    --main-bg-color: #77ab59; /* #3AAFA9 */
-	--main-fg-color: #36802d; /* var(--main-fg-color); #2B7A78 */
-	--second-bg-color: #f0f7da; /* white */
-	--emphasis-color: #234d20	; /* #17252A */
-
-	/* dark -> light
-		#234d20	(35,77,32)
-		#36802d	(54,128,45)
-		#77ab59	(119,171,89)
-		#c9df8a	(201,223,138)
-		#f0f7da */
+    --main-bg-color: white; /* #77ab59;  #3AAFA9 */
+    --main-fg-color: black; /* #36802d;  var(--main-fg-color); #2B7A78 */
+    --second-bg-color: #36802d; /* #f0f7da;  white */
+    --second-fg-color: white;
+    --emphasis-color: #234d20; /* #17252A */
+    --button-color: #45b648;
+}
+colors {
+    color1: #234d20;
+	color2:	#36802d;
+	color3:	#77ab59;
+	color4:	#c9df8a;
+	color5:	#f0f7da;
 }
 
 body {
@@ -20,10 +22,30 @@ body {
     overflow: hidden;
 }
 
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border-color: var(--main-bg-color);
+  -webkit-text-fill-color: black;
+  /*-webkit-box-shadow: 0 0 0px 1000px #000 inset;*/
+    -webkit-box-shadow: 0 0 0 30px white inset;
+  transition: background-color 5000s ease-in-out 0s;
+    font-size: large;
+}
+
 .container {
     /*width: 100%;*/
     /*height: 100vh;*/
 }
+
+
 
 .left-container {
     width: 40%;
@@ -144,37 +166,56 @@ svg path {
     right: 0;
 }
 
-
-.resetPassLink {
-    color: var(--main-fg-color);
+.cant-login {
+    color: var(--second-fg-color);
+    margin: 0;
 }
 
+.cant-login:hover {
+    color: white;
+}
+
+/*.login-btn {*/
+/*    float: right; !***!*/
+/*    !*margin-top: 2rem;*!*/
+/*    !*right: 40%;*!*/
+/*    !*transform: translate(0, -50%);*!*/
+/*    !*position: absolute;*!*/
+/*    color: var(--main-fg-color);*/
+/*!*!important;*!*/
+/*    !*background-color: white !important;*!*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 16px;*/
+/*    border: 1px solid var(--main-fg-color);*/
+/*    width: 150px;*/
+/*    height: 50px;*/
+/*    border-radius: 50px;*/
+/*    text-align: center;*/
+/*    line-height: 50px;*/
+/*    margin-left: 50px;*/
+/*    cursor: pointer;*/
+/*    transition: all 300ms ease-in-out;*/
+/*}*/
+
 .login-btn {
-    float: right; /***/
-    /*margin-top: 2rem;*/
-    /*right: 40%;*/
-    /*transform: translate(0, -50%);*/
-    /*position: absolute;*/
-    color: var(--main-fg-color);
-/*!important;*/
-    /*background-color: white !important;*/
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    border: 1px solid var(--main-fg-color);
-    width: 150px;
-    height: 50px;
-    border-radius: 50px;
-    text-align: center;
-    line-height: 50px;
-    margin-left: 50px;
-    cursor: pointer;
-    transition: all 300ms ease-in-out;
+
+    border: 1px solid var(--second-fg-color);
+    color: var(--second-fg-color);
+    /*background: red;*/
+    /*border-style: none;*/
+    /*background: var(--button-color);*/
+    /*outline: none;*/
 }
 
 .login-btn:hover {
-    color: #fff;
-    background-color: var(--main-fg-color);
+
+    background-color: var(--second-fg-color);
+    color: var(--second-bg-color);
     text-decoration: none;
+
+    /*color: #fff;*/
+    /*background-color: var(--main-fg-color);*/
+    /*text-decoration: none;*/
 }
 
 .start-container {
@@ -187,13 +228,15 @@ svg path {
 }
 
 .start-title {
-    color: var(--main-fg-color);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 32px;
-    text-transform: uppercase;
+    color: var(--second-fg-color);
+    /*font-family: 'Montserrat', sans-serif;*/
+    font-family: "Monotype Corsiva", "Apple Chancery", "URW Chancery L", cursive;
+    font-size: 3rem;
+    /*text-transform: uppercase;*/
     letter-spacing: 2.5px;
     text-align: center;
     transition: all 300ms ease-in-out;
+    margin-bottom: 1rem;
 }
 
 .project-container {
@@ -206,9 +249,9 @@ svg path {
 }
 
 .tell-us-more {
-    color: var(--main-fg-color);
+    color: var(--second-fg-color);
     font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
+    font-size: 1rem;
     text-align: center;
     position: relative;
     transition: all 300ms ease-in-out;
@@ -223,7 +266,7 @@ svg path {
     right: 0;
 }
 
-.start-btn {
+.signup-btn {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
@@ -233,16 +276,16 @@ svg path {
     line-height: 50px;
     margin-top: 4rem;
     border-radius: 50px;
-    border: 1px solid var(--main-fg-color);
-    color: var(--main-fg-color);
+    border: 1px solid var(--second-fg-color);
+    color: var(--second-fg-color);
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     cursor: pointer;
     transition: all 300ms ease-in-out;
 }
 
-.start-btn:hover {
-    background-color: var(--main-fg-color);
+.signup-btn:hover {
+    background-color: var(--second-fg-color);
     color: var(--second-bg-color);
     text-decoration: none;
 }
@@ -312,7 +355,7 @@ svg path {
         display: none;
     }
 
-    .start-btn {
+    .signup-btn {
         margin-top: 30px;
         width: 100px;
         height: 20px;

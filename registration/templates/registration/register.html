@@ -1,19 +1,87 @@
-{% extends "planner/base.html" %}
-
-{% block title %}
-Create an account
-{% endblock %}
+{% load static %}
 
 
+<!------ Include the above in your HEAD tag ---------->
+<!DOCTYPE html>
+<html lang="en">
 
-{% load crispy_forms_tags %}
+<head>
+    <meta charset="UTF-8">
+    <title>Create an account</title>
+    <!-- Icons -->
+    <link rel="shortcut icon" href="{% static 'planner/images/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'planner/images/apple-touch-icon.png' %}">
 
-{% block body %}
-    <div class="container">
-        <form method="post" class="form-group" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form | crispy }}
-        <button type="submit" class="btn btn-success">Sign up</button>
-        </form>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body id="signup">
+<h3 class="text-center pt-5">
+    <img src="{% static "planner/images/planda.png" %}" style="height: 3rem">
+</h3>
+<div class="container">
+    <div id="login-row" class="row justify-content-center align-items-center">
+        <div id="login-column" class="col-md-6">
+            <div id="login-box" class="col-md-16">
+                <div class="content-section text-center text-info">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group" style="background: none;">
+                            <legend class="border-top mb-4 ">Create an account</legend>
+                            <div class="container" style="background: none;">
+                                {% for field in form %}
+                                    <div class="row mt-3" style="width: 30rem; background: none;">
+                                        <div class="col-6">
+                                            {{ field.label_tag }}
+                                        </div>
+
+                                        <div class="col-6">
+                                            {{ field }}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn signup-btn" type="submit">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-{% endblock %}
+</div>
+
+<style>
+
+* {
+    color: #1c431e;
+}
+
+.signup-btn {
+
+    border: 1px solid #1c431e;
+    color: #1c431e;
+    background: none;
+    /*background: red;*/
+    /*border-style: none;*/
+    /*background: var(--button-color);*/
+    /*outline: none;*/
+}
+
+.signup-btn:hover {
+
+    background-color: #1c431e;
+    color: white;
+    text-decoration: none;
+
+    /*color: #fff;*/
+    /*background-color: var(--main-fg-color);*/
+    /*text-decoration: none;*/
+}
+</style>
+
+</body>
+</html>

@@ -3,64 +3,81 @@
 {% load project_list_extras %}
 {% block title %}Projects{% endblock %}
 {% block profilelink %}
-<li class="nav-item">
-    <a class="nav-link" href="{% url 'planner:user_profile' user.username %}">My Profile</a>
-</li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'planner:user_profile' user.username %}">My Profile</a>
+    </li>
 {% endblock %}
 {% block username %}{{ user.username }}{% endblock %}
 {% block body %}
 
     <div class="container project-list-page-container">
 
-    <div class="container" style="height: 3rem;">
-        <button id="add-project-btn" type="button" class="btn btn-primary">Add Project</button>
-        <form id="add-project-form" method="post" action="#">
-            {% csrf_token %}
-            <div class="form-group row">
-                <div class="col-xs-2">
-                    <input id="add-project-input" class="form-control input-sm" type="text" name="title">
+        {#    <div class="container" style="height: 3rem;">#}
+        {#        <button id="add-project-btn" type="button" class="btn btn-primary">Add Project</button>#}
+        {#        <form id="add-project-form" method="post" action="#">#}
+        {#            {% csrf_token %}#}
+        {#            <div class="form-group row">#}
+        {#                <div class="col-xs-2">#}
+        {#                    <input id="add-project-input" class="form-control input-sm" type="text" name="title">#}
+        {#                </div>#}
+        {#                <div class="col-xs-2">#}
+        {#                    <button class="hidden" type="submit"></button>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </form>#}
+        {#    </div>#}
+
+        <div class="container">
+            {% if project_list %}
+                <h3 class="project-list-header font-weight-bold">Your Projects</h3>
+                <div class="list-group">
+
+                    {% for project in project_list %}
+                        <a href="{% url "planner:project_page" project.pk %}"
+                           class="list-group-item list-group-item-action flex-column align-items-start project-list-item p-4">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h3 class="mb-1">{{ project.title }}</h3>
+                                {#                                <small>{{ project.pk }}</small>#}
+                                <form action="{% url "planner:delete_project" project.pk %}">
+                                    <button class="btn delete-project-btn" href="#">
+                                        <i class="fa fa-trash delete-project-icon"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <p class="mb-1">
+                                Team: {{ project_teams|key:project.pk }}
+                            </p>
+
+
+                            <div class="d-flex w-100 justify-content-between">
+                                <small>Created by {{ project.creator.username }}</small>
+
+                            </div>
+                        </a>
+                    {% endfor %}
+
                 </div>
-                <div class="col-xs-2">
-                    <button class="hidden" type="submit"></button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <div class="container">
-    {% if project_list %}
-        <h4 class="project-list-header">Your Projects</h4>
-        <div class="list-group">
-
-            {% for project in project_list %}
-                <a href="{% url "planner:project_page" project.pk %}"
-                   class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h3 class="mb-1">{{ project.title }}</h3>
-                        <small>{{ project.pk }}</small>
-
-                    </div>
-                    <p class="mb-1">
-                            Team: {{ project_teams|key:project.pk }}
-                    </p>
-
-
-                    <div class="d-flex w-100 justify-content-between">
-                        <small>Created by {{ project.creator.username }}</small>
-                        <form action="{% url "planner:delete_project" project.pk %}">
-                            <button class="btn" href="#">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </form>
-                    </div>
-                </a>
-            {% endfor %}
+            {% else %}
+                <h4 class="project-list-header">You have no projects</h4>
+            {% endif %}
 
         </div>
-        {% else %}
-        <h4 class="project-list-header" >You have no projects</h4>
-    {% endif %}
-    </div>
+
+        <div class="container mt-3" style="height: 3rem;">
+            <button id="add-project-btn" type="button" class="btn btn-primary btn-style-one">Add Project</button>
+            <form id="add-project-form" method="post" action="#">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <div class="col-xs-2">
+                        <input id="add-project-input" class="form-control input-sm" type="text" name="title">
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="hidden" type="submit"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
     </div>
 
     <script src="{% static 'js/add_project.js' %}"></script>

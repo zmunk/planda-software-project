@@ -1,9 +1,15 @@
 /* Theme colors */
 
 :root {
-    --main-bg-color: coral;
+    --main-bg-color: #f0f7da; /* coral; */
+    --primary-color: #45b648;
+    --primary-hover: #53ea5b;
+    --project-list-item-color: white;/* #c9df8a; */
+    --project-list-item-hover: black; /* #667543; */
+    --project-list-item-text: black;
+    --project-list-item-text-hover: white;
     --list-bg: #45b648; /* #275e2a; */
-    --list-title-color:  white; /* #c3dbc4; */
+    --list-title-color: #b9ffbe; /* #c3dbc4; */
     --list-scrollbar: #1c431e;
     --task-text-color: #1c431e;
     --task-hover-bg: #dadada; /* #dadada; */
@@ -33,8 +39,10 @@
 }
 
 body {
-    background-color: #E8EAED;
+    background-color: var(--main-bg-color);
 }
+
+
 
 .content-wrap {
     margin-bottom: 3rem;
@@ -62,6 +70,21 @@ body {
     align-items: center;
     width: 100%;
     height: 100%;
+}
+
+.btn-style-one {
+    border-style: none;
+    background: var(--primary-color);
+    outline: none;
+    /*background-color: #45b648;*/
+}
+
+.btn-style-one:hover {
+    background: var(--primary-hover);
+}
+
+.btn-style-one:focus {
+    outline: none;
 }
 
 /* Navbar */
@@ -105,6 +128,32 @@ body {
 
 .project-list-header {
     text-align: left;
+}
+
+.project-list-item {
+    background: var(--project-list-item-color);
+    color: var(--project-list-item-text);
+}
+
+/*.project-list-item {}*/
+
+.project-list-item:hover,
+.project-list-item:focus {
+    background: var(--project-list-item-hover);
+    color: var(--project-list-item-text-hover);
+}
+
+.project-list-item:hover *,
+.project-list-item:focus * {
+    color: var(--project-list-item-text-hover);
+}
+
+.delete-project-icon {
+    color: var(--project-list-item-text);
+}
+
+.delete-project-icon:hover {
+    color: red;
 }
 
 #add-project-form {
@@ -192,6 +241,14 @@ body {
 .list-items::-webkit-scrollbar-thumb {
     background-color: var(--list-scrollbar);
     border-right: 0.3rem solid var(--list-bg);
+}
+
+.category-delete-btn i {
+    color: var(--add-task-text-color);
+}
+
+.category-delete-btn i:hover {
+    color: red;
 }
 
 .item {
@@ -442,7 +499,7 @@ span.task-author {
 
 /*********/
 .fa-trash {
-    color: var(--add-task-text-color);
+    /*color: var(--add-task-text-color);*/
 }
 
 /* Profile Page */
