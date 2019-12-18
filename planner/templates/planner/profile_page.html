@@ -22,7 +22,7 @@
                             <div class="rounded container parent pt-lg-5">
 
                                 <div class="child media profile-header" style="background: none;">
-                                    <div class="profile" style="">
+                                    <div class="profile mx-auto" style="">
 
                                         {% if profile_user.image %}
                                             <img src="{{ profile_user.image.url }}"
@@ -42,16 +42,15 @@
 
                                 </div>
 
-                                <div class="child media-body m-3 ">
-
-                                    <h4 class="mt-0 mb-0">{{ profile_user.username }}</h4>
+                                <div class="child media-body my-3 mx-5" style="background: none;">
+                                    <h4 class="my-0">{{ profile_user.username }}</h4>
                                     <p class="small mb-4">
                                         <i class="fa fa-envelope mr-2"></i>
                                         {{ profile_user.email }}
                                     </p>
                                 </div>
-                                <div class="child p-4 d-flex text-center">
-                                    <ul class="list-inline mb-0">
+                                <div class="child p-4 d-flex text-center" style="background: none;">
+                                    <ul class="list-inline mb-0 mx-auto" style="background: none;">
                                         <li class="list-inline-item">
                                             <h5 class="font-weight-bold mb-0 d-block">{{ number_of_projects }}</h5>
                                             <small class="text-muted">

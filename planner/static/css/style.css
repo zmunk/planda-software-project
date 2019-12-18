@@ -1,7 +1,7 @@
 /* Theme colors */
 
 :root {
-    --main-bg-color: #f0f7da; /* coral; */
+    --main-bg-color: #e3e3e3; /* coral; */
     --primary-color: #45b648;
     --primary-hover: #53ea5b;
     --project-list-item-color: white;/* #c9df8a; */
@@ -10,7 +10,7 @@
     --project-list-item-text-hover: white;
     --list-bg: #45b648; /* #275e2a; */
     --list-title-color: #b9ffbe; /* #c3dbc4; */
-    --list-scrollbar: #1c431e;
+    --list-scrollbar: #338136; /* #1c431e; */
     --task-text-color: #1c431e;
     --task-hover-bg: #dadada; /* #dadada; */
     --add-task-text-color: #205323; /* #609f62; */
@@ -141,6 +141,7 @@ body {
 .project-list-item:focus {
     background: var(--project-list-item-hover);
     color: var(--project-list-item-text-hover);
+    transition: 0.5s ease-in ;
 }
 
 .project-list-item:hover *,
@@ -535,6 +536,10 @@ span.task-author {
     /*height: 100%;*/
     /*padding: 0px;*/
     /*width: auto;*/
+}
+
+.logout-link:active {
+    background: var(--primary-color);
 }
 
 /* Hover effect */

@@ -53,9 +53,6 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Dashboard</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{% url "planner:projects_listed" %}">My Projects</a>
                 </li>
 
@@ -64,13 +61,6 @@
                         <a class="nav-link" href="{% url 'planner:user_profile' user.username %}">My Profile</a>
                     </li>
                 {% endif %}
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
             </ul>
 
             {% if user.is_authenticated %}
@@ -91,7 +81,7 @@
                              aria-labelledby="navbarDropdownMenuLink-55">
 
                             <p class="dropdown-header">{{ user }}</p>
-                            <a class="dropdown-item" href="{% url "planner:logout" %}">Log out</a>
+                            <a class="dropdown-item logout-link" href="{% url "planner:logout" %}">Log out</a>
                         </div>
                     </li>
                 </ul>

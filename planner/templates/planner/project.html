@@ -118,10 +118,11 @@
                         <li class="item draggable" draggable="true" data-taskId="{{ task.pk }}"
                             data-taskOrder="{{ task.order }}">
                             <!-- Task Text -->
-                            <div id="task-text-{{ task.pk }}" class="row no-gutters task-text"
+                            <div id="task-block-{{ task.pk }}" class="row no-gutters task-block"
                                  ondblclick="edit_task_clicked({{ task.pk }})">
                                 <div class="col-xs-10 col-md-11">
-                                    {{ task.text }}&emsp;<span class="task-author">{{ task.author }}</span>
+                                    <span id="task-text-{{ task.pk }}">{{ task.text }}</span>&emsp;
+                                    <span class="task-author">{{ task.author }}</span>
                                 </div>
                                 <div class="col-xs-2 col-md-1 task-delete-btn-container">
 

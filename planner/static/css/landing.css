@@ -3,7 +3,7 @@
 :root {
     --main-bg-color: white; /* #77ab59;  #3AAFA9 */
     --main-fg-color: black; /* #36802d;  var(--main-fg-color); #2B7A78 */
-    --second-bg-color: #1c431e; /* #36802d; #f0f7da;  white */
+    --second-bg-color: #1c431e; /* #45b648; /* #1c431e; /* #36802d; #f0f7da;  white */
     --second-fg-color: white;
     --emphasis-color: #234d20; /* #17252A */
     --button-color: #45b648;
@@ -246,7 +246,9 @@ svg path {
 .start-title {
     color: var(--second-fg-color);
     /*font-family: 'Montserrat', sans-serif;*/
-    font-family: "Monotype Corsiva", "Apple Chancery", "URW Chancery L", cursive;
+    font-family: "Roboto", sans-serif;
+    /*font-family: "Monotype Corsiva", "Apple Chancery", "URW Chancery L", cursive;*/
+    font-weight: 100;
     font-size: 3rem;
     /*text-transform: uppercase;*/
     letter-spacing: 2.5px;
