@@ -15,3 +15,7 @@
     color: white;
     text-decoration: none;
 }
+
+.alert-danger * {
+    color: red;
+}
