@@ -3,7 +3,7 @@
 :root {
     --main-bg-color: white; /* #77ab59;  #3AAFA9 */
     --main-fg-color: black; /* #36802d;  var(--main-fg-color); #2B7A78 */
-    --second-bg-color: #36802d; /* #f0f7da;  white */
+    --second-bg-color: #1c431e; /* #36802d; #f0f7da;  white */
     --second-fg-color: white;
     --emphasis-color: #234d20; /* #17252A */
     --button-color: #45b648;

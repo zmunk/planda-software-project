@@ -1,19 +1,32 @@
-* {
-    color: #1c431e;
+:root {
+    --emphasis-color: #1c431e;
 }
 
-.btn {
+* {
+    color: var(--emphasis-color);
+}
 
+.main-btn {
     border: 1px solid #1c431e;
-    color: #1c431e;
+    color: var(--emphasis-color);
     background: none;
 }
 
-.btn:hover {
-
-    background-color: #1c431e;
+.main-btn:hover {
+    background-color: var(--emphasis-color);
     color: white;
     text-decoration: none;
+}
+
+.back-btn {
+    border: none;
+    color: gray;
+    background: none;
+    margin-right: 2rem;
+}
+
+.back-btn:hover {
+    color: black;
 }
 
 .alert-danger * {
