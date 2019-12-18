@@ -1,0 +1,13 @@
+language: python
+
+python:
+  - "3.7.4"
+
+script: pytest
+
+notifications:
+  email:
+    recipients:
+      - ibrahimtigrek@std.sehir.edu.tr
+    on_success: never # default: change
+    on_failure: always # default: always
