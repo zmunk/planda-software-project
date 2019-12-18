@@ -114,8 +114,12 @@
                 <ul class="list-items droppable" data-parentId="{{ category.pk }}">
 
                     {% for task in category.task_set.all|sort_by:'order' %}
-                        <li class="item draggable" draggable="true" data-taskId="{{ task.pk }}" data-taskOrder="{{ task.order }}">
-                            <div class="row no-gutters">
+
+                        <li class="item draggable" draggable="true" data-taskId="{{ task.pk }}"
+                            data-taskOrder="{{ task.order }}">
+                            <!-- Task Text -->
+                            <div id="task-text-{{ task.pk }}" class="row no-gutters task-text"
+                                 ondblclick="edit_task_clicked({{ task.pk }})">
                                 <div class="col-xs-10 col-md-11">
                                     {{ task.text }}&emsp;<span class="task-author">{{ task.author }}</span>
                                 </div>
@@ -127,7 +131,17 @@
                                     </a>
                                 </div>
                             </div>
-
+                            <!-- Task Edit Form -->
+                            <form id="edit-task-form-{{ task.pk }}" class="edit-task-form" method="post"
+                                  action="{% url "planner:edit_task" project_id task.pk %}"
+                                  onfocusout="edit_task_form_unfocused()">
+                                {% csrf_token %}
+                                <input id="edit-task-input-{{ task.pk }}"
+                                       class="edit-task-input form-control input-sm"
+                                       type="text" name="text">
+                                <button class="hidden" type="submit"></button>
+                            </form>
+                            <!-- End Task -->
                         </li>
                     {% endfor %}
 
@@ -174,6 +188,7 @@
     <script src="{% static 'js/add_list.js' %}"></script>
     <script src="{% static 'js/add_task.js' %}"></script>
     <script src="{% static 'js/add_user.js' %}"></script>
+    <script src="{% static 'js/edit_task.js' %}"></script>
     <!-- Deleting Tasks and Categories -->
     <script src="{% static 'js/deleting.js' %}"></script>
 

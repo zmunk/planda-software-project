@@ -55,8 +55,7 @@ urlpatterns = [
     path("project/<int:project_id>/delete/task/<int:task_id>/", login_required(views.TaskDelete.as_view()),
          name="delete_task"),
     # UPDATE TASK
-    path("project/<int:project_id>/update/task/<int:task_id>/", login_required(views.TaskUpdate.as_view()),
-         name="update_task"),  # TODO: this is never called
+    path("project/<int:project_id>/update/task/<int:task_id>/", login_required(views.TaskUpdate.as_view()), name="edit_task"),  # TODO: this is never called
     # ADD USER TO PROJECT
     path("project/<int:project_id>/add/user/", login_required(views.AddUserToProject.as_view()), name="add_user"),
     # PROFILE PAGE

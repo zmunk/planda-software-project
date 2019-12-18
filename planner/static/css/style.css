@@ -293,6 +293,11 @@ span.task-author {
     color: black;
 }
 
+.edit-task-form {
+    display: none;
+}
+
+
 .add-task-btn-wrapper {
     margin: 0;
 }
